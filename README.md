@@ -1,3 +1,8 @@
+<img src="./images/logo.png" width="240px">
+
+![RebornX CMS](https://img.shields.io/badge/RebornX-CMS-f98e2c.svg)
+![LICENSE](https://img.shields.io/badge/LICENSE-GPL--3.0--or--later-green.svg)
+
 # RebornX CMS
 
 **A modernized fork of XOOPS 2.0.5**
