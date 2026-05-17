@@ -1,7 +1,9 @@
 <img src="./images/logo.png" width="240px">
 
 ![RebornX CMS](https://img.shields.io/badge/RebornX-CMS-f98e2c.svg)
-![LICENSE](https://img.shields.io/badge/LICENSE-GPL--3.0--or--later-green.svg)
+![PHP](https://img.shields.io/badge/PHP8.2+-blue.svg)
+![MySQL](https://img.shields.io/badge/MySQLi-purple.svg)
+![LICENSE](https://img.shields.io/badge/LICENSE-GPLv3+-green.svg)
 
 # RebornX CMS
 
