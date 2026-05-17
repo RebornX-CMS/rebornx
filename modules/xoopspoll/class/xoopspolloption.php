@@ -35,7 +35,7 @@ class XoopsPollOption extends XoopsObject
 	public $db;
 
 	// constructor
-	function XoopsPollOption($id=null)
+	function __construct($id=null)
 	{
 		$this->db = Database::getInstance();
 		$this->initVar("option_id", XOBJ_DTYPE_INT, null, false);

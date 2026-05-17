@@ -38,7 +38,7 @@ class XoopsErrorHandler
 	 * @var array 
 	 * @access private 
 	 */
-	var $_errors = array();
+	public $_errors = array();
 
 	/**
 	 * Show error messages?
@@ -46,7 +46,7 @@ class XoopsErrorHandler
 	 * @var boolean
 	 * @access private
 	 */
-	var $_showErrors = false;
+	public $_showErrors = false;
 
 	/**
 	 * Was there a fatal error (E_USER_ERROR)
@@ -54,7 +54,7 @@ class XoopsErrorHandler
 	 * @var boolean
 	 * @access private
 	 */
-	var $_isFatal = false;
+	public $_isFatal = false;
 
 	/**
 	 * Constructor
@@ -63,7 +63,7 @@ class XoopsErrorHandler
 	 * registering an error handler, the setting or 'error_reporting' is
 	 * ignored and *everything* is trapped.
 	 */
-	function XoopsErrorHandler()
+	function __construct()
 	{
 		set_error_handler('XoopsErrorHandler_HandleError');
 		register_shutdown_function('XoopsErrorHandler_Shutdown'); 
@@ -193,7 +193,7 @@ function XoopsErrorHandler_HandleError($errNo, $errStr, $errFile, $errLine)
 		'errfile' => preg_replace("|^" . XOOPS_ROOT_PATH . "/|", '', $errFile),
 		'errline' => $errLine 
 		);
-	$error_handler = XoopsErrorHandler::getInstance();
+		$error_handler = new XoopsErrorHandler();
 	$error_handler->handleError($new_error);
 } 
 

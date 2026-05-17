@@ -55,7 +55,7 @@ if (!defined("XOOPS_MAINFILE_INCLUDED")) {
 	define("XOOPS_THEME_URL", XOOPS_URL."/themes");
 	define("XOOPS_UPLOAD_URL", XOOPS_URL."/uploads");
 	include_once XOOPS_ROOT_PATH.'/class/logger.php';
-	$xoopsLogger =& XoopsLogger::instance();
+	$xoopsLogger = new XoopsLogger();
 	$xoopsLogger->startTime();
 	if (!defined('XOOPS_XMLRPC')) {
 		define('XOOPS_DB_CHKREF', 1);
@@ -142,11 +142,11 @@ if (!defined("XOOPS_MAINFILE_INCLUDED")) {
 	if ($xoopsConfig['use_ssl'] && isset($_POST[$xoopsConfig['sslpost_name']]) && $_POST[$xoopsConfig['sslpost_name']] != '') {
 		session_id($_POST[$xoopsConfig['sslpost_name']]);
 	} elseif ($xoopsConfig['use_mysession'] && $xoopsConfig['session_name'] != '') {
-		if (isset($HTTP_COOKIE_VARS[$xoopsConfig['session_name']])) {
-			session_id($HTTP_COOKIE_VARS[$xoopsConfig['session_name']]);
+		if (isset($_COOKIE[$xoopsConfig['session_name']])) {
+			session_id($_COOKIE[$xoopsConfig['session_name']]);
 		} else {
 			// no custom session cookie set, destroy session if any
-			$HTTP_SESSION_VARS = array();
+			$_SESSION = array();
 			//session_destroy();
 		}
 		if (function_exists('session_cache_expire')) {
@@ -156,16 +156,16 @@ if (!defined("XOOPS_MAINFILE_INCLUDED")) {
 	session_set_save_handler(array(&$sess_handler, 'open'), array(&$sess_handler, 'close'), array(&$sess_handler, 'read'), array(&$sess_handler, 'write'), array(&$sess_handler, 'destroy'), array(&$sess_handler, 'gc'));
 	session_start();
 
-	if (!empty($HTTP_SESSION_VARS['xoopsUserId'])) {
-		$xoopsUser =& $member_handler->getUser($HTTP_SESSION_VARS['xoopsUserId']);
+	if (!empty($_SESSION['xoopsUserId'])) {
+		$xoopsUser =& $member_handler->getUser($_SESSION['xoopsUserId']);
 		if (!is_object($xoopsUser)) {
 			$xoopsUser = '';
-			$HTTP_SESSION_VARS = array();
+			$_SESSION = array();
 		} else {
 			if ($xoopsConfig['use_mysession'] && $xoopsConfig['session_name'] != '') {
 				setcookie($xoopsConfig['session_name'], session_id(), time()+(60*$xoopsConfig['session_expire']), '/',  '', 0);
 			}
-			$xoopsUser->setGroups($HTTP_SESSION_VARS['xoopsUserGroups']);
+			$xoopsUser->setGroups($_SESSION['xoopsUserGroups']);
 			$xoopsUserIsAdmin = $xoopsUser->isAdmin();
 		}
 	}
@@ -309,7 +309,7 @@ class XoopsTpl extends Smarty
 	/**
 	 * Constructor
 	 **/
-	function XoopsTpl()
+	function __construct()
 	{
 		global $xoopsConfig;
 		$this->Smarty();

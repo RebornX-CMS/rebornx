@@ -31,7 +31,7 @@ class NewsStory extends XoopsStory
 {
 	public $newstopic;   // XoopsTopic object
 
-	function NewsStory($storyid=-1)
+	function __construct($storyid=-1)
 	{
 		$this->db = Database::getInstance();
 		$this->table = $this->db->prefix("stories");

@@ -34,6 +34,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 include_once XOOPS_ROOT_PATH."/class/xoopstopic.php";
 include_once XOOPS_ROOT_PATH."/class/xoopsuser.php";
 
+#[AllowDynamicProperties]
 class XoopsStory
 {
     public $table;
@@ -60,7 +61,7 @@ class XoopsStory
     public $topicstable;
     public $comments;
 
-	function Story($storyid=-1)
+	function __construct($storyid=-1)
 	{
 		$this->db = Database::getInstance();
 		$this->table = "";

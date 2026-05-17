@@ -55,25 +55,26 @@ class XoopsDatabase
 	{
 		/**
 		 * Prefix for tables in the database
+		 * Protected to prevent external modification
 		 * @var string
 		 */
-		var $prefix = '';
+		protected $prefix = '';
 		/**
 		 * reference to a {@link XoopsLogger} object
          * @see XoopsLogger
 		 * @var object XoopsLogger
 		 */
-		var $logger;
+		protected $logger;
 
 		/**
 		 * constructor
          * 
          * will always fail, because this is an abstract class!
 		 */
-		function XoopsDatabase()
-		{
-			// exit("Cannot instantiate this class directly");
-		}
+	function __construct()
+	{
+	
+	}
 
 		/**
 		 * assign a {@link XoopsLogger} object to the database

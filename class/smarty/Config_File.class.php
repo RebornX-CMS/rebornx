@@ -75,7 +75,7 @@ class Config_File {
 	 *
 	 * @param string $config_path (optional) path to the config files
 	 */
-	function Config_File($config_path = NULL)
+	function __construct($config_path = NULL)
 	{
 		if (substr(PHP_OS, 0, 3) == "WIN" || substr(PHP_OS, 0, 4) == "OS/2")
 			$this->_separator = "\\";
@@ -266,10 +266,10 @@ class Config_File {
 		$config_data["sections"] = array();
 		preg_match_all("/^\[(.*?)\]/m", $contents, $match);
 		foreach ($match[1] as $section) {
-			if ($section{0} == '.' && !$this->read_hidden)
+			if ($section[0] == '.' && !$this->read_hidden)
 				continue;
 			if (preg_match("/\[".preg_quote($section)."\](.*?)(\n\[|\Z)/s", $contents, $match))
-				if ($section{0} == '.')
+				if ($section[0] == '.')
 					$section = substr($section, 1);
 				$config_data["sections"][$section]["vars"] = $this->_parse_config_block($match[1]);
 		}
@@ -317,7 +317,7 @@ class Config_File {
      */
 	function _set_config_var(&$container, $var_name, $var_value, $booleanize)
 	{
-		if ($var_name{0} == '.') {
+		if ($var_name[0] == '.') {
 			if (!$this->read_hidden)
 				return;
 			else

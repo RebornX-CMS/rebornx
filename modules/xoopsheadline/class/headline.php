@@ -31,7 +31,7 @@
 class XoopsheadlineHeadline extends XoopsObject
 {
 
-	function XoopsheadlineHeadline()
+	function __construct()
 	{
 		$this->XoopsObject();
 		$this->initVar('headline_id', XOBJ_DTYPE_INT, null, false);
@@ -65,12 +65,12 @@ class xoopsheadlineHeadlineHandler
 {
 	public $db;
 
-	function XoopsheadlineHeadlineHandler(&$db)
+	function __construct($db)
 	{
 		$this->db = $db;
 	}
 
-	function &getInstance(&$db)
+	function getInstance($db)
 	{
 		static $instance;
 		if (!isset($instance)) {
@@ -79,12 +79,12 @@ class xoopsheadlineHeadlineHandler
 		return $instance;
 	}
 
-	function &create()
+	function create()
 	{
 		return new XoopsheadlineHeadline();
 	}
 
-	function &get($id)
+	function get($id)
 	{
 		$id = intval($id);
 		if ($id > 0) {

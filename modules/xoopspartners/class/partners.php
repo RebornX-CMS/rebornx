@@ -35,7 +35,7 @@ class PartnerSystem extends XoopsObject
 	public $db;
 
     // constructor
-	function PartnerSystem($id=null)
+	function __construct($id=null)
 	{
 		$this->db = Database::getInstance();
 		$this->initVar("id", XOBJ_DTYPE_INT, null, false);

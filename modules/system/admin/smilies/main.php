@@ -35,13 +35,13 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 include_once XOOPS_ROOT_PATH."/modules/system/admin/smilies/smilies.php";
 $op ='SmilesAdmin';
 $ok = 0;
-foreach ($HTTP_POST_VARS as $k => $v) {
+foreach ($_POST as $k => $v) {
 	${$k} = $v;
 }
 
-if (isset($HTTP_GET_VARS['op']) && ($HTTP_GET_VARS['op'] == 'SmilesEdit' || $HTTP_GET_VARS['op'] == 'SmilesDel')) {
-	$op = $HTTP_GET_VARS['op'];
-	$id = isset($HTTP_GET_VARS['id']) ? intval($HTTP_GET_VARS['id']) : 0;
+if (isset($_GET['op']) && ($_GET['op'] == 'SmilesEdit' || $_GET['op'] == 'SmilesDel')) {
+	$op = $_GET['op'];
+	$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 }
 
 switch($op) {

@@ -33,16 +33,16 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 	exit("Access Denied");
 } else {
 	$op = 'list';
-	if (isset($HTTP_POST_VARS)) {
-		foreach ( $HTTP_POST_VARS as $k => $v ) {
+	if (isset($_POST)) {
+		foreach ( $_POST as $k => $v ) {
 			${$k} = $v;
 		}
 	}
-	if (isset($HTTP_GET_VARS['op'])) {
-		$op = trim($HTTP_GET_VARS['op']);
+	if (isset($_GET['op'])) {
+		$op = trim($_GET['op']);
 	}
-	if (isset($HTTP_GET_VARS['confcat_id'])) {
-		$confcat_id = intval($HTTP_GET_VARS['confcat_id']);
+	if (isset($_GET['confcat_id'])) {
+		$confcat_id = intval($_GET['confcat_id']);
 	}
 	if ($op == 'list') {
 		$confcat_handler =& xoops_gethandler('configcategory');
@@ -223,7 +223,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 
 	if ($op == 'showmod') {
 		$config_handler =& xoops_gethandler('config');
-		$mod = isset($HTTP_GET_VARS['mod']) ? intval($HTTP_GET_VARS['mod']) : 0;
+		$mod = isset($_GET['mod']) ? intval($_GET['mod']) : 0;
 		if (empty($mod)) {
 			header('Location: admin.php?fct=preferences');
 			exit();

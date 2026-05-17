@@ -37,7 +37,7 @@ class XoopsImagecategory extends XoopsObject
 {
 	var $_imageCount;
 
-	function XoopsImagecategory()
+	function __construct()
 	{
 		$this->XoopsObject();
 		$this->initVar('imgcat_id', XOBJ_DTYPE_INT, null, false);

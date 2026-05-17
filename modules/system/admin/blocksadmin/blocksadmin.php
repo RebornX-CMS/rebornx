@@ -38,12 +38,12 @@ if ( $xoopsUser->isAdmin($xoopsModule->mid()) ) {
 
 	function list_blocks()
 	{
-		global $xoopsUser, $xoopsConfig, $HTTP_GET_VARS;
+		global $xoopsUser, $xoopsConfig, $_GET;
 		include_once XOOPS_ROOT_PATH.'/class/xoopslists.php';
 		//OpenTable();
-		$selmod = isset($HTTP_GET_VARS['selmod']) ? intval($HTTP_GET_VARS['selmod']) : 0;
-		$selvis = isset($HTTP_GET_VARS['selvis']) ? intval($HTTP_GET_VARS['selvis']) : 2;
-		$selgrp = isset($HTTP_GET_VARS['selgrp']) ? intval($HTTP_GET_VARS['selgrp']) : XOOPS_GROUP_USERS;
+		$selmod = isset($_GET['selmod']) ? intval($_GET['selmod']) : 0;
+		$selvis = isset($_GET['selvis']) ? intval($_GET['selvis']) : 2;
+		$selgrp = isset($_GET['selgrp']) ? intval($_GET['selgrp']) : XOOPS_GROUP_USERS;
 		echo "
 		<h4 style='text-align:left;'>"._AM_BADMIN."</h4>";
 		echo '<form action="admin.php" method="get">';
@@ -54,7 +54,7 @@ if ( $xoopsUser->isAdmin($xoopsModule->mid()) ) {
 		$module_list =& $module_handler->getList($criteria);
 		$toponlyblock = false;
 		$module_list[-1] = _AM_TOPPAGE;
-		$selmod = isset($HTTP_GET_VARS['selmod']) ? intval($HTTP_GET_VARS['selmod']) : -1;
+		$selmod = isset($_GET['selmod']) ? intval($_GET['selmod']) : -1;
 		ksort($module_list);
 		foreach ($module_list as $k => $v) {
 			$sel = '';

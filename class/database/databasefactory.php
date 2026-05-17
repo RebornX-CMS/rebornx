@@ -2,7 +2,7 @@
 class XoopsDatabaseFactory
 {
 
-	function XoopsDatabaseFactory()
+	function __construct()
 	{
 	}
 

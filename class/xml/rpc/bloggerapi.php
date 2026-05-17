@@ -34,7 +34,7 @@ require_once XOOPS_ROOT_PATH.'/class/xml/rpc/xmlrpcapi.php';
 class BloggerApi extends XoopsXmlRpcApi
 {
 
-    function BloggerApi(&$params, &$response, &$module)
+    function __construct(&$params, &$response, &$module)
     {
         $this->XoopsXmlRpcApi($params, $response, $module);
         $this->_setXoopsTagMap('storyid', 'postid');

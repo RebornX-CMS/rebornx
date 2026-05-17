@@ -8,19 +8,19 @@
  * Purpose:  evaluate a template variable as a template
  * -------------------------------------------------------------
  */
-function smarty_function_eval($params, &$this)
+function smarty_function_eval($params, &$smarty)
 {
     extract($params);
 
     if (!isset($var)) {
-        $this->trigger_error("eval: missing 'var' parameter");
+        $smarty->trigger_error("eval: missing 'var' parameter");
         return;
     }
 	if($var == '') {
 		return;
 	}
 
-	$this->_compile_template("evaluated template", $var, $source);
+	$smarty->_compile_template("evaluated template", $var, $source);
 	
     ob_start();
 	eval('?>' . $source);
@@ -28,7 +28,7 @@ function smarty_function_eval($params, &$this)
     ob_end_clean();
 
     if (!empty($assign)) {
-    	$this->assign($assign, $contents);
+    	$smarty->assign($assign, $contents);
     } else {
 		return $contents;
     }

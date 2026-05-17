@@ -52,7 +52,7 @@ class ForumPosts
 	public $istopic = false;
 	public $islocked = false;
 
-	function ForumPosts($id=null)
+	function __construct($id=null)
 	{
 		$this->db =& Database::getInstance();
 		if ( is_array($id) ) {

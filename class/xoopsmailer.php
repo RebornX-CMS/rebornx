@@ -129,7 +129,16 @@ class XoopsMailer
 	// protected
     public $encoding = '8bit';
 
-	function XoopsMailer()
+    // priority
+    var $priority;
+
+    // headers
+    var $headers;
+
+    // line ending
+    var $LE;
+
+	function __construct()
 	{
 
 		$this->multimailer = new XoopsMultiMailer();
@@ -191,7 +200,7 @@ class XoopsMailer
 	// public
 	function setFromUser(&$user)
 	{
-        if ( get_class($user) == "xoopsuser" ) {
+        if ( get_class($user) == "XoopsUser" || $user instanceof XoopsUser ) {
 			$this->fromUser = $user;
 		}
 	}
@@ -476,7 +485,7 @@ class XoopsMailer
 	function setToUsers(&$user)
 	{
 		if ( !is_array($user) ) {
-			if ( get_class($user) == "xoopsuser" ) {
+			if ( $user instanceof XoopsUser ) {
 				array_push($this->toUsers, $user);
 			}
 		} else {
@@ -490,7 +499,7 @@ class XoopsMailer
 	function setToGroups($group)
 	{
 		if ( !is_array($group) ) {
-			if ( get_class($group) == "xoopsgroup" ) {
+			if ( get_class($group) == "XoopsGroup" || $group instanceof XoopsGroup ) {
 				$member_handler = xoops_gethandler('member');
 				$this->setToUsers($member_handler->getUsersByGroup($group->getVar('groupid'), true));
 			}

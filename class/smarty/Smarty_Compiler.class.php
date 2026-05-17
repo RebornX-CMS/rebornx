@@ -78,7 +78,7 @@ class Smarty_Compiler extends Smarty {
 	/**
 	 * The class constructor.
 	 */
-    function Smarty_Compiler()
+    function __construct()
     {
 		// matches double quoted strings:
 		// "foobar"
@@ -237,9 +237,13 @@ class Smarty_Compiler extends Smarty {
         }
 
         /* Annihilate the comments. */
-        $template_source = preg_replace("!({$ldq})\*(.*?)\*({$rdq})!se",
-                                        "'\\1*'.str_repeat(\"\n\", substr_count('\\2', \"\n\")) .'*\\3'",
-                                        $template_source);
+        $template_source = preg_replace_callback(
+            "!({$ldq})\*(.*?)\*({$rdq})!s",
+            function ($matches) {
+                return $matches[1].'*'.str_repeat("\n", substr_count($matches[2], "\n")).'*'.$matches[3];
+            },
+            $template_source
+        );
 
         /* Pull out the literal blocks. */
         preg_match_all("!{$ldq}literal{$rdq}(.*?){$ldq}/literal{$rdq}!s", $template_source, $match);
@@ -317,7 +321,7 @@ class Smarty_Compiler extends Smarty {
         }
 
         // remove \n from the end of the file, if any
-        if ($template_compiled{strlen($template_compiled) - 1} == "\n" ) {
+        if ($template_compiled[strlen($template_compiled) - 1] == "\n" ) {
             $template_compiled = substr($template_compiled, 0, -1);
         }
 
@@ -371,7 +375,7 @@ class Smarty_Compiler extends Smarty {
     {		
 				
         /* Matched comment. */
-        if ($template_tag{0} == '*' && $template_tag{strlen($template_tag) - 1} == '*')
+        if ($template_tag[0] == '*' && $template_tag[strlen($template_tag) - 1] == '*')
             return '';
 		
         /* Split tag into two three parts: command, command modifiers and the arguments. */
@@ -470,7 +474,8 @@ class Smarty_Compiler extends Smarty {
                 return $this->left_delimiter.$tag_command.$this->right_delimiter;
 
             case 'literal':
-                list (,$literal_block) = each($this->_literal_blocks);
+                $literal_block = current($this->_literal_blocks);
+                next($this->_literal_blocks);
                 $this->_current_line_no += substr_count($literal_block, "\n");
                 return "<?php echo '".str_replace("'", "\'", str_replace("\\", "\\\\", $literal_block))."'; ?>\n";
 
@@ -479,7 +484,8 @@ class Smarty_Compiler extends Smarty {
                     $this->_syntax_error("(secure mode) php tags not permitted", E_USER_WARNING, __FILE__, __LINE__);
                     return;
                 }
-                list (,$php_block) = each($this->_php_blocks);
+                $php_block = current($this->_php_blocks);
+                next($this->_php_blocks);
                 $this->_current_line_no += substr_count($php_block, "\n");
                 return '<?php '.$php_block.' ?>';
 
@@ -571,7 +577,7 @@ class Smarty_Compiler extends Smarty {
 	 */
     function _compile_block_tag($tag_command, $tag_args, $tag_modifier, &$output)
     {
-        if ($tag_command{0} == '/') {
+        if ($tag_command[0] == '/') {
             $start_tag = false;
             $tag_command = substr($tag_command, 1);
         } else
@@ -1509,11 +1515,11 @@ class Smarty_Compiler extends Smarty {
         }
 		
         foreach ($indexes as $index) {			
-            if ($index{0} == '[') {
+            if ($index[0] == '[') {
                 $index = substr($index, 1, -1);
                 if (is_numeric($index)) {
                     $output .= "[$index]";
-                } elseif ($index{0} == '$') {
+                } elseif ($index[0] == '$') {
                     $output .= "[\$this->_tpl_vars['" . substr($index, 1) . "']]";
                 } else {
                     $parts = explode('.', $index);
@@ -1521,8 +1527,8 @@ class Smarty_Compiler extends Smarty {
                     $section_prop = isset($parts[1]) ? $parts[1] : 'index';
                     $output .= "[\$this->_sections['$section']['$section_prop']]";
                 }
-            } else if ($index{0} == '.') {
-                if ($index{1} == '$')
+            } else if ($index[0] == '.') {
+                if ($index[1] == '$')
                     $output .= "[\$this->_tpl_vars['" . substr($index, 2) . "']]";
                 else
                     $output .= "['" . substr($index, 1) . "']";
@@ -1533,7 +1539,7 @@ class Smarty_Compiler extends Smarty {
 					$this->_syntax_error('(secure) call to private object member is not allowed', E_USER_ERROR, __FILE__, __LINE__);
 				}
                 $output .= $index;
-			} elseif ($index{0} == '(') {
+			} elseif ($index[0] == '(') {
 				$index = $this->_parse_parenth_args($index);
                 $output .= $index;
             } else {
@@ -1629,7 +1635,7 @@ class Smarty_Compiler extends Smarty {
             preg_match_all('!:(' . $this->_qstr_regexp . '|[^:]+)!', $modifier_arg_strings[$_i], $_match);
             $_modifier_args = $_match[1];
 
-            if ($_modifier_name{0} == '@') {
+            if ($_modifier_name[0] == '@') {
                 $_map_array = 'false';
                 $_modifier_name = substr($_modifier_name, 1);
             } else {
@@ -1641,10 +1647,10 @@ class Smarty_Compiler extends Smarty {
 
 			if($_modifier_name == 'default') {
 				// supress notifications of default modifier vars and args
-				if($output{0} == '$') {
+				if($output[0] == '$') {
 					$output = '@' . $output;
 				}
-				if(isset($_modifier_args[0]) && $_modifier_args[0]{0} == '$') {
+				if(isset($_modifier_args[0]) && $_modifier_args[0][0] == '$') {
 					$_modifier_args[0] = '@' . $_modifier_args[0];
 				}
 			}
@@ -1689,7 +1695,7 @@ class Smarty_Compiler extends Smarty {
         $_ref = substr($indexes[0], 1);
 
 		foreach($indexes as $_index) {		
-        	if ($_index{0} != '.') {
+        	if ($_index[0] != '.') {
             	$this->_syntax_error('$smarty' . implode('', array_slice($indexes, 0, 2)) . ' is an invalid reference', E_USER_ERROR, __FILE__, __LINE__);
         	}
 		}

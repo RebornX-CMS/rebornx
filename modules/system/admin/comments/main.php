@@ -34,13 +34,13 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 	exit("Access Denied");
 } else {
 	$op = 'list';
-//	if (isset($HTTP_POST_VARS)) {
-//		foreach ( $HTTP_POST_VARS as $k => $v ) {
+//	if (isset($_POST)) {
+//		foreach ( $_POST as $k => $v ) {
 //			${$k} = $v;
 //		}
 //	}
-	if (isset($HTTP_GET_VARS['op'])) {
-		$op = trim($HTTP_GET_VARS['op']);
+	if (isset($_GET['op'])) {
+		$op = trim($_GET['op']);
 	}
 	switch ($op) {
 	case 'list':
@@ -49,8 +49,8 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		$limit_array = array(10, 20, 50, 100);
 		$status_array = array(XOOPS_COMMENT_PENDING => _CM_PENDING, XOOPS_COMMENT_ACTIVE => _CM_ACTIVE, XOOPS_COMMENT_HIDDEN => _CM_HIDDEN);
 		$status_array2 = array(XOOPS_COMMENT_PENDING => '<span style="text-decoration: none; font-weight: bold; color: #00ff00;">'._CM_PENDING.'</span>', XOOPS_COMMENT_ACTIVE => '<span style="text-decoration: none; font-weight: bold; color: #ff0000;">'._CM_ACTIVE.'</span>', XOOPS_COMMENT_HIDDEN => '<span style="text-decoration: none; font-weight: bold; color: #0000ff;">'._CM_HIDDEN.'</span>');
-		$status = (!isset($HTTP_GET_VARS['status']) || !in_array(intval($HTTP_GET_VARS['status']), array_keys($status_array))) ? 0 : intval($HTTP_GET_VARS['status']);
-		$module = !isset($HTTP_GET_VARS['module']) ? 0 : intval($HTTP_GET_VARS['module']);
+		$status = (!isset($_GET['status']) || !in_array(intval($_GET['status']), array_keys($status_array))) ? 0 : intval($_GET['status']);
+		$module = !isset($_GET['module']) ? 0 : intval($_GET['module']);
 		$module_handler =& xoops_gethandler('module');
 		$module_array =& $module_handler->getList(new Criteria('hascomments', 1));
 		$comment_handler =& xoops_gethandler('comment');
@@ -63,13 +63,13 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		}
 		$total = $comment_handler->getCount($criteria);
 		if ($total > 0) {
-			$start = isset($HTTP_GET_VARS['start']) ? intval($HTTP_GET_VARS['start']) : 0;
-			$limit = isset($HTTP_GET_VARS['limit']) ? intval($HTTP_GET_VARS['limit']) : 0;
+			$start = isset($_GET['start']) ? intval($_GET['start']) : 0;
+			$limit = isset($_GET['limit']) ? intval($_GET['limit']) : 0;
 			if (!in_array($limit, $limit_array)) {
 				$limit = 50;
 			}
-			$sort = (!isset($HTTP_GET_VARS['sort']) || !in_array($HTTP_GET_VARS['sort'], array('com_modid', 'com_status', 'com_created', 'com_uid', 'com_ip', 'com_title'))) ? 'com_id' : $HTTP_GET_VARS['sort'];
-			if (!isset($HTTP_GET_VARS['order']) || $HTTP_GET_VARS['order'] != 'ASC') {
+			$sort = (!isset($_GET['sort']) || !in_array($_GET['sort'], array('com_modid', 'com_status', 'com_created', 'com_uid', 'com_ip', 'com_title'))) ? 'com_id' : $_GET['sort'];
+			if (!isset($_GET['order']) || $_GET['order'] != 'ASC') {
 				$order = 'DESC';
 				$otherorder = 'ASC';
 			} else {
@@ -145,7 +145,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		break;
 	
 	case 'jump':
-		$com_id = (isset($HTTP_GET_VARS['com_id'])) ? intval($HTTP_GET_VARS['com_id']) : 0;
+		$com_id = (isset($_GET['com_id'])) ? intval($_GET['com_id']) : 0;
 		if ($com_id > 0) {
 			$comment_handler =& xoops_gethandler('comment');
 			$comment =& $comment_handler->get($com_id);

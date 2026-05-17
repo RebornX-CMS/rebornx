@@ -33,28 +33,28 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 	exit("Access Denied");
 } else {
 	$op = 'list';
-	if (isset($HTTP_POST_VARS)) {
-		foreach ( $HTTP_POST_VARS as $k => $v ) {
+	if (isset($_POST)) {
+		foreach ( $_POST as $k => $v ) {
 			${$k} = $v;
 		}
 	}
-	if (isset($HTTP_GET_VARS['op'])) {
-		$op = trim($HTTP_GET_VARS['op']);
+	if (isset($_GET['op'])) {
+		$op = trim($_GET['op']);
 		$id = $moddir = $file = $type = $tplset = null;
-		if (isset($HTTP_GET_VARS['id'])) {
-			$id = intval($HTTP_GET_VARS['id']);
+		if (isset($_GET['id'])) {
+			$id = intval($_GET['id']);
 		}
-		if (isset($HTTP_GET_VARS['moddir'])) {
-			$moddir = trim($HTTP_GET_VARS['moddir']);
+		if (isset($_GET['moddir'])) {
+			$moddir = trim($_GET['moddir']);
 		}
-		if (isset($HTTP_GET_VARS['file'])) {
-			$file = trim($HTTP_GET_VARS['file']);
+		if (isset($_GET['file'])) {
+			$file = trim($_GET['file']);
 		}
-		if (isset($HTTP_GET_VARS['type'])) {
-			$type = trim($HTTP_GET_VARS['type']);
+		if (isset($_GET['type'])) {
+			$type = trim($_GET['type']);
 		}
-		if (isset($HTTP_GET_VARS['tplset'])) {
-			$tplset = trim($HTTP_GET_VARS['tplset']);
+		if (isset($_GET['tplset'])) {
+			$tplset = trim($_GET['tplset']);
 		}
 	}
 
@@ -128,7 +128,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		xoops_cp_footer();
 		break;
 	case 'listtpl':
-		$tplset = trim($HTTP_GET_VARS['tplset']);
+		$tplset = trim($_GET['tplset']);
 		if ($tplset == '') {
 			redirect_header('admin.php?fct=tplsets',1);
 		}
@@ -705,7 +705,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		}
 		break;
 	case 'showimage':
-		$image_id = isset($HTTP_GET_VARS['id']) ? intval($HTTP_GET_VARS['id']) : 0;
+		$image_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 		if (empty($image_id)) {
 			header('Content-type: image/gif');
 			readfile(XOOPS_UPLOAD_PATH.'/blank.gif');
@@ -783,7 +783,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 			header('Cache-Control: no-cache, must-revalidate');
 			header('Pragma: no-cache');
 			header('Content-Type: application/force-download');
-			if (preg_match("/MSIE 5.5/", $HTTP_USER_AGENT)) { 
+			if (preg_match("/MSIE 5.5/", $_SERVER["HTTP_USER_AGENT"])) { 
 				header('Content-Disposition: filename='.$tpl->getVar('tpl_file')); 
 			} else {
 				header('Content-Disposition: attachment; filename='.$tpl->getVar('tpl_file'));
@@ -794,7 +794,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		break;
 	case 'uploadtpl':
 		$tpltpl_handler =& xoops_gethandler('tplfile');
-		$id = intval($HTTP_GET_VARS['id']);
+		$id = intval($_GET['id']);
 		$tpl =& $tpltpl_handler->get($id);
 		xoops_cp_header();
 		echo '<a href="admin.php?fct=tplsets">'. _MD_TPLMAIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;<a href="./admin.php?fct=tplsets&amp;op=listtpl&amp;moddir='.$tpl->getVar('tpl_module').'&amp;tplset='.$tpl->getVar('tpl_tplset').'">'.$tpl->getVar('tpl_tplset').'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'._MD_UPLOAD.'<br /><br />';
@@ -823,7 +823,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 			include_once XOOPS_ROOT_PATH.'/class/uploader.php';
 			$uploader = new XoopsMediaUploader(XOOPS_UPLOAD_PATH, array('text/html', 'application/x-cdf', 'text/plain'), 200000);
 			$uploader->setPrefix('tmp');
-			if ($uploader->fetchMedia($HTTP_POST_VARS['xoops_upload_file'][0])) {
+			if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 				if (!$uploader->upload()) {
 					$err = $uploader->getErrors();
 				} else {
@@ -879,7 +879,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		include_once XOOPS_ROOT_PATH.'/class/uploader.php';
 		$uploader = new XoopsMediaUploader(XOOPS_UPLOAD_PATH, array('text/html', 'application/x-cdf', 'text/plain'), 200000);
 		$uploader->setPrefix('tmp');
-		if ($uploader->fetchMedia($HTTP_POST_VARS['xoops_upload_file'][0])) {
+		if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 			if (!$uploader->upload()) {
 				$err = $uploader->getErrors();
 			} else {
@@ -921,7 +921,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 	case 'download':
 		if (isset($tplset)) {
 			if (false != extension_loaded('zlib')) {
-				if (isset($HTTP_GET_VARS['method']) && $HTTP_GET_VARS['method'] == 'tar') {
+				if (isset($_GET['method']) && $_GET['method'] == 'tar') {
 					if (@function_exists('gzencode')) {
 						require_once(XOOPS_ROOT_PATH.'/class/tardownloader.php');
 						$downloader = new XoopsTarDownloader();
@@ -1085,7 +1085,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		$uploader->setPrefix('tmp');
 		xoops_cp_header();
 		echo '<code>';
-		if ($uploader->fetchMedia($HTTP_POST_VARS['xoops_upload_file'][0])) {
+		if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 			if (!$uploader->upload()) {
 				xoops_error($uploader->getErrors());
 			} else {
@@ -1249,7 +1249,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		$uploader = new XoopsMediaUploader(XOOPS_UPLOAD_PATH, array('text/html', 'application/x-cdf'), 200000);
 		$uploader->setPrefix('tmp');
 		$msg = array();
-		foreach ($HTTP_POST_VARS['xoops_upload_file'] as $upload_file) {
+		foreach ($_POST['xoops_upload_file'] as $upload_file) {
 			// '.' is converted to '_' when upload
 			$upload_file2 = str_replace('.', '_', $upload_file);
 			if ($uploader->fetchMedia($upload_file2)) {

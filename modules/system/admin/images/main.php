@@ -33,19 +33,19 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 	exit("Access Denied");
 } else {
 	$op = 'list';
-	if (isset($HTTP_POST_VARS)) {
-		foreach ( $HTTP_POST_VARS as $k => $v ) {
+	if (isset($_POST)) {
+		foreach ( $_POST as $k => $v ) {
 			${$k} = $v;
 		}
 	}
-	if (isset($HTTP_GET_VARS['op'])) {
-		$op = trim($HTTP_GET_VARS['op']);
+	if (isset($_GET['op'])) {
+		$op = trim($_GET['op']);
 	}
-	if (isset($HTTP_GET_VARS['image_id'])) {
-		$image_id = intval($HTTP_GET_VARS['image_id']);
+	if (isset($_GET['image_id'])) {
+		$image_id = intval($_GET['image_id']);
 	}
-	if (isset($HTTP_GET_VARS['imgcat_id'])) {
-		$imgcat_id = intval($HTTP_GET_VARS['imgcat_id']);
+	if (isset($_GET['imgcat_id'])) {
+		$imgcat_id = intval($_GET['imgcat_id']);
 	}
 	if ($op == 'list') {
 		$imgcat_handler = xoops_gethandler('imagecategory');
@@ -114,7 +114,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		echo '<a href="admin.php?fct=images">'. _MD_IMGMAIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'.$imagecategory->getVar('imgcat_name').'<br /><br />';
 		$criteria = new Criteria('imgcat_id', $imgcat_id);
 		$imgcount = $image_handler->getCount($criteria);
-		$start = isset($HTTP_GET_VARS['start']) ? intval($HTTP_GET_VARS['start']) : 0;
+		$start = isset($_GET['start']) ? intval($_GET['start']) : 0;
 		$criteria->setStart($start);
 		$criteria->setLimit(20);
 		$images =& $image_handler->getObjects($criteria, true, false);
@@ -196,9 +196,9 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		$uploader = new XoopsMediaUploader(XOOPS_UPLOAD_PATH, array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png', 'image/bmp'), $imagecategory->getVar('imgcat_maxsize'), $imagecategory->getVar('imgcat_maxwidth'), $imagecategory->getVar('imgcat_maxheight'));
 		$uploader->setPrefix('img');
 		$err = array();
-		$ucount = count($HTTP_POST_VARS['xoops_upload_file']);
+		$ucount = count($_POST['xoops_upload_file']);
 		for ($i = 0; $i < $ucount; $i++) {
-			if ($uploader->fetchMedia($HTTP_POST_VARS['xoops_upload_file'][$i])) {
+			if ($uploader->fetchMedia($_POST['xoops_upload_file'][$i])) {
 				if (!$uploader->upload()) {
 					$err[] = $uploader->getErrors();
 				} else {

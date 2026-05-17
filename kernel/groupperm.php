@@ -59,7 +59,7 @@ class XoopsGroupPerm extends XoopsObject
      * Constructor
      * 
      */
-    function XoopsGroupPerm()
+    function __construct()
     {
         $this->XoopsObject();
         $this->initVar('gperm_id', XOBJ_DTYPE_INT, null, false);

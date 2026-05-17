@@ -35,15 +35,15 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 include_once XOOPS_ROOT_PATH."/modules/system/admin/modulesadmin/modulesadmin.php";
 $op = "list";
-if ( isset($HTTP_POST_VARS) ) {
-	foreach ( $HTTP_POST_VARS as $k => $v ) {
+if ( isset($_POST) ) {
+	foreach ( $_POST as $k => $v ) {
 		${$k} = $v;
   	}
 }
 
-if (isset($HTTP_GET_VARS['op'])) {
-	$op = $HTTP_GET_VARS['op'];
-	$module = $HTTP_GET_VARS['module'];
+if (isset($_GET['op'])) {
+	$op = $_GET['op'];
+	$module = $_GET['module'];
 }
 
 if ( $op == "list" ) {

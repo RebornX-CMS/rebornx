@@ -40,8 +40,8 @@ include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
 
 function displayUsers()
 {
-	global $xoopsDB, $xoopsConfig, $xoopsModule, $HTTP_GET_VARS;
-	$userstart = isset($HTTP_GET_VARS['userstart']) ? intval($HTTP_GET_VARS['userstart']) : 0;
+	global $xoopsDB, $xoopsConfig, $xoopsModule, $_GET;
+	$userstart = isset($_GET['userstart']) ? intval($_GET['userstart']) : 0;
     xoops_cp_header();
 	$member_handler =& xoops_gethandler('member');
 	$usercount = $member_handler->getUserCount();

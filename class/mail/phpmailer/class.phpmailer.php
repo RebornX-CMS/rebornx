@@ -1354,11 +1354,17 @@ class phpmailer
             $encoded .= $this->LE;
 
         // Replace every high ascii, control and = characters
-        $encoded = preg_replace('/([\000-\010\013\014\016-\037\075\177-\377])/e',
-                  "'='.sprintf('%02X', ord('\\1'))", $encoded);
+        $encoded = preg_replace_callback(
+            '/([\000-\010\013\014\016-\037\075\177-\377])/',
+            function ($m) { return '=' . sprintf('%02X', ord($m[1])); },
+            $encoded
+        );
         // Replace every spaces and tabs when it's the last character on a line
-        $encoded = preg_replace("/([\011\040])".$this->LE."/e",
-                  "'='.sprintf('%02X', ord('\\1')).'".$this->LE."'", $encoded);
+        $encoded = preg_replace_callback(
+            "/([\011\040])" . $this->LE . "/",
+            function ($m) { return '=' . sprintf('%02X', ord($m[1])) . $this->LE; },
+            $encoded
+        );
 
         // Maximum line length of 76 characters before CRLF (74 + space + '=')
         $encoded = $this->word_wrap($encoded, 74, true);
@@ -1377,16 +1383,27 @@ class phpmailer
 
         switch (strtolower($position)) {
           case 'phrase':
-            $encoded = preg_replace("/([^A-Za-z0-9!*+\/ -])/e", "'='.sprintf('%02X', ord('\\1'))", $encoded);
+            $encoded = preg_replace_callback(
+                "/([^A-Za-z0-9!*+\/ -])/",
+                function ($m) { return '=' . sprintf('%02X', ord($m[1])); },
+                $encoded
+            );
             break;
           case 'comment':
-            $encoded = preg_replace("/([\(\)\"])/e", "'='.sprintf('%02X', ord('\\1'))", $encoded);
+            $encoded = preg_replace_callback(
+                "/([\(\)\"])/",
+                function ($m) { return '=' . sprintf('%02X', ord($m[1])); },
+                $encoded
+            );
             // Fall-through
           case 'text':
           default:
             // Replace every high ascii, control =, ? and _ characters
-            $encoded = preg_replace('/([\000-\011\013\014\016-\037\075\077\137\177-\377])/e',
-                  "'='.sprintf('%02X', ord('\\1'))", $encoded);
+            $encoded = preg_replace_callback(
+                '/([\000-\011\013\014\016-\037\075\077\137\177-\377])/',
+                function ($m) { return '=' . sprintf('%02X', ord($m[1])); },
+                $encoded
+            );
             break;
         }
         
@@ -1615,11 +1632,11 @@ class phpmailer
         if(!isset($_SERVER))
         {
             // For PHP < 4.1.0 compatibility
-            global $HTTP_SERVER_VARS;
-            global $HTTP_ENV_VARS;
-            $_SERVER = $HTTP_SERVER_VARS;
+            global $_SERVER;
+            global $_ENV;
+            $_SERVER = $_SERVER;
             if(!isset($_SERVER["REMOTE_ADDR"]))
-                $_SERVER = $HTTP_ENV_VARS; // must be Apache
+                $_SERVER = $_ENV; // must be Apache
         }
         
         if(isset($_SERVER[$varName]))
@@ -1745,7 +1762,7 @@ class Boundary
     /**
      * Main constructor.
      */
-    function Boundary($boundary_id) {
+    function __construct($boundary_id) {
         $this->ID = $boundary_id;
     }
     

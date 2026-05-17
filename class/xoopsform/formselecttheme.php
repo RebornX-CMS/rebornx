@@ -63,7 +63,7 @@ class XoopsFormSelectTheme extends XoopsFormSelect
 	 * @param	mixed	$value	Pre-selected value (or array of them).
 	 * @param	int		$size	Number or rows. "1" makes a drop-down-list
 	 */
-	function XoopsFormSelectTheme($caption, $name, $value=null, $size=1)
+	function __construct($caption, $name, $value=null, $size=1)
 	{
 		$this->XoopsFormSelect($caption, $name, $value, $size);
 		$this->addOptionArray(XoopsLists::getThemesList());

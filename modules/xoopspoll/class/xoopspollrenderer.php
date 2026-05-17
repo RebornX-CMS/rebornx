@@ -37,7 +37,7 @@ class XoopsPollRenderer
 	public $poll;
 
 	// constructor
-	function XoopsPollRenderer(&$poll)
+	function __construct(&$poll)
 	{
 		$this->poll =& $poll;
 	}

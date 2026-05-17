@@ -34,15 +34,15 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 }
 $op = 'mod_users';
 include_once XOOPS_ROOT_PATH."/modules/system/admin/users/users.php";
-if (isset($HTTP_POST_VARS)) {
-	foreach ( $HTTP_POST_VARS as $k => $v ) {
+if (isset($_POST)) {
+	foreach ( $_POST as $k => $v ) {
 		${$k} = $v;
 	}
 }
-if (isset($HTTP_GET_VARS['op'])) {
-	$op = trim($HTTP_GET_VARS['op']);
-	if (isset($HTTP_GET_VARS['uid'])) {
-		$uid = intval($HTTP_GET_VARS['uid']);
+if (isset($_GET['op'])) {
+	$op = trim($_GET['op']);
+	if (isset($_GET['uid'])) {
+		$uid = intval($_GET['uid']);
 	}
 }
 switch ($op) {

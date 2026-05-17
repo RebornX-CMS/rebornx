@@ -33,13 +33,13 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 	exit("Access Denied");
 } else {
 	$op = 'list';
-	if (isset($HTTP_POST_VARS)) {
-		foreach ( $HTTP_POST_VARS as $k => $v ) {
+	if (isset($_POST)) {
+		foreach ( $_POST as $k => $v ) {
 			${$k} = $v;
 		}
 	}
-	if (isset($HTTP_GET_VARS['op'])) {
-		$op = trim($HTTP_GET_VARS['op']);
+	if (isset($_GET['op'])) {
+		$op = trim($_GET['op']);
 	}
 	if ($op == 'list') {
 		xoops_cp_header();
@@ -66,7 +66,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 	if ($op == 'listavt') {
 		$avt_handler =& xoops_gethandler('avatar');
 		xoops_cp_header();
-		$type = (isset($HTTP_GET_VARS['type']) && $HTTP_GET_VARS['type'] == 'C') ? 'C' : 'S';
+		$type = (isset($_GET['type']) && $_GET['type'] == 'C') ? 'C' : 'S';
 		echo '<a href="admin.php?fct=avatars">'. _MD_AVATARMAN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;';
 		if ($type == 'S') {
 			echo _MD_SYSAVATARS;
@@ -76,7 +76,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		echo '<br /><br />';
 		$criteria = new Criteria('avatar_type', $type);
 		$avtcount = $avt_handler->getCount($criteria);
-		$start = isset($HTTP_GET_VARS['start']) ? intval($HTTP_GET_VARS['start']) : 0;
+		$start = isset($_GET['start']) ? intval($_GET['start']) : 0;
 		$criteria->setStart($start);
 		$criteria->setLimit(10);
 		$avatars =& $avt_handler->getObjects($criteria, true);
@@ -151,9 +151,9 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 		$uploader = new XoopsMediaUploader(XOOPS_UPLOAD_PATH, array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'), 500000);
 		$uploader->setPrefix('savt');
 		$err = array();
-		$ucount = count($HTTP_POST_VARS['xoops_upload_file']);
+		$ucount = count($_POST['xoops_upload_file']);
 		for ($i = 0; $i < $ucount; $i++) {
-			if ($uploader->fetchMedia($HTTP_POST_VARS['xoops_upload_file'][$i])) {
+			if ($uploader->fetchMedia($_POST['xoops_upload_file'][$i])) {
 				if (!$uploader->upload()) {
 					$err[] = $uploader->getErrors();
 				} else {
@@ -185,8 +185,8 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 
 	if ($op == 'delfile') {
 		xoops_cp_header();
-		$user_id = isset($HTTP_GET_VARS['user_id']) ? intval($HTTP_GET_VARS['user_id']) : 0;
-		xoops_confirm(array('op' => 'delfileok', 'avatar_id' => intval($HTTP_GET_VARS['avatar_id']), 'fct' => 'avatars', 'user_id' => $user_id), 'admin.php', _MD_RUDELIMG);
+		$user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : 0;
+		xoops_confirm(array('op' => 'delfileok', 'avatar_id' => intval($_GET['avatar_id']), 'fct' => 'avatars', 'user_id' => $user_id), 'admin.php', _MD_RUDELIMG);
 		xoops_cp_footer();
 		exit();
 	}

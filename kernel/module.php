@@ -55,7 +55,7 @@ class XoopsModule extends XoopsObject
     /**
      * Constructor
      */
-    function XoopsModule()
+    function __construct()
     {
         $this->XoopsObject();
         $this->initVar('mid', XOBJ_DTYPE_INT, null, false);

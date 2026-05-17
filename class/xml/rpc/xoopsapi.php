@@ -34,7 +34,7 @@ require_once XOOPS_ROOT_PATH.'/class/xml/rpc/xmlrpcapi.php';
 class XoopsApi extends XoopsXmlRpcApi
 {
 
-    function XoopsApi(&$params, &$response, &$module)
+    function __construct(&$params, &$response, &$module)
     {
         $this->XoopsXmlRpcApi($params, $response, $module);
     }

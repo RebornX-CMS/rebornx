@@ -60,7 +60,7 @@ class XoopsSessionHandler
      * @param	object  &$mf    reference to a XoopsManagerFactory
      * 
      */
-    function XoopsSessionHandler(&$db)
+    function __construct(&$db)
     {
         $this->db =& $db;
     }
@@ -116,7 +116,7 @@ class XoopsSessionHandler
      **/
     function write($sess_id, $sess_data)
 	{
-        global $HTTP_SERVER_VARS;
+        global $_SERVER;
 		list($count) = $this->db->fetchRow($this->db->query("SELECT COUNT(*) FROM ".$this->db->prefix('session')." WHERE sess_id='".$sess_id."'"));
         if ( $count > 0 ) {
 			$sql = sprintf("UPDATE %s SET sess_updated = %u, sess_data = '%s' WHERE sess_id = '%s'", $this->db->prefix('session'), time(), $sess_data, $sess_id);

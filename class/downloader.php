@@ -43,15 +43,15 @@ class XoopsDownloader
 	/**#@+
 	 * file information
 	 */
-	var $mimetype;
-	var $ext;
-	var $archiver;
+	public $mimetype;
+	public $ext;
+	public $archiver;
     /**#@-*/
 
 	/**
 	 * Constructor
 	 */
-	function XoopsDownloader()
+	function __construct()
 	{
 		//EMPTY
 	}
@@ -65,12 +65,11 @@ class XoopsDownloader
 	 */
 	function _header($filename)
 	{
-		global $HTTP_USER_AGENT;
 		if (function_exists('mb_http_output')) {
 			mb_http_output('pass');
 		}
 		header('Content-Type: '.$this->mimetype);
-		if (preg_match("/MSIE ([0-9]\.[0-9]{1,2})/", $HTTP_USER_AGENT)) {
+		if (preg_match("/MSIE ([0-9]\.[0-9]{1,2})/", $_SERVER["HTTP_USER_AGENT"])) {
 			header('Content-Disposition: inline; filename="'.$filename.'"');
 			header('Expires: 0');
 			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');

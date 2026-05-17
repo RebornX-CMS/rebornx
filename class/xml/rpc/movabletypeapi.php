@@ -33,7 +33,7 @@ require_once XOOPS_ROOT_PATH.'/class/xml/rpc/xmlrpcapi.php';
 
 class MovableTypeApi extends XoopsXmlRpcApi
 {
-    function MovableTypeApi(&$params, &$response, &$module)
+    function __construct(&$params, &$response, &$module)
     {
         $this->XoopsXmlRpcApi($params, $response, $module);
     }

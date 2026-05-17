@@ -29,11 +29,11 @@
 // Project: The XOOPS Project                                                //
 // ------------------------------------------------------------------------- //
 
-if (isset($HTTP_POST_VARS['fct'])) {
-	$fct = trim($HTTP_POST_VARS['fct']);
+if (isset($_POST['fct'])) {
+	$fct = trim($_POST['fct']);
 }
-if (isset($HTTP_GET_VARS['fct'])) {
-	$fct = trim($HTTP_GET_VARS['fct']);
+if (isset($_GET['fct'])) {
+	$fct = trim($_GET['fct']);
 }
 if (isset($fct) && $fct == "users") {
 	$xoopsOption['pagetype'] = "user";

@@ -34,7 +34,7 @@ $email = isset($_POST['email']) ? $myts->makeTboxData4PreviewInForm($_POST['emai
 $user_viewemail = isset($_POST['user_viewemail']) ? $_POST['user_viewemail'] : "";
 $url = isset($_POST['url']) ? $myts->makeTboxData4PreviewInForm($_POST['url']) : "";
 $timezone_offset = isset($_POST['timezone_offset']) ? $_POST['timezone_offset'] : "";
-//$user_avatar = isset($HTTP_POST_VARS['user_avatar']) ? $HTTP_POST_VARS['user_avatar'] : "blank.gif";
+//$user_avatar = isset($_POST['user_avatar']) ? $_POST['user_avatar'] : "blank.gif";
 
 $email_tray = new XoopsFormElementTray(_US_EMAIL, "<br />");
 $email_text = new XoopsFormText("", "email", 25, 60, $email);

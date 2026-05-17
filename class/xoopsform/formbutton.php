@@ -71,7 +71,7 @@ class XoopsFormButton extends XoopsFormElement {
      * @param	string  $type       Type of the button.
      * This could be either "button", "submit", or "reset"
 	 */
-	function XoopsFormButton($caption, $name, $value="", $type="button"){
+	function __construct($caption, $name, $value="", $type="button"){
 		$this->setCaption($caption);
 		$this->setName($name);
 		$this->_type = $type;

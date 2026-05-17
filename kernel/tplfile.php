@@ -34,7 +34,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 class XoopsTplfile extends XoopsObject
 {
 
-	function XoopsTplfile()
+	function __construct()
 	{
 		$this->XoopsObject();
 		$this->initVar('tpl_id', XOBJ_DTYPE_INT, null, false);

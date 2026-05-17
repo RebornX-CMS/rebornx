@@ -478,7 +478,7 @@ function xoops_getcss($theme = '')
 	return '';
 }
 
-function &getMailer()
+function getMailer()
 {
 	global $xoopsConfig;
 	include_once XOOPS_ROOT_PATH."/class/xoopsmailer.php";
@@ -491,19 +491,18 @@ function &getMailer()
 	return new XoopsMailer();
 }
 
-function &xoops_gethandler($name)
+function xoops_gethandler($name)
 {
-	$xoopsHandlerRegistry =& XoopsHandlerRegistry::instance();
+	$xoopsHandlerRegistry = XoopsHandlerRegistry::instance();
 	$name = strtolower(trim($name));
-	$handler =& $xoopsHandlerRegistry->getHandler($name);
+	$handler = $xoopsHandlerRegistry->getHandler($name);
 	if (!$handler) {
 		require_once XOOPS_ROOT_PATH.'/kernel/'.$name.'.php';
 		$class = 'Xoops'.ucfirst($name).'Handler';
 		if (class_exists($class)) {
 			unset($handler);
-			$handler =& new $class($GLOBALS['xoopsDB']);
+			$handler = new $class($GLOBALS['xoopsDB']);
 			$xoopsHandlerRegistry->setHandler($name, $handler);
-		
 		} else {
 			trigger_error('Class <b>'.$class.'</b> does not exist<br />Handler Name: '.$name, E_USER_ERROR);
 		}
@@ -511,7 +510,7 @@ function &xoops_gethandler($name)
 	return $handler;
 }
 
-function &xoops_getmodulehandler($name = null, $module_dir = null)
+function xoops_getmodulehandler($name = null, $module_dir = null)
 {
 	// if $module_dir is not specified
 	if (!isset($module_dir)) {
@@ -524,15 +523,15 @@ function &xoops_getmodulehandler($name = null, $module_dir = null)
 	} else {
 		$module_dir = trim($module_dir);
 	}
-	$xoopsHandlerRegistry =& XoopsHandlerRegistry::instance();
+	$xoopsHandlerRegistry = XoopsHandlerRegistry::instance();
 	$name = (!isset($name)) ? $module_dir : trim($name);
-	$handler =& $xoopsHandlerRegistry->getModuleHandler($module_dir, $name);
+	$handler = $xoopsHandlerRegistry->getModuleHandler($module_dir, $name);
 	if (!$handler) {
 		require_once XOOPS_ROOT_PATH.'/modules/'.$module_dir.'/class/'.$name.'.php';
 		$class = ucfirst(strtolower($module_dir)).ucfirst($name).'Handler';
 		if (class_exists($class)) {
 			unset($handler);
-			$handler =& new $class($GLOBALS['xoopsDB']);
+			$handler = new $class($GLOBALS['xoopsDB']);
 			$xoopsHandlerRegistry->setModuleHandler($module_dir, $name, $handler);
 		} else {
 			trigger_error('Handler does not exist<br />Module: '.$module_dir.'<br />Name: '.$name, E_USER_ERROR);

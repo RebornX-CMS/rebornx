@@ -105,7 +105,7 @@ class XoopsForm {
      * @param	string  $action "action" attribute for the <form> tag
      * @param   string  $method "method" attribute for the <form> tag
 	 */
-	function XoopsForm($title, $name, $action, $method="post"){
+	function __construct($title, $name, $action, $method="post"){
 		$this->_title = $title;
 		$this->_name = $name;
 		$this->_action = $action;

@@ -775,9 +775,10 @@ class Snoopy
 		$headers .= "\r\n";
 		
 		// set the read timeout if needed
-		if ($this->read_timeout > 0)
-			socket_set_timeout($fp, $this->read_timeout);
 		$this->timed_out = false;
+		if ($this->read_timeout > 0) {
+			stream_set_timeout($fp, $this->read_timeout);
+		}
 		fwrite($fp,$headers.$body,strlen($headers.$body));
 		
 		$this->_redirectaddr = false;
@@ -892,7 +893,7 @@ class Snoopy
 			if(!is_array($this->cookies))
 				$this->cookies = (array)$this->cookies;
 	
-			reset($this->cookies);
+		${reset}(null);
 			if ( count($this->cookies) > 0 ) {
 				$cookie_str = 'Cookie: ';
 				foreach ( $this->cookies as $cookieKey => $cookieVal ) {

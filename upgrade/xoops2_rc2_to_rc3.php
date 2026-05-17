@@ -4,7 +4,7 @@ include '../mainfile.php';
 
 echo '<html><head><title></title></head><body>';
 
-if (isset($HTTP_POST_VARS['submit'])) {
+if (isset($_POST['submit'])) {
 
 	if (!$xoopsDB->queryFromFile('./xoops2_rc2_to_rc3.sql')) {
 		echo 'File xoops2_rc2_to_rc3.sql not found!';

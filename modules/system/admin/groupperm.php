@@ -1,6 +1,6 @@
 <?php
 include '../../../include/cp_header.php';
-$modid = isset($HTTP_POST_VARS['modid']) ? intval($HTTP_POST_VARS['modid']) : 0;
+$modid = isset($_POST['modid']) ? intval($_POST['modid']) : 0;
 // we dont want system module permissions to be changed here
 if ($modid <= 1 || !is_object($xoopsUser) || !$xoopsUser->isAdmin($modid)) {
 	redirect_header(XOOPS_URL.'/index.php', 1, _NOPERM);
@@ -14,10 +14,10 @@ if (!is_object($module) || !$module->getVar('isactive')) {
 }
 $member_handler =& xoops_gethandler('member');
 $group_list =& $member_handler->getGroupList();
-if (is_array($HTTP_POST_VARS['perms']) && !empty($HTTP_POST_VARS['perms'])) {
+if (is_array($_POST['perms']) && !empty($_POST['perms'])) {
 	$gperm_handler = xoops_gethandler('groupperm');
 	if (false != $gperm_handler->deleteByModule($modid)) {
-		foreach ($HTTP_POST_VARS['perms'] as $perm_name => $perm_data) {
+		foreach ($_POST['perms'] as $perm_name => $perm_data) {
 			foreach ($perm_data['groups'] as $group_id => $item_ids) {
 				foreach ($item_ids as $item_id => $selected) {
 					if ($selected == 1) {

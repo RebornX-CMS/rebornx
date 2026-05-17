@@ -36,8 +36,8 @@ include_once XOOPS_ROOT_PATH."/modules/system/admin/banners/banners.php";
 include_once XOOPS_ROOT_PATH."/class/module.textsanitizer.php";
 
 // bug-compatibility ;-)
-extract($HTTP_GET_VARS);
-extract($HTTP_POST_VARS);
+extract($_GET);
+extract($_POST);
 
 $op = !isset($op) ? 'BannersAdmin' : $op;
 switch ( $op ) {

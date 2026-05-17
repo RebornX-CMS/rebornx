@@ -67,7 +67,7 @@ class XoopsUser extends XoopsObject
      * @param array $id Array of key-value-pairs to be assigned to the user. (for backward compatibility only)
      * @param int $id ID of the user to be loaded from the database.
      */
-    function XoopsUser($id = null)
+    function __construct($id = null)
     {
         $this->initVar('uid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('name', XOBJ_DTYPE_TXTBOX, null, false, 60);
@@ -490,7 +490,7 @@ class XoopsUserHandler extends XoopsObjectHandler
      */
     function insert(&$user, $force = false)
     {
-        if (get_class($user) != 'xoopsuser') {
+        if (!$user instanceof XoopsUser) {
             return false;
         }
         if (!$user->isDirty()) {
@@ -534,7 +534,7 @@ class XoopsUserHandler extends XoopsObjectHandler
      */
     function delete(&$user, $force = false)
     {
-        if (get_class($user) != 'xoopsuser') {
+        if (!$user instanceof XoopsUser) {
             return false;
         }
         $sql = sprintf("DELETE FROM %s WHERE uid = %u", $this->db->prefix("users"), $user->getVar('uid'));
@@ -561,7 +561,7 @@ class XoopsUserHandler extends XoopsObjectHandler
         $ret = array();
         $limit = $start = 0;
         $sql = 'SELECT * FROM '.$this->db->prefix('users');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' '.$criteria->renderWhere();
             if ($criteria->getSort() != '') {
                 $sql .= ' ORDER BY '.$criteria->getSort().' '.$criteria->getOrder();
@@ -595,7 +595,7 @@ class XoopsUserHandler extends XoopsObjectHandler
     function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('users');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' '.$criteria->renderWhere();
         }
         $result = $this->db->query($sql);
@@ -615,7 +615,7 @@ class XoopsUserHandler extends XoopsObjectHandler
     function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM '.$this->db->prefix('users');
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' '.$criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {
@@ -637,7 +637,7 @@ class XoopsUserHandler extends XoopsObjectHandler
     {
         $set_clause = is_numeric($fieldvalue) ? $fieldname.' = '.$fieldvalue : $fieldname.' = '.$this->db->quoteString($fieldvalue);
         $sql = 'UPDATE '.$this->db->prefix('users').' SET '.$set_clause;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && $criteria instanceof CriteriaElement) {
             $sql .= ' '.$criteria->renderWhere();
         }
         if (!$result = $this->db->query($sql)) {

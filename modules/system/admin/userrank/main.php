@@ -53,12 +53,12 @@ if (isset($_FILES)) {
     extract($_FILES);
 }
 
-if (isset($HTTP_GET_VARS['rank_id'])) {
-	$rank_id = intval($HTTP_GET_VARS['rank_id']);
+if (isset($_GET['rank_id'])) {
+	$rank_id = intval($_GET['rank_id']);
 }
 
-if (isset($HTTP_GET_VARS['op'])) {
-	$op = $HTTP_GET_VARS['op'];
+if (isset($_GET['op'])) {
+	$op = $_GET['op'];
 }
 
 switch ($op) {

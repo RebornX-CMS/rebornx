@@ -69,7 +69,7 @@ class XoopsFormRadio extends XoopsFormElement {
 	 * @param	string	$name		"name" attribute
 	 * @param	string	$value		Pre-selected value
 	 */
-	function XoopsFormRadio($caption, $name, $value = null){
+	function __construct($caption, $name, $value = null){
 		$this->setCaption($caption);
 		$this->setName($name);
 		if (isset($value)) {

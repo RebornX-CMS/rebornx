@@ -123,14 +123,14 @@ function SmilesEdit($id)
 
 function SmilesAdd($smile_code, $smile_url, $smile_desc, $smile_display)
 {
-	global $HTTP_POST_VARS;
+	global $_POST;
 	$db =& Database::getInstance();
 	$myts =& MyTextSanitizer::getInstance();
 
 	include_once XOOPS_ROOT_PATH.'/class/uploader.php';
 	$uploader = new XoopsMediaUploader(XOOPS_UPLOAD_PATH, array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png'), 100000, 120, 120);
 	$uploader->setPrefix('smil');
-	if ($uploader->fetchMedia($HTTP_POST_VARS['xoops_upload_file'][0])) {
+	if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 		if (!$uploader->upload()) {
 			$err = $uploader->getErrors();
 		} else {
@@ -158,14 +158,14 @@ function SmilesAdd($smile_code, $smile_url, $smile_desc, $smile_display)
 
 function SmilesSave($id, $smile_code, $smile_url, $smile_desc, $smile_display, $old_smile)
 {
-	global $HTTP_POST_VARS;
+	global $_POST;
 	$db =& Database::getInstance();
 	$myts =& MyTextSanitizer::getInstance();
 	if (isset($smile_url) && trim($smile_url) != '') {
 		include_once XOOPS_ROOT_PATH.'/class/uploader.php';
 		$uploader = new XoopsMediaUploader(XOOPS_UPLOAD_PATH, array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png'), 100000, 120, 120);
 		$uploader->setPrefix('smil');
-		if ($uploader->fetchMedia($HTTP_POST_VARS['xoops_upload_file'][0])) {
+		if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 			if (!$uploader->upload()) {
 				$err = $uploader->getErrors();
 			} else {

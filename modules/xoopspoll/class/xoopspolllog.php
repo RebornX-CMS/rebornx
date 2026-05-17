@@ -35,7 +35,7 @@ class XoopsPollLog extends XoopsObject
 	public $db;
 
 	// constructor
-	function XoopsPollLog($id=null)
+	function __construct($id=null)
 	{
 		$this->db = Database::getInstance();
 		$this->initVar("log_id", XOBJ_DTYPE_INT, 0);

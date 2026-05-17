@@ -118,7 +118,7 @@ class XoopsMediaUploader
      * @param   int     $maxWidth
      * @param   int     $maxHeight
      **/
-    function XoopsMediaUploader($uploadDir, $allowedMimeTypes, $maxFileSize, $maxWidth=null, $maxHeight=null)
+    function __construct($uploadDir, $allowedMimeTypes, $maxFileSize, $maxWidth=null, $maxHeight=null)
     {
         if (is_array($allowedMimeTypes)) {
             $this->allowedMimeTypes = $allowedMimeTypes;
@@ -138,7 +138,7 @@ class XoopsMediaUploader
      * 
      * @param   string  $media_name Name of the file field
      * @param   int     $index      Index of the file (if more than one uploaded under that name)
-     * @global  $HTTP_POST_FILES
+     * @global  $_FILES
      * @return  bool
      **/
     function fetchMedia($media_name, $index = null)

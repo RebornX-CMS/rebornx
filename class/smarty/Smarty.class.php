@@ -543,7 +543,7 @@ class Smarty
      * @uses $global_assign uses {@link assign()} to assign each corresponding
      *                      value from $GLOBALS to the template vars
      */
-    function Smarty()
+    function __construct()
     {
         foreach ($this->global_assign as $key => $var_name) {
             if (is_array($var_name)) {
@@ -1977,8 +1977,8 @@ class Smarty
      */    
     function _dequote($string)
     {
-        if (($string{0} == "'" || $string{0} == '"') &&
-            $string{strlen($string)-1} == $string{0})
+        if (($string[0] == "'" || $string[0] == '"') &&
+            $string[strlen($string)-1] == $string[0])
             return substr($string, 1, -1);
         else
             return $string;
@@ -2219,7 +2219,7 @@ class Smarty
     {
         if (!file_exists($dir)) {
             $_dir_parts = preg_split('!\\'.DIR_SEP.'+!', $dir, -1, PREG_SPLIT_NO_EMPTY);
-            $_new_dir = ($dir{0} == DIR_SEP) ? DIR_SEP : '';
+            $_new_dir = ($dir[0] == DIR_SEP) ? DIR_SEP : '';
             
             // do not attempt to test or make directories outside of open_basedir
             $_open_basedir_ini = ini_get('open_basedir');

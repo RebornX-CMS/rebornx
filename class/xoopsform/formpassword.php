@@ -79,7 +79,7 @@ class XoopsFormPassword extends XoopsFormElement {
 	 * @param	int		$value		Initial value of the field. 
 	 * 								<b>Warning:</b> this is readable in cleartext in the page's source!
 	 */
-	function XoopsFormPassword($caption, $name, $size, $maxlength, $value=""){
+	function __construct($caption, $name, $size, $maxlength, $value=""){
 		$this->setCaption($caption);
 		$this->setName($name);
 		$this->_size = intval($size);

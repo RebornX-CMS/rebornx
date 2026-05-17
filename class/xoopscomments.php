@@ -17,6 +17,17 @@
 //                                                                           //
 //  This program is distributed in the hope that it will be useful,          //
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the License, or        //
+//  (at your option) any later version.                                      //
+//                                                                           //
+//  You may not change or alter any portion of this comment or credits       //
+//  of supporting developers from this source code or any supporting         //
+//  source code which is considered copyrighted (c) material of the          //
+//  original comment or credit authors.                                      //
+//                                                                           //
+//  This program is distributed in the hope that it will be useful,          //
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
 //  GNU General Public License for more details.                             //
 //                                                                           //
@@ -40,11 +51,11 @@ class XoopsComments extends XoopsObject
 	var $ctable;
     public $db;
 
-	function XoopsComments($ctable, $id=null)
+	function __construct($ctable, $id=null)
 	{
 		$this->ctable = $ctable;
 		$this->db = Database::getInstance();
-		$this->XoopsObject();
+		parent::__construct();
 		$this->initVar('comment_id', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('item_id', XOBJ_DTYPE_INT, null, false);
 		$this->initVar('order', XOBJ_DTYPE_INT, null, false);
@@ -165,7 +176,7 @@ class XoopsComments extends XoopsObject
 				$ret[] = $myrow['comment_id'];
 			}
 		} else {
-			$sql = "SELECT * FROM ".$this->ctable."".$where_query." ORDER BY $orderby";
+			$sql = "SELECT * FROM " . $this->ctable . " " . $where_query . " ORDER BY $orderby";
 			$result = $this->db->query($sql,$limit,$start);
 			while ( $myrow = $this->db->fetchArray($result) ) {
 				$ret[] = new XoopsComments($this->ctable,$myrow);
@@ -204,7 +215,7 @@ class XoopsComments extends XoopsObject
 			if ($mode != "flat" || $mode != "nocomments" || $mode != "thread" ) {
 				$mode = "flat";
 			}
-			echo "&nbsp;<input type='button' onclick='location=\"newcomment.php?item_id=".intval($item_id)."&amp;order=".intval($order)."&amp;mode=".$mode."\"' value='"._CM_POSTCOMMENT."' />";
+			echo "&nbsp;<input type='button' onclick='location=\"newcomment.php?item_id=".intval($item_id)."&order=".intval($order)."&mode=".$mode."\"' value='"._CM_POSTCOMMENT."' />";
 		}
 		echo "</td></tr></table></form>";
 	}
@@ -240,13 +251,13 @@ class XoopsComments extends XoopsObject
 			$ip_image = "<img src='".XOOPS_URL."/images/icons/ip.gif' alt='' />";
 		}
 		if ( $adminview || ($xoopsUser && $this->getVar("user_id") == $xoopsUser->getVar("uid")) ) {
-			$edit_image = "<a href='editcomment.php?comment_id=".$this->getVar("comment_id")."&amp;mode=".$mode."&amp;order=".intval($order)."'><img src='".XOOPS_URL."/images/icons/edit.gif' alt='"._EDIT."' /></a>";
+			$edit_image = "<a href='editcomment.php?comment_id=".$this->getVar("comment_id")."&mode=".$mode."&order=".intval($order)."'><img src='".XOOPS_URL."/images/icons/edit.gif' alt='"._EDIT."' /></a>";
 		}
 		if ( $xoopsConfig['anonpost'] || $xoopsUser ) {
-			$reply_image = "<a href='replycomment.php?comment_id=".$this->getVar("comment_id")."&amp;mode=".$mode."&amp;order=".intval($order)."'><img src='".XOOPS_URL."/images/icons/reply.gif' alt='"._REPLY."' /></a>";
+			$reply_image = "<a href='replycomment.php?comment_id=".$this->getVar("comment_id")."&mode=".$mode."&order=".intval($order)."'><img src='".XOOPS_URL."/images/icons/reply.gif' alt='"._REPLY."' /></a>";
 		}
 		if ( $adminview ) {
-			$delete_image = "<a href='deletecomment.php?comment_id=".$this->getVar("comment_id")."&amp;mode=".$mode."&amp;order=".intval($order)."'><img src='".XOOPS_URL."/images/icons/delete.gif' alt='"._DELETE."' /></a>";
+			$delete_image = "<a href='deletecomment.php?comment_id=".$this->getVar("comment_id")."&mode=".$mode."&order=".intval($order)."'><img src='".XOOPS_URL."/images/icons/delete.gif' alt='"._DELETE."' /></a>";
 		}
 
 		if ( $poster ) {
@@ -272,7 +283,7 @@ class XoopsComments extends XoopsObject
 			}
 			$profile_image = "<a href='".XOOPS_URL."/userinfo.php?uid=".$poster->getVar("uid")."'><img src='".XOOPS_URL."/images/icons/profile.gif' alt='"._PROFILE."' /></a>";
 			if ( $xoopsUser ) {
-				$pm_image =  "<a href='javascript:openWithSelfMain(\"".XOOPS_URL."/pmlite.php?send2=1&amp;to_userid=".$poster->getVar("uid")."\",\"pmlite\",450,370);'><img src='".XOOPS_URL."/images/icons/pm.gif' alt='".sprintf(_SENDPMTO,$poster->getVar("uname", "E"))."' /></a>";
+				$pm_image =  "<a href='javascript:openWithSelfMain(\"".XOOPS_URL."/pmlite.php?send2=1&to_userid=".$poster->getVar("uid")."\",\"pmlite\",450,370);'><img src='".XOOPS_URL."/images/icons/pm.gif' alt='".sprintf(_SENDPMTO,$poster->getVar("uname", "E"))."' /></a>";
 			} else {
 				$pm_image = "";
 			}
@@ -338,7 +349,7 @@ class XoopsComments extends XoopsObject
 		} else {
 			$icon = "icons/no_posticon.gif";
 		}
-		echo "<tr class='$bg' align='left'><td>".$prefix."<img src='".XOOPS_URL."/images/".$icon."'>&nbsp;<a href='".$_SERVER['PHP_SELF']."?item_id=".$this->getVar("item_id")."&amp;comment_id=".$this->getVar("comment_id")."&amp;mode=".$mode."&amp;order=".$order."#".$this->getVar("comment_id")."'>".$this->getVar("subject")."</a></td><td><a href='".XOOPS_URL."/userinfo.php?uid=".$this->getVar("user_id")."'>".XoopsUser::getUnameFromId($this->getVar("user_id"))."</a></td><td>".$date."</td></tr>";
+		echo "<tr class='$bg' align='left'><td>".$prefix."<img src='".XOOPS_URL."/images/".$icon."'>&nbsp;<a href='".$_SERVER['PHP_SELF']."?item_id=".$this->getVar("item_id")."&comment_id=".$this->getVar("comment_id")."&mode=".$mode."&order=".$order."#".$this->getVar("comment_id")."'>".$this->getVar("subject")."</a></td><td><a href='".XOOPS_URL."/userinfo.php?uid=".$this->getVar("user_id")."'>".XoopsUser::getUnameFromId($this->getVar("user_id"))."</a></td><td>".$date."</td></tr>";
 	}
 
 	function showTreeFoot()

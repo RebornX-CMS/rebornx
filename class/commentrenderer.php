@@ -42,12 +42,12 @@ class XoopsCommentRenderer {
 	/**#@+
      * @access	private
      */
-    var $_tpl;
+    public $_tpl;
     public $_comments = null;
     public $_useIcons = true;
     public $_doIconCheck = false;
-	var $_memberHandler;
-	var $_statusText;
+	public $_memberHandler;
+	public $_statusText;
     /**#@-*/
 
 	/**
@@ -57,7 +57,7 @@ class XoopsCommentRenderer {
 	 * @param   boolean $use_icons
 	 * @param   boolean $do_iconcheck
 	 **/
-	function XoopsCommentRenderer(&$tpl, $use_icons = true, $do_iconcheck = false)
+	function __construct(&$tpl, $use_icons = true, $do_iconcheck = false)
 	{
 		$this->_tpl = $tpl;
 		$this->_useIcons = $use_icons;

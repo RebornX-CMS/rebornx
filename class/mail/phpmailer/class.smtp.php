@@ -25,18 +25,18 @@ class SMTP
     public $SMTP_PORT = 25; # the default SMTP PORT
     public $CRLF = "\r\n";  # CRLF pair
 
-    var $smtp_conn;      # the socket to the server
-    var $error;          # error if any on the last call
-    var $helo_rply;      # the reply the server sent to us for HELO
+    public $smtp_conn;      # the socket to the server
+    public $error;          # error if any on the last call
+    public $helo_rply;      # the reply the server sent to us for HELO
 
-    var $do_debug;       # the level of debug to perform
+    public $do_debug;       # the level of debug to perform
 
     /**
      * Initialize the class so that the data is in a known state.
      * @access public
      * @return void
      */
-    function SMTP() {
+    function __construct() {
         $this->smtp_conn = 0;
         $this->error = null;
         $this->helo_rply = null;

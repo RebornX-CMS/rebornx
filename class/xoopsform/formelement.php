@@ -95,7 +95,7 @@ class XoopsFormElement {
 	 * constructor
 	 * 
 	 */
-	function XoopsFormElement(){
+	function __construct(){
 		exit("This class cannot be instantiated!");
 	}
 

@@ -64,7 +64,7 @@ class MyTextSanitizer
     *
     * @todo Sofar, this does nuttin' ;-)
 	*/
-	function MyTextSanitizer()
+	function __construct()
 	{
 
 	}
@@ -216,20 +216,18 @@ class MyTextSanitizer
 	}
 
 	/**
-	 * Add slashes to the text if magic_quotes_gpc is turned off.
+	 * Add slashes to the text.
 	 *
 	 * @param   string  $text
 	 * @return  string
 	 **/
-	function &addSlashes($text)
+	function addSlashes($text)
 	{
-		if (!get_magic_quotes_gpc()) {
-			$text = addslashes($text);
-		}
+		$text = addslashes($text);
 		return $text;
 	}
 	/*
-	* if magic_quotes_gpc is on, stirip back slashes
+	* strip back slashes
     *
     * @param	string  $text
     *
@@ -237,9 +235,7 @@ class MyTextSanitizer
 	*/
 	function stripSlashesGPC($text)
 	{
-		if (get_magic_quotes_gpc()) {
-			$text = stripslashes($text);
-		}
+		$text = stripslashes($text);
 		return $text;
 	}
 

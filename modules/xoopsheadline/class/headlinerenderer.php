@@ -36,8 +36,6 @@ class XoopsHeadlineRenderer
 	// holds reference to xoopsheadline class object
 	public $_hl;
 
-	public $_tpl;
-
 	// XoopTemplate object
 	public $_tpl;
 
@@ -51,7 +49,7 @@ class XoopsHeadlineRenderer
 	public $_parser;
 
 
-	function XoopsHeadlineRenderer(&$headline)
+	function __construct(&$headline)
 	{
 		$this->_hl = $headline;
 		$this->_tpl = new XoopsTpl();

@@ -24,7 +24,7 @@
 //  along with this program; if not, write to the Free Software              //
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
-// Author: Jochen Büînagel (job@buennagel.com)                               //
+// Author: Jochen BÑŒÐ¾nagel (job@buennagel.com)                               //
 // URL:  http://www.xoops.org												 //
 // Project: The XOOPS Project                                                //
 // ------------------------------------------------------------------------- //
@@ -34,7 +34,7 @@
  * 
  * @filesource 
  *
- * @author		Jochen Büînagel	<jb@buennagel.com>
+ * @author		Jochen BÑŒÐ¾nagel	<jb@buennagel.com>
  * @copyright	copyright (c) 2000-2003 The XOOPS Project (http://www.xoops.org)
  *
  * @version		$Revision: 1.6 $ - $Date: 2003/04/25 10:13:21 $
@@ -148,11 +148,11 @@ class XoopsMultiMailer extends phpmailer {
 	 * 
 	 * @global	$xoopsConfig
 	 */
-	function XoopsMultiMailer(){
+	function __construct(){
 		global $xoopsConfig;
 	
-		$config_handler =& xoops_gethandler('config');
-		$xoopsMailerConfig =& $config_handler->getConfigsByCat(XOOPS_CONF_MAILER);
+		$config_handler = xoops_gethandler('config');
+		$xoopsMailerConfig = $config_handler->getConfigsByCat(XOOPS_CONF_MAILER);
 		$this->From = $xoopsMailerConfig['from'];
 		if ($this->From == '') {
 		    $this->From = $xoopsConfig['adminmail'];
@@ -162,7 +162,7 @@ class XoopsMultiMailer extends phpmailer {
 		    $this->Mailer = "smtp";
 			$this->SMTPAuth = TRUE;
 			$this->Host = implode(';',$xoopsMailerConfig['smtphost']);
-			$this->User = $xoopsMailerConfig['smtpuser'];
+			$this->Username = $xoopsMailerConfig['smtpuser'];
 			$this->Password = $xoopsMailerConfig['smtppass'];
 		} else {
 			$this->Mailer = $xoopsMailerConfig['mailmethod'];

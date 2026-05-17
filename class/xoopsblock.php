@@ -38,7 +38,7 @@ class XoopsBlock extends XoopsObject
 {
 	var $db;
 
-	function XoopsBlock($id = null)
+	function __construct($id = null)
 	{
 		$this->db = Database::getInstance();
 		$this->initVar('bid', XOBJ_DTYPE_INT, null, false);

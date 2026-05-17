@@ -32,13 +32,13 @@
 $form = new XoopsThemeForm(_AM_SENDMTOUSERS, "mailusers", "admin.php?fct=mailusers");
 
 // from finduser section
-if (!empty($HTTP_POST_VARS['memberslist_id'])) {
-	$user_count = count($HTTP_POST_VARS['memberslist_id']);
+if (!empty($_POST['memberslist_id'])) {
+	$user_count = count($_POST['memberslist_id']);
 	$display_names = "";
 	for ( $i = 0; $i < $user_count; $i++ ) {
-		$uid_hidden = new XoopsFormHidden("mail_to_user[]", $HTTP_POST_VARS['memberslist_id'][$i]);
+		$uid_hidden = new XoopsFormHidden("mail_to_user[]", $_POST['memberslist_id'][$i]);
 		$form->addElement($uid_hidden);
-		$display_names .= "<a href='".XOOPS_URL."/userinfo.php?uid=".$HTTP_POST_VARS['memberslist_id'][$i]."' target='_blank'>".$HTTP_POST_VARS['memberslist_uname'][$HTTP_POST_VARS['memberslist_id'][$i]]."</a>, ";
+		$display_names .= "<a href='".XOOPS_URL."/userinfo.php?uid=".$_POST['memberslist_id'][$i]."' target='_blank'>".$_POST['memberslist_uname'][$_POST['memberslist_id'][$i]]."</a>, ";
 		unset($uid_hidden);
 	}
 	$users_label = new XoopsFormLabel(_AM_SENDTOUSERS2, substr($display_names, 0, -2));

@@ -90,7 +90,7 @@ class CriteriaElement
     /**
      * Constructor
      **/
-    function CriteriaElement()
+    function __construct()
     {
 
     }
@@ -218,7 +218,7 @@ class CriteriaCompo extends CriteriaElement
      * @param   object  $ele
      * @param   string  $condition
      **/
-    function CriteriaCompo($ele=null, $condition='AND')
+    function __construct($ele=null, $condition='AND')
     {
         if (isset($ele) && is_object($ele)) {
             $this->add($ele, $condition);
@@ -283,7 +283,8 @@ class CriteriaCompo extends CriteriaElement
         if ($count > 0) {
             $retval = $this->criteriaElements[0]->renderLdap();
             for ($i = 1; $i < $count; $i++) {
-                $cond = $this->conditions[$i];
+                $op = '';
+                $cond = isset($this->conditions[$i]) ? (string)$this->conditions[$i] : '';
                 if(strtoupper($cond) == 'AND'){
                     $op = '&';
                 } elseif (strtoupper($cond)=='OR'){
@@ -323,7 +324,7 @@ class Criteria extends CriteriaElement
      * @param   string  $value
      * @param   string  $operator
      **/
-    function Criteria($column, $value='', $operator='=')
+    function __construct($column, $value='', $operator='=')
     {
         $this->column = $column;
         $this->value = $value;
@@ -342,7 +343,7 @@ class Criteria extends CriteriaElement
             if (is_numeric($this->value) || strtoupper($this->operator) == 'IN') {
                 $clause .= ' '.$this->value;
             } else {
-                $clause .= " '".trim($this->value)."'";
+                $clause .= " '".trim((string)$this->value)."'";
             }
         }
 

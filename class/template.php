@@ -58,10 +58,10 @@ class XoopsTpl extends Smarty
 	/**
 	 * Constructor
 	 **/
-	function XoopsTpl()
+	function __construct()
 	{
 		global $xoopsConfig;
-		$this->Smarty();
+		parent::__construct();
 		$this->compile_id = null;
 		if ($xoopsConfig['theme_fromfile'] == 1) {
 			$this->_canUpdateFromFile = true;

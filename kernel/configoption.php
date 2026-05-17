@@ -55,7 +55,7 @@ class XoopsConfigOption extends XoopsObject
     /**
      * Constructor
      */
-    function XoopsConfigOption()
+    function __construct()
     {
         $this->XoopsObject();
         $this->initVar('confop_id', XOBJ_DTYPE_INT, null);

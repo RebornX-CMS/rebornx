@@ -71,7 +71,7 @@ class XoopsConfigItem extends XoopsObject
     /**
      * Constructor
      */
-    function XoopsConfigItem()
+    function __construct()
     {
         $this->initVar('conf_id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('conf_modid', XOBJ_DTYPE_INT, null, false);

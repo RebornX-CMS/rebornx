@@ -9,7 +9,7 @@
 */
 
 /*
-=======================================================================
+========================================================================
 Name:
 	tar Class
 
@@ -68,12 +68,12 @@ Version History:
 				- Changed "private" functions to have
 				  special function names beginning with
 				  two underscores
-=======================================================================
+========================================================================
 XOOPS changes onokazu <webmaster@xoops.org>
 
 	12/25/2002 - Added flag to addFile() function for binary files
 
-=======================================================================
+========================================================================
 */
 
 /**
@@ -95,25 +95,25 @@ class tar
 	/**#@+
 	 * Unprocessed Archive Information
 	 */
-	var $filename;
-	var $isGzipped;
-	var $tar_file;
+	public $filename;
+	public $isGzipped;
+	public $tar_file;
     /**#@-*/
 
 	/**#@+
 	 * Processed Archive Information
 	 */
-	var $files;
-	var $directories;
-	var $numFiles;
-	var $numDirectories;
+	public $files;
+	public $directories;
+	public $numFiles;
+	public $numDirectories;
     /**#@-*/
 
 
 	/**
 	 * Class Constructor -- Does nothing...
 	 */
-	function tar()
+	function __construct()
 	{
 		return true;
 	}
@@ -126,7 +126,7 @@ class tar
      * 
      * @access	private
 	 */
-	function __computeUnsignedChecksum($bytestring)
+	private function __computeUnsignedChecksum($bytestring)
 	{
 		$unsigned_chksum = '';
 		for($i=0; $i<512; $i++)
@@ -148,7 +148,7 @@ class tar
      * 
      * @access	private
 	 **/
-	function __parseNullPaddedString($string)
+	private function __parseNullPaddedString($string)
 	{
 		$position = strpos($string,chr(0));
 		return substr($string,0,$position);
@@ -161,7 +161,7 @@ class tar
      * 
      * @access	private
 	 **/
-	function __parseTar()
+	private function __parseTar()
 	{
 		// Read Files from archive
 		$tar_length = strlen($this->tar_file);
@@ -222,7 +222,8 @@ class tar
 				$this->numFiles++;
 
 				// Create us a new file in our array
-				$activeFile = &$this->files[];
+				$activeFile = [];
+				$this->files[] = &$activeFile;
 
 				// Asign Values
 				$activeFile["name"]		= $file_name;
@@ -240,7 +241,8 @@ class tar
 				$this->numDirectories++;
 
 				// Create a new directory in our array
-				$activeDir = &$this->directories[];
+				$activeDir = [];
+				$this->directories[] = &$activeDir;
 
 				// Assign values
 				$activeDir["name"]		= $file_name;
@@ -268,7 +270,7 @@ class tar
      * 
      * @access	private
 	 **/
-	function __readTar($filename='')
+	private function __readTar($filename='')
 	{
 		// Set the filename to load
 		if(!$filename)
@@ -276,7 +278,8 @@ class tar
 
 		// Read in the TAR file
 		$fp = fopen($filename,"rb");
-		$this->tar_file = fread($fp,filesize($filename));
+		$fsize = filesize($filename);
+		$this->tar_file = fread($fp, $fsize !== false ? (int)$fsize : 0);
 		fclose($fp);
 
 		if($this->tar_file[0] == chr(31) && $this->tar_file[1] == chr(139) && $this->tar_file[2] == chr(8)) {
@@ -301,7 +304,7 @@ class tar
      * 
      * @access	private
 	 **/
-	function __generateTAR()
+	private function __generateTAR()
 	{
 		// Clear any data currently in $this->tar_file
 		unset($this->tar_file);
@@ -527,13 +530,14 @@ class tar
 
 		// Add directory to processed data
 		$this->numDirectories++;
-		$activeDir		= &$this->directories[];
+		$activeDir = [];
 		$activeDir["name"]	= $dirname;
 		$activeDir["mode"]	= $file_information["mode"];
 		$activeDir["time"]	= $file_information["time"];
 		$activeDir["user_id"]	= $file_information["uid"];
 		$activeDir["group_id"]	= $file_information["gid"];
-		$activeDir["checksum"]	= $checksum;
+		$activeDir["checksum"]	= '';
+		$this->directories[] = $activeDir;
 
 		return true;
 	}
@@ -566,22 +570,24 @@ class tar
 		} else {
 			$fp = fopen($filename, "rb");
 		}
-		$file_contents = fread($fp,filesize($filename));
+		$fsize = filesize($filename);
+		$file_contents = fread($fp, $fsize !== false ? (int)$fsize : 0);
 		fclose($fp);
 
 		// Add file to processed data
 		$this->numFiles++;
-		$activeFile			= &$this->files[];
+		$activeFile = [];
 		$activeFile["name"]		= $filename;
 		$activeFile["mode"]		= $file_information["mode"];
 		$activeFile["user_id"]		= $file_information["uid"];
 		$activeFile["group_id"]		= $file_information["gid"];
 		$activeFile["size"]		= $file_information["size"];
 		$activeFile["time"]		= $file_information["mtime"];
-		$activeFile["checksum"]		= isset($checksum) ? $checksum : '';
+		$activeFile["checksum"]		= '';
 		$activeFile["user_name"]	= "";
 		$activeFile["group_name"]	= "";
 		$activeFile["file"]		= trim($file_contents);
+		$this->files[] = $activeFile;
 
 		return true;
 	}

@@ -88,14 +88,14 @@ function RankForumAdmin()
 
 function RankForumAdd($rank_title,$rank_min,$rank_max,$rank_image,$rank_special)
 {
-	global $HTTP_POST_VARS, $HTTP_POST_FILES;
+	global $_POST, $_FILES;
 	$db =& Database::getInstance();
 	$myts =& MyTextSanitizer::getInstance();
 	if (isset($rank_image['name']) && trim($rank_image['name']) != '') {
 		include_once XOOPS_ROOT_PATH.'/class/uploader.php';
 		$uploader = new XoopsMediaUploader(XOOPS_UPLOAD_PATH, array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png'), 100000, 120, 120);
 		$uploader->setPrefix('rank');
-		if ($uploader->fetchMedia($HTTP_POST_VARS['xoops_upload_file'][0])) {
+		if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 			if (!$uploader->upload()) {
 				$err = $uploader->getErrors();
 			} else {
@@ -160,14 +160,14 @@ function RankForumEdit($rank_id)
 
 function RankForumSave($rank_id, $rank_title, $rank_min, $rank_max, $rank_image, $rank_special, $old_rank)
 {
-	global $HTTP_POST_VARS, $HTTP_POST_FILES;
+	global $_POST, $_FILES;
 	$db =& Database::getInstance();
 	$myts =& MyTextSanitizer::getInstance();
 	if (isset($rank_image['name']) && trim($rank_image['name']) != '') {
 		include_once XOOPS_ROOT_PATH.'/class/uploader.php';
 		$uploader = new XoopsMediaUploader(XOOPS_UPLOAD_PATH, array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png'), 100000, 120, 120);
 		$uploader->setPrefix('rank');
-		if ($uploader->fetchMedia($HTTP_POST_VARS['xoops_upload_file'][0])) {
+		if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 			if (!$uploader->upload()) {
 				$err = $uploader->getErrors();
 			} else {

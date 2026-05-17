@@ -59,7 +59,7 @@ class XoopsFormLabel extends XoopsFormElement {
 	 * @param	string	$caption	Caption
 	 * @param	string	$value		Text
 	 */
-	function XoopsFormLabel($caption="", $value=""){
+	function __construct($caption="", $value=""){
 		$this->setCaption($caption);
 		$this->_value = $value;
 	}

@@ -33,7 +33,7 @@ require_once XOOPS_ROOT_PATH.'/class/xml/rpc/xmlrpcapi.php';
 
 class MetaWeblogApi extends XoopsXmlRpcApi
 {
-    function MetaWeblogApi(&$params, &$response, &$module)
+    function __construct(&$params, &$response, &$module)
     {
         $this->XoopsXmlRpcApi($params, $response, $module);
         $this->_setXoopsTagMap('storyid', 'postid');

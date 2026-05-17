@@ -74,17 +74,17 @@ function displayGroups()
 
 function modifyGroup($g_id)
 {
-	global $HTTP_GET_VARS, $HTTP_POST_VARS;
+	global $_GET, $_POST;
 	$userstart = $memstart = 0;
-	if ( !empty($HTTP_POST_VARS['userstart']) ) {
-		$userstart = intval($HTTP_POST_VARS['userstart']);
-	} elseif (!empty($HTTP_GET_VARS['userstart'])) {
-		$userstart = intval($HTTP_GET_VARS['userstart']);
+	if ( !empty($_POST['userstart']) ) {
+		$userstart = intval($_POST['userstart']);
+	} elseif (!empty($_GET['userstart'])) {
+		$userstart = intval($_GET['userstart']);
 	}
-	if ( !empty($HTTP_POST_VARS['memstart']) ) {
-		$memstart = intval($HTTP_POST_VARS['memstart']);
-	} elseif (!empty($HTTP_GET_VARS['memstart'])) {
-		$memstart = intval($HTTP_GET_VARS['memstart']);
+	if ( !empty($_POST['memstart']) ) {
+		$memstart = intval($_POST['memstart']);
+	} elseif (!empty($_GET['memstart'])) {
+		$memstart = intval($_GET['memstart']);
 	}
 	xoops_cp_header();
 	//OpenTable();

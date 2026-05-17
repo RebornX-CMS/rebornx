@@ -31,7 +31,7 @@
 
 function b_system_online_show()
 {
-	global $xoopsConfig, $xoopsUser, $xoopsModule, $HTTP_SERVER_VARS;
+	global $xoopsConfig, $xoopsUser, $xoopsModule, $_SERVER;
 	$online_handler =& xoops_gethandler('online');
 	mt_srand((double)microtime()*1000000);
 	// set gc probabillity to 10% for now..
@@ -46,9 +46,9 @@ function b_system_online_show()
 		$uname = '';
 	}
 	if (is_object($xoopsModule)) {
-		$online_handler->write($uid, $uname, time(), $xoopsModule->getVar('mid'), $HTTP_SERVER_VARS['REMOTE_ADDR']);
+		$online_handler->write($uid, $uname, time(), $xoopsModule->getVar('mid'), $_SERVER['REMOTE_ADDR']);
 	} else {
-		$online_handler->write($uid, $uname, time(), 0, $HTTP_SERVER_VARS['REMOTE_ADDR']);
+		$online_handler->write($uid, $uname, time(), 0, $_SERVER['REMOTE_ADDR']);
 	}
 	$onlines =& $online_handler->getAll();
 	if (false != $onlines) {
@@ -82,13 +82,13 @@ function b_system_online_show()
 
 function b_system_login_show()
 {
-	global $xoopsUser, $xoopsConfig, $HTTP_COOKIE_VARS;
+	global $xoopsUser, $xoopsConfig, $_COOKIE;
 	if (!$xoopsUser) {
 		$block = array();
 		$block['lang_username'] = _USERNAME;
 		$block['unamevalue'] = "";
-		if (isset($HTTP_COOKIE_VARS[$xoopsConfig['usercookie']])) {
-			$block['unamevalue'] = $HTTP_COOKIE_VARS[$xoopsConfig['usercookie']];
+		if (isset($_COOKIE[$xoopsConfig['usercookie']])) {
+			$block['unamevalue'] = $_COOKIE[$xoopsConfig['usercookie']];
 		}
 		$block['lang_password'] = _PASSWORD;
 		$block['lang_login'] = _LOGIN;
@@ -364,7 +364,7 @@ function b_system_comments_show($options)
 // RMV-NOTIFY
 function b_system_notification_show()
 {
-	global $xoopsConfig, $xoopsUser, $xoopsModule, $HTTP_SERVER_VARS;
+	global $xoopsConfig, $xoopsUser, $xoopsModule, $_SERVER;
 	include_once XOOPS_ROOT_PATH . '/include/notification_functions.php';
 	include_once XOOPS_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/notification.php';
 	// Notification must be enabled, and user must be logged in
@@ -398,7 +398,7 @@ function b_system_notification_show()
 	// Additional form data
 	$block['target_page'] = "notification_update.php";
 	// FIXME: better or more standardized way to do this?
-	$script_url = explode('/', $HTTP_SERVER_VARS['SCRIPT_NAME']);
+	$script_url = explode('/', $_SERVER['SCRIPT_NAME']);
 	$script_name = $script_url[count($script_url)-1];
 	$block['redirect_script'] = $script_name;
 	$block['submit_button'] = _NOT_UPDATENOW;

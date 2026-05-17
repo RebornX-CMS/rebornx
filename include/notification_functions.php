@@ -362,7 +362,7 @@ function &notificationSubscribableCategoryInfo ($module_id=null)
 		}
 	}
 
-	// TODO: switch to $_GET instead of $HTTP_GET_VARS.  But also 
+	// TODO: switch to $_GET instead of $_GET.  But also 
 	// in wiki need to switch, because we are SETTING the get vars
 	// so we have the itemid always present even on default homepage
 

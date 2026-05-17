@@ -38,7 +38,7 @@ class SaxParser
         createStringInput to construct xml input source objects to supply
         to the constructor, or the implementor can construct them individually.
     ****************************************************************************/
-    function SaxParser(&$input)
+    function __construct(&$input)
     {
         $this->level = 0;
         $this->parser = xml_parser_create('UTF-8');
@@ -159,9 +159,6 @@ class SaxParser
     function free()
     {
         xml_parser_free($this->parser);
-
-        unset($this);
-        $this = null;
     }
 
     /****************************************************************************

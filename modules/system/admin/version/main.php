@@ -29,17 +29,17 @@
 // Project: The XOOPS Project                                                //
 // ------------------------------------------------------------------------- //
 error_reporting(E_ALL);
-if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin($xoopsModule->getVar('mid')) || !isset($HTTP_GET_VARS['mid'])) {
+if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin($xoopsModule->getVar('mid')) || !isset($_GET['mid'])) {
 	exit("Access Denied");
 }
 
-if (is_numeric($HTTP_GET_VARS['mid'])) {
+if (is_numeric($_GET['mid'])) {
 	$module_handler =& xoops_gethandler('module');
-	$versioninfo =& $module_handler->get($HTTP_GET_VARS['mid']);
-} elseif (file_exists(XOOPS_ROOT_PATH.'/modules/'.trim($HTTP_GET_VARS['mid']).'/xoops_version.php')) {
+	$versioninfo =& $module_handler->get($_GET['mid']);
+} elseif (file_exists(XOOPS_ROOT_PATH.'/modules/'.trim($_GET['mid']).'/xoops_version.php')) {
 		$module_handler =& xoops_gethandler('module');
 		$versioninfo =& $module_handler->create();
-		$versioninfo->loadInfo(trim($HTTP_GET_VARS['mid']));
+		$versioninfo->loadInfo(trim($_GET['mid']));
 } else {
 	exit();
 }

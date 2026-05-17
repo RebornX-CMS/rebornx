@@ -36,7 +36,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 class XoopsImageset extends XoopsObject
 {
 
-	function XoopsImageset()
+	function __construct()
 	{
 		$this->XoopsObject();
 		$this->initVar('imgset_id', XOBJ_DTYPE_INT, null, false);

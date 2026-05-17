@@ -33,6 +33,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 }
 include_once XOOPS_ROOT_PATH."/class/xoopstree.php";
 
+#[AllowDynamicProperties]
 class XoopsTopic
 {
     public $table;
@@ -43,8 +44,12 @@ class XoopsTopic
     public $prefix; // only used in topic tree
     public $use_permission = false;
     public $mid; // module id used for setting permission
+    public $db;
+    public $m_groups;
+    public $s_groups;
+    public $r_groups;
 
-	function XoopsTopic($table, $topicid=0)
+	function __construct($table, $topicid=0)
 	{
 		$this->db = Database::getInstance();
 		$this->table = $table;
@@ -143,7 +148,7 @@ class XoopsTopic
 				}
 			}
 			if ( !empty($this->s_groups) && is_array($this->s_groups) ){
-				foreach ( $s_groups as $s_g ) {
+				foreach ( $this->s_groups as $s_g ) {
 					$submit_topics = XoopsPerms::getPermitted($this->mid, "SubmitInTopic", $s_g);
 					$add = true;
 					foreach($parent_topics as $p_topic){
@@ -163,7 +168,7 @@ class XoopsTopic
 				}
 			}
 			if ( !empty($this->r_groups) && is_array($this->r_groups) ){
-				foreach ( $r_groups as $r_g ) {
+				foreach ( $this->r_groups as $r_g ) {
 					$read_topics = XoopsPerms::getPermitted($this->mid, "ReadInTopic", $r_g);
 					$add = true;
 					foreach($parent_topics as $p_topic){

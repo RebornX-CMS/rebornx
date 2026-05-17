@@ -35,15 +35,15 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 	include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 	include_once XOOPS_ROOT_PATH."/modules/system/admin/groups/groups.php";
 	$op = "display";
-	if ( isset($HTTP_POST_VARS) ) {
-		foreach ( $HTTP_POST_VARS as $k => $v ) {
+	if ( isset($_POST) ) {
+		foreach ( $_POST as $k => $v ) {
 			$$k = $v;
   		}
 	}
-	if ( isset($HTTP_GET_VARS['op']) ) {
-		if ($HTTP_GET_VARS['op'] == "modify" || $HTTP_GET_VARS['op'] == "del") {
-			$op = $HTTP_GET_VARS['op'];
-			$g_id = $HTTP_GET_VARS['g_id'];
+	if ( isset($_GET['op']) ) {
+		if ($_GET['op'] == "modify" || $_GET['op'] == "del") {
+			$op = $_GET['op'];
+			$g_id = $_GET['g_id'];
 		}
 	}
 

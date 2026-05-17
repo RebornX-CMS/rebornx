@@ -357,7 +357,7 @@ case "post":
     			if (isset($com_config['extraParams']) && is_array($com_config['extraParams'])) {
         			$extra_params = '';
         			foreach ($com_config['extraParams'] as $extra_param) {
-            			$extra_params .= isset($HTTP_GET_VARS[$extra_param]) ? $extra_param.'='.$HTTP_GET_VARS[$extra_param].'&amp;' : $extra_param.'=&amp;';
+            			$extra_params .= isset($_GET[$extra_param]) ? $extra_param.'='.$_GET[$extra_param].'&amp;' : $extra_param.'=&amp;';
         			}
         			$comment_url .= $extra_params;
     			}

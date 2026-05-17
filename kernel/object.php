@@ -116,7 +116,7 @@ class XoopsObject
     * normally, this is called from child classes only
     * @access public
     */
-    function XoopsObject()
+    function __construct()
     {
     }
 
@@ -185,7 +185,7 @@ class XoopsObject
     function assignVar($key, $value)
     {
         if (isset($value) && isset($this->vars[$key])) {
-            $this->vars[$key][value] = $value;
+            $this->vars[$key]['value'] = $value;
         }
     }
 
@@ -213,7 +213,7 @@ class XoopsObject
     function setVar($key, $value, $not_gpc = false)
     {
         if (!empty($key) && isset($value) && isset($this->vars[$key])) {
-            $this->vars[$key][value] = $value;
+            $this->vars[$key]['value'] = $value;
             $this->vars[$key]['not_gpc'] = $not_gpc;
             $this->vars[$key]['changed'] = true;
             $this->setDirty();
@@ -415,11 +415,11 @@ class XoopsObject
                 case XOBJ_DTYPE_TXTBOX:
                     if ($v['required'] && $cleanv != '0' && $cleanv == '') {
                         $this->setErrors("$k is required.");
-                        continue;
+                        continue 2;
                     }
                     if (isset($v['maxlength']) && strlen($cleanv) > intval($v['maxlength'])) {
                         $this->setErrors("$k must be shorter than ".intval($v['maxlength'])." characters.");
-                        continue;
+                        continue 2;
                     }
                     if (!$v['not_gpc']) {
                         $cleanv = $ts->stripSlashesGPC($ts->censorString($cleanv));
@@ -430,7 +430,7 @@ class XoopsObject
                 case XOBJ_DTYPE_TXTAREA:
                     if ($v['required'] && $cleanv != '0' && $cleanv == '') {
                         $this->setErrors("$k is required.");
-                        continue;
+                        continue 2;
                     }
                     if (!$v['not_gpc']) {
                         $cleanv = $ts->stripSlashesGPC($ts->censorString($cleanv));
@@ -451,11 +451,11 @@ class XoopsObject
                 case XOBJ_DTYPE_EMAIL:
                     if ($v['required'] && $cleanv == '') {
                         $this->setErrors("$k is required.");
-                        continue;
+                        continue 2;
                     }
                     if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i",$cleanv)) {
                         $this->setErrors("Invalid Email");
-                        continue;
+                        continue 2;
                     }
                     if (!$v['not_gpc']) {
                         $cleanv = $ts->stripSlashesGPC($cleanv);
@@ -464,7 +464,7 @@ class XoopsObject
                 case XOBJ_DTYPE_URL:
                     if ($v['required'] && $cleanv == '') {
                         $this->setErrors("$k is required.");
-                        continue;
+                        continue 2;
                     }
                     if ($cleanv != '' && !preg_match("/^http[s]*:\/\//i", $cleanv)) {
                         $cleanv = 'http://' . $cleanv;
@@ -525,7 +525,7 @@ class XoopsObject
      * @access public
      * @return object clone
      */
-    function &clone()
+    function &dclone()
     {
         $class = get_class($this);
         $clone = new $class();
@@ -608,7 +608,7 @@ class XoopsObjectHandler
 	 * @param object $db reference to the {@link XoopsDatabase} object
      * @access protected
      */
-    function XoopsObjectHandler(&$db)
+    function __construct(&$db)
     {
         $this->db = $db;
     }

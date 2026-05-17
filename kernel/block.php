@@ -54,7 +54,7 @@ class XoopsBlock extends XoopsObject
 	 *  
      * @param mixed $id
      **/
-    function XoopsBlock($id = null)
+    function __construct($id = null)
     {
         $this->initVar('bid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('mid', XOBJ_DTYPE_INT, 0, false);
@@ -83,8 +83,11 @@ class XoopsBlock extends XoopsObject
             if (is_array($id)) {
                 $this->assignVars($id);
             } else {
-                $blkhandler =& xoops_gethandler('block');
-                $this =& $blkhandler->get($id);
+                $blkhandler = xoops_gethandler('block');
+                $blk = $blkhandler->get($id);
+                if (is_object($blk)) {
+                    $this->assignVars($blk->getVars());
+                }
             }
         }
     }

@@ -63,15 +63,15 @@ if (false != $user) {
 	$user->setVar('last_login', time());
 	if (!$member_handler->insertUser($user)) {
 	}
-	$HTTP_SESSION_VARS = array();
-	$HTTP_SESSION_VARS['xoopsUserId'] = $user->getVar('uid');
-	$HTTP_SESSION_VARS['xoopsUserGroups'] = $user->getGroups();
+	$_SESSION = array();
+	$_SESSION['xoopsUserId'] = $user->getVar('uid');
+	$_SESSION['xoopsUserGroups'] = $user->getGroups();
 	if ($xoopsConfig['use_mysession'] && $xoopsConfig['session_name'] != '') {
 		setcookie($xoopsConfig['session_name'], session_id(), time()+(60 * $xoopsConfig['session_expire']), '/',  '', 0);
 	}
 	$user_theme = $user->getVar('theme');
 	if (in_array($user_theme, $xoopsConfig['theme_set_allowed'])) {
-		$HTTP_SESSION_VARS['xoopsUserTheme'] = $user_theme;
+		$_SESSION['xoopsUserTheme'] = $user_theme;
 	}
 	if (!empty($_POST['xoops_redirect']) && !strpos($_POST['xoops_redirect'], 'register')) {
 		$parsed = parse_url(XOOPS_URL);
@@ -79,14 +79,14 @@ if (false != $user) {
 		if (isset($parsed['host'])) {
 			$url .= isset($parsed['port']) ?$parsed['host'].':'.$parsed['port'].trim($_POST['xoops_redirect']): $parsed['host'].trim($_POST['xoops_redirect']);
 		} else {
-			$url = xoops_getenv('HTTP_HOST').trim($HTTP_POST_VARS['xoops_redirect']);
+			$url = xoops_getenv('HTTP_HOST').trim($_POST['xoops_redirect']);
 		}
 	} else {
 		$url = XOOPS_URL.'/index.php';
 	}
 
 	// set cookie for autologin
-	//if (!empty($HTTP_POST_VARS['rememberme'])) {
+	//if (!empty($_POST['rememberme'])) {
 	//	$expire = time() + $xoopsConfig['session_expire'] * 60;
 	//	setcookie('autologin_uname', $uname, $expire, '/', '', 0);
 	//	setcookie('autologin_pass', md5($pass), $expire, '/', '', 0);

@@ -37,7 +37,7 @@ class XoopsAvatar extends XoopsObject
 {
     var $_userCount;
 
-    function XoopsAvatar()
+    function __construct()
     {
         $this->XoopsObject();
         $this->initVar('avatar_id', XOBJ_DTYPE_INT, null, false);

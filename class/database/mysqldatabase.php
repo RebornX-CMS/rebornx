@@ -58,7 +58,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
 	 * Database connection
 	 * @var mysqli
 	 */
-	var $conn;
+	public $conn;
 
 	/**
 	 * connect to the database
