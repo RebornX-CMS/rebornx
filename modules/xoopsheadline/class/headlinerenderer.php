@@ -34,21 +34,21 @@ include_once XOOPS_ROOT_PATH.'/modules/xoopsheadline/language/'.$GLOBALS['xoopsC
 class XoopsHeadlineRenderer
 {
 	// holds reference to xoopsheadline class object
-	var $_hl;
+	public $_hl;
 
-	var $_tpl;
+	public $_tpl;
 
 	// XoopTemplate object
-	var $_tpl;
+	public $_tpl;
 
-	var $_feed;
+	public $_feed;
 
-	var $_block;
+	public $_block;
 
-	var $_errors = array();
+	public $_errors = array();
 
 	// RSS2 SAX parser
-	var $_parser;
+	public $_parser;
 
 
 	function XoopsHeadlineRenderer(&$headline)

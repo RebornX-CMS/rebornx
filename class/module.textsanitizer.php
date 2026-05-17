@@ -46,7 +46,7 @@ class MyTextSanitizer
 	/**
 	 * @var	array
 	 */
-	var $smileys = array();
+    public $smileys = array();
 
 	/**
 	 *

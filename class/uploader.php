@@ -84,30 +84,30 @@ Example
  */
 class XoopsMediaUploader
 {
-    var $mediaName;
-    var $mediaType;
-    var $mediaSize;
-    var $mediaDimension;
-    var $mediaTmpName;
-    var $mediaError;
+    public $mediaName;
+    public $mediaType;
+    public $mediaSize;
+    public $mediaDimension;
+    public $mediaTmpName;
+    public $mediaError;
 
-    var $uploadDir = '';
+    public $uploadDir = '';
 
-    var $allowedMimeTypes = array();
+    public $allowedMimeTypes = array();
 
-    var $maxFileSize = 0;
-    var $maxWidth;
-    var $maxHeight;
+    public $maxFileSize = 0;
+    public $maxWidth;
+    public $maxHeight;
 
-    var $targetFileName;
+    public $targetFileName;
 
-    var $prefix;
+    public $prefix;
 
-    var $errors = array();
+    public $errors = array();
 
-    var $savedDestination;
+    public $savedDestination;
 
-    var $savedFileName;
+    public $savedFileName;
 
     /**
      * Constructor

@@ -31,12 +31,12 @@
 
 class XoopsTree
 {
-	var $table;     //table with parent-child structure
-	var $id;    //name of unique id for records in table $table
-	var $pid;     // name of parent id used in table $table
-	var $order;    //specifies the order of query results
-	var $title;     // name of a field in table $table which will be used when  selection box and paths are generated
-	var $db;
+    public $table;     //table with parent-child structure
+    public $id;    //name of unique id for records in table $table
+    public $pid;     // name of parent id used in table $table
+    public $order;    //specifies the order of query results
+    public $title;     // name of a field in table $table which will be used when  selection box and paths are generated
+    public $db;
 
 	//constructor of class XoopsTree
 	//sets the names of table, unique id, and parend id

@@ -28,21 +28,21 @@ class phpmailer
      * @access public
      * @var int
      */
-    var $Priority          = 3;
+    public $Priority = 3;
 
     /**
      * Sets the CharSet of the message.
      * @access public
      * @var string
      */
-    var $CharSet           = "iso-8859-1";
+    public $CharSet = "iso-8859-1";
 
     /**
      * Sets the Content-type of the message.
      * @access public
      * @var string
      */
-    var $ContentType        = "text/plain";
+    public $ContentType = "text/plain";
 
     /**
      * Sets the Encoding of the message. Options for this are "8bit",
@@ -50,28 +50,28 @@ class phpmailer
      * @access public
      * @var string
      */
-    var $Encoding          = "8bit";
+    public $Encoding = "8bit";
 
     /**
      * Holds the most recent mailer error message.
      * @access public
      * @var string
      */
-    var $ErrorInfo         = "";
+    public $ErrorInfo = "";
 
     /**
      * Sets the From email address for the message.
      * @access public
      * @var string
      */
-    var $From               = "root@localhost";
+    public $From = "root@localhost";
 
     /**
      * Sets the From name of the message.
      * @access public
      * @var string
      */
-    var $FromName           = "Root User";
+    public $FromName = "Root User";
 
     /**
      * Sets the Sender email of the message. If not empty, will be sent via -f to sendmail
@@ -79,14 +79,14 @@ class phpmailer
      * @access public
      * @var string
      */
-    var $Sender            = "";
+    public $Sender = "";
 
     /**
      * Sets the Subject of the message.
      * @access public
      * @var string
      */
-    var $Subject           = "";
+    public $Subject = "";
 
     /**
      * Sets the Body of the message.  This can be either an HTML or text body.
@@ -94,7 +94,7 @@ class phpmailer
      * @access public
      * @var string
      */
-    var $Body               = "";
+    public $Body = "";
 
     /**
      * Sets the text-only body of the message.  This automatically sets the
@@ -104,7 +104,7 @@ class phpmailer
      * @access public
      * @var string
      */
-    var $AltBody           = "";
+    public $AltBody = "";
 
     /**
      * Sets word wrapping on the body of the message to a given number of 
@@ -112,21 +112,21 @@ class phpmailer
      * @access public
      * @var int
      */
-    var $WordWrap          = 0;
+    public $WordWrap = 0;
 
     /**
      * Method to send mail: ("mail", "sendmail", or "smtp").
      * @access public
      * @var string
      */
-    var $Mailer            = "mail";
+    public $Mailer = "mail";
 
     /**
      * Sets the path of the sendmail program.
      * @access public
      * @var string
      */
-    var $Sendmail          = "/usr/sbin/sendmail";
+    public $Sendmail = "/usr/sbin/sendmail";
 
     /**
      *  Turns Microsoft mail client headers on and off.  Useful mostly
@@ -134,7 +134,7 @@ class phpmailer
      *  @access public
      *  @var bool
      */
-    var $UseMSMailHeaders = false;
+    public $UseMSMailHeaders = false;
     
     /**
      * Path to phpmailer plugins.  This is now only useful if the SMTP class 
@@ -142,28 +142,28 @@ class phpmailer
      * @access public
      * @var string
      */
-    var $PluginDir         = "";
+    public $PluginDir = "";
 
     /**
      *  Holds phpmailer version.
      *  @access public
      *  @var string
      */
-    var $Version           = "1.65";
+    public $Version = "1.65";
 
     /**
      * Sets the email address that a reading confirmation will be sent.
      * @access public
      * @var string
      */
-    var $ConfirmReadingTo  = "";
+    public $ConfirmReadingTo = "";
 
     /**
      *  Sets the line endings of the message.
      *  @access public
      *  @var string
      */
-    var $LE           = "\n";
+    public $LE = "\n";
 
     /**
      *  Sets the hostname to use in Message-Id and Received headers
@@ -172,7 +172,7 @@ class phpmailer
      *  @access public
      *  @var string
      */
-    var $Hostname          = "";
+    public $Hostname = "";
 
 
     /////////////////////////////////////////////////
@@ -188,42 +188,42 @@ class phpmailer
      *  @access public
      *  @var string
      */
-    var $Host        = "localhost";
+    public $Host = "localhost";
 
     /**
      *  Sets the default SMTP server port.
      *  @access public
      *  @var int
      */
-    var $Port        = 25;
+    public $Port = 25;
 
     /**
      *  Sets the SMTP HELO of the message (Default is $Hostname).
      *  @access public
      *  @var string
      */
-    var $Helo        = "";
+    public $Helo = "";
 
     /**
      *  Sets SMTP authentication. Utilizes the Username and Password variables.
      *  @access public
      *  @var bool
      */
-    var $SMTPAuth     = false;
+    public $SMTPAuth = false;
 
     /**
      *  Sets SMTP username.
      *  @access public
      *  @var string
      */
-    var $Username     = "";
+    public $Username = "";
 
     /**
      *  Sets SMTP password.
      *  @access public
      *  @var string
      */
-    var $Password     = "";
+    public $Password = "";
 
     /**
      *  Sets the SMTP server timeout in seconds. This function will not 
@@ -231,14 +231,14 @@ class phpmailer
      *  @access public
      *  @var int
      */
-    var $Timeout      = 10;
+    public $Timeout = 10;
 
     /**
      *  Sets SMTP class debugging on or off.
      *  @access public
      *  @var bool
      */
-    var $SMTPDebug    = false;
+    public $SMTPDebug = false;
 
 
     /////////////////////////////////////////////////
@@ -250,53 +250,53 @@ class phpmailer
      *  @access private
      *  @var array
      */
-    var $to              = array();
+    public $to = array();
 
     /**
      *  Holds all "CC" addresses.
      *  @access private
      *  @var array
      */
-    var $cc              = array();
+    public $cc = array();
 
     /**
      *  Holds all "BCC" addresses.
      *  @access private
      *  @var array
      */
-    var $bcc             = array();
+    public $bcc = array();
 
     /**
      *  Holds all "Reply-To" addresses.
      *  @var array
      */
-    var $ReplyTo         = array();
+    public $ReplyTo = array();
 
     /**
      *  Holds all string and binary attachments.
      *  @access private
      *  @var array
      */
-    var $attachment      = array();
+    public $attachment = array();
 
     /**
      *  Holds all custom headers.
      *  @var array
      */
-    var $CustomHeader    = array();
+    public $CustomHeader = array();
 
     /**
      *  Holds the type of the message.
      *  @var string
      */
-    var $message_type    = "";
+    public $message_type = "";
 
     /**
      *  Holds the message boundaries.
      *  @access private
      *  @var string array
      */
-    var $boundary        = array();
+    public $boundary = array();
 
     /////////////////////////////////////////////////
     // VARIABLE METHODS
@@ -1698,49 +1698,49 @@ class Boundary
      * @access private
      * @var string
      */
-    var $ID = 0;
+    public $ID = 0;
 
     /**
      * Sets the boundary Content Type.
      * @access public
      * @var string
      */
-    var $ContentType = "text/plain";
+    public $ContentType = "text/plain";
 
     /**
      * Sets the Encoding.
      * @access public
      * @var string
      */
-    var $Encoding = "";
+    public $Encoding = "";
 
     /**
      * Sets an attachment disposition.
      * @access public
      * @var string
      */
-    var $Disposition = "";
+    public $Disposition = "";
 
     /**
      * Sets an attachment file name.
      * @access public
      * @var string
      */
-    var $FileName = "";
+    public $FileName = "";
     
     /**
      * Sets the Char set.
      * @access public
      * @var string
      */
-    var $CharSet = "";
+    public $CharSet = "";
     
     /**
      *  Sets the line endings of the message.  Default is "\n";
      *  @access public
      *  @var string
      */
-    var $LE           = "\n";
+    public $LE = "\n";
     
     /**
      * Main constructor.

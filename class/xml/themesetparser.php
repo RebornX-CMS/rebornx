@@ -34,10 +34,10 @@ include_once XOOPS_ROOT_PATH.'/class/xml/xmltaghandler.php';
 
 class XoopsThemeSetParser extends SaxParser
 {
-	var $tempArr = array();
-	var $themeSetData = array();
-	var $imagesData = array();
-	var $templatesData = array();
+    public $tempArr = array();
+    public $themeSetData = array();
+    public $imagesData = array();
+    public $templatesData = array();
 
 	function XoopsThemeSetParser(&$input)
 	{

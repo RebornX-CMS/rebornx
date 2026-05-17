@@ -134,7 +134,7 @@ if ( !is_object($xoopsUser) || !is_object($xoopsModule) || !$xoopsUser->isAdmin(
 			}
 			$criteria_object = new CriteriaCompo();
 			foreach ($criteria as $c) {
-				list ($field, $op, $value) = split(' ', $c);
+list ($field, $op, $value) = preg_split('/ /', $c);
 				$criteria_object->add(new Criteria($field,$value,$op), 'AND');
 			}
 			$member_handler =& xoops_gethandler('member');

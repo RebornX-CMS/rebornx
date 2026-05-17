@@ -29,7 +29,7 @@ include_once XOOPS_ROOT_PATH."/class/xoopsstory.php";
 
 class NewsStory extends XoopsStory
 {
-	var $newstopic;   // XoopsTopic object
+	public $newstopic;   // XoopsTopic object
 
 	function NewsStory($storyid=-1)
 	{

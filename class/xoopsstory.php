@@ -36,29 +36,29 @@ include_once XOOPS_ROOT_PATH."/class/xoopsuser.php";
 
 class XoopsStory
 {
-    var $table;
-	var $storyid;
-	var $topicid;
-	var $uid;
-	var $title;
-	var $hometext;
-	var $bodytext="";
-	var $counter;
-	var $created;
-	var $published;
-	var $expired;
-	var $hostname;
-	var $nohtml=0;
-	var $nosmiley=0;
-	var $ihome=0;
-	var $notifypub=0;
-	var $type;
-	var $approved;
-	var $topicdisplay;
-	var $topicalign;
-	var $db;
-	var $topicstable;
-	var $comments;
+    public $table;
+    public $storyid;
+    public $topicid;
+    public $uid;
+    public $title;
+    public $hometext;
+    public $bodytext = "";
+    public $counter;
+    public $created;
+    public $published;
+    public $expired;
+    public $hostname;
+    public $nohtml = 0;
+    public $nosmiley = 0;
+    public $ihome = 0;
+    public $notifypub = 0;
+    public $type;
+    public $approved;
+    public $topicdisplay;
+    public $topicalign;
+    public $db;
+    public $topicstable;
+    public $comments;
 
 	function Story($storyid=-1)
 	{

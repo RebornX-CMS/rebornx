@@ -43,9 +43,9 @@ class XoopsCommentRenderer {
      * @access	private
      */
     var $_tpl;
-	var $_comments = null;
-	var $_useIcons = true;
-	var $_doIconCheck = false;
+    public $_comments = null;
+    public $_useIcons = true;
+    public $_doIconCheck = false;
 	var $_memberHandler;
 	var $_statusText;
     /**#@-*/

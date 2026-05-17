@@ -45,9 +45,13 @@ include_once XOOPS_ROOT_PATH."/modules/system/admin/userrank/userrank.php";
 
 $op = 'RankForumAdmin';
 
-// hotfix for register_globals=off (Bunny)
-extract($HTTP_POST_VARS);
-extract($HTTP_POST_FILES);
+// PHP 8.2+ compatibility - replaced superglobals
+if (isset($_POST)) {
+    extract($_POST);
+}
+if (isset($_FILES)) {
+    extract($_FILES);
+}
 
 if (isset($HTTP_GET_VARS['rank_id'])) {
 	$rank_id = intval($HTTP_GET_VARS['rank_id']);

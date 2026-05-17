@@ -33,24 +33,24 @@ include_once XOOPS_ROOT_PATH."/class/xoopstree.php";
 
 class ForumPosts
 {
-	var $post_id;
-	var $topic_id;
-	var $forum_id;
-	var $post_time;
-	var $poster_ip;
-	var $order;
-	var $subject;
-	var $post_text;
-	var $pid;
-	var $nohtml = 0;
-	var $nosmiley = 0;
-	var $uid;
-	var $icon;
-	var $attachsig;
-	var $prefix;
-	var $db;
-	var $istopic = false;
-	var $islocked = false;
+	public $post_id;
+	public $topic_id;
+	public $forum_id;
+	public $post_time;
+	public $poster_ip;
+	public $order;
+	public $subject;
+	public $post_text;
+	public $pid;
+	public $nohtml = 0;
+	public $nosmiley = 0;
+	public $uid;
+	public $icon;
+	public $attachsig;
+	public $prefix;
+	public $db;
+	public $istopic = false;
+	public $islocked = false;
 
 	function ForumPosts($id=null)
 	{

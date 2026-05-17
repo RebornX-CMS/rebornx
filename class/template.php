@@ -53,7 +53,7 @@ class XoopsTpl extends Smarty
 	 * Allow update of template files from the themes/ directory?
      * This should be set to false on an active site to increase performance
 	 */
-	var $_canUpdateFromFile = false;
+    public $_canUpdateFromFile = false;
 
 	/**
 	 * Constructor

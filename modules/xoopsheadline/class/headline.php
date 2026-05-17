@@ -63,7 +63,7 @@ class XoopsheadlineHeadline extends XoopsObject
 
 class xoopsheadlineHeadlineHandler
 {
-	var $db;
+	public $db;
 
 	function XoopsheadlineHeadlineHandler(&$db)
 	{

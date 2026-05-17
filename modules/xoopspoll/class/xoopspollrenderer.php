@@ -34,7 +34,7 @@ class XoopsPollRenderer
 {
 	// private
 	// XoopsPoll class object
-	var $poll;
+	public $poll;
 
 	// constructor
 	function XoopsPollRenderer(&$poll)

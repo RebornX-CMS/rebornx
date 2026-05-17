@@ -35,14 +35,14 @@ include_once XOOPS_ROOT_PATH."/class/xoopstree.php";
 
 class XoopsTopic
 {
-	var $table;
-	var $topic_id;
-	var $topic_pid;
-	var $topic_title;
-	var $topic_imgurl;
-	var $prefix; // only used in topic tree
-	var $use_permission=false;
-	var $mid; // module id used for setting permission
+    public $table;
+    public $topic_id;
+    public $topic_pid;
+    public $topic_title;
+    public $topic_imgurl;
+    public $prefix; // only used in topic tree
+    public $use_permission = false;
+    public $mid; // module id used for setting permission
 
 	function XoopsTopic($table, $topicid=0)
 	{

@@ -63,29 +63,29 @@ class CriteriaElement
 	 * Sort order
      * @var	string
 	 */
-	var $order = 'ASC';
+    public $order = 'ASC';
     
     /**
      * @var	string
      */
-    var $sort = '';
+    public $sort = '';
 
     /**
      * Number of records to retrieve
      * @var	int
      */
-    var $limit = 0;
+    public $limit = 0;
     
     /**
      * Offset of first record
      * @var	int
      */
-    var $start = 0;
+    public $start = 0;
     
     /**
      * @var	string
      */
-    var $groupby = '';
+    public $groupby = '';
 
     /**
      * Constructor
@@ -204,13 +204,13 @@ class CriteriaCompo extends CriteriaElement
      * The elements of the collection
      * @var	array   Array of {@link CriteriaElement} objects
      */
-    var $criteriaElements = array();
+    public $criteriaElements = array();
 
     /**
      * Conditions
      * @var	array
      */
-    var $conditions = array();
+    public $conditions = array();
 
     /**
      * Constructor

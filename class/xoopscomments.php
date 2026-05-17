@@ -38,7 +38,7 @@ include_once XOOPS_ROOT_PATH.'/language/'.$GLOBALS['xoopsConfig']['language'].'/
 class XoopsComments extends XoopsObject
 {
 	var $ctable;
-	var $db;
+    public $db;
 
 	function XoopsComments($ctable, $id=null)
 	{

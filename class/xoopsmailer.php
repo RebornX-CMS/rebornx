@@ -124,10 +124,10 @@ class XoopsMailer
 	var $templatedir;
 
 	// protected
-	var $charSet = 'iso-8859-1';
+    public $charSet = 'iso-8859-1';
 
 	// protected
-	var $encoding = '8bit';
+    public $encoding = '8bit';
 
 	function XoopsMailer()
 	{

@@ -32,7 +32,7 @@ include_once XOOPS_ROOT_PATH."/class/xoopsobject.php";
 
 class XoopsPoll extends XoopsObject
 {
-	var $db;
+	public $db;
 
 	//constructor
 	function XoopsPoll($id=null)
