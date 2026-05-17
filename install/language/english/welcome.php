@@ -16,8 +16,8 @@ It is free to redistribute as long as you abide by the distribution terms of the
 <p>
 <ul>
 <li>WWW Server (<a href='http://www.apache.org/' target='_blank'>Apache</a>, IIS, Roxen, etc)</li>
-<li><a href='http://www.php.net/' target='_blank'>PHP</a> 4.0.5 and higher (4.1.1 or higher recommended)</li>
-<li><a href='http://www.mysql.com/' target='_blank'>MySQL</a> Database 3.23.XX</li>
+<li><a href='http://www.php.net/' target='_blank'>PHP</a> 8.2 or higher</li>
+<li><a href='http://www.mysql.com/' target='_blank'>MySQL</a> 5.7+ or <a href='https://mariadb.org/' target='_blank'>MariaDB</a> 10.3+</li>
 </ul>
 </p>
 <u><b>Before you install</b></u>

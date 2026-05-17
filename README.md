@@ -10,7 +10,7 @@ RebornX is a content management system (CMS) based on XOOPS Version 2.0.5 (Octob
 
 ### Core Modernization
 - **PHP 8.2+ Compatible** — Codebase updated to run on modern PHP versions with full type safety and removal of deprecated constructs.
-- **MySQLi / PDO** — Replaced the original `mysql_*` functions with modern MySQLi and PDO database abstraction layers for improved security, performance, and compatibility.
+- **MySQLi / PDO** — Replaced the original `mysql_*` functions with modern MySQLi and PDO (MySQLi-based) database abstraction layers for improved security, performance, and compatibility.
 - **Error Handling** — Robust exception-based error handling replacing legacy PHP error mechanisms.
 
 ### Theming
@@ -23,8 +23,8 @@ RebornX is a content management system (CMS) based on XOOPS Version 2.0.5 (Octob
 - **Multi-Language Content** — Built-in support for serving content in multiple languages.
 
 ### Database
-- **MySQLi Support** — Full MySQLi driver with prepared statements for query parameterization, eliminating SQL injection vectors.
-- **PDO Support** — Optional PDO abstraction allowing database-agnostic operation (MySQL, PostgreSQL, SQLite, etc.).
+- **MySQLi Support** — Full MySQLi driver with prepared statements for query parameterization, eliminating SQL injection vectors. All database access uses MySQLi.
+- **PDO Support** — Optional PDO abstraction (backed by the MySQLi driver) for database-agnostic operation.
 - **Migration Tools** — Upgrade path from the original XOOPS 2.0.x database schema.
 
 ### Security
@@ -55,7 +55,7 @@ RebornX is a content management system (CMS) based on XOOPS Version 2.0.5 (Octob
 
 - **Web Server:** Apache 2.4+ with `mod_rewrite`, or Nginx
 - **PHP:** 8.2 or higher
-- **Database:** MySQL 5.7+ / MariaDB 10.3+ (MySQLi or PDO)
+- **Database:** MySQL 5.7+ / MariaDB 10.3+ (MySQLi or PDO via MySQLi driver)
 - **Extensions:** `mbstring`, `gd`/`imagick`, `json`, `session`, `filter`, `ctype`, `tokenizer`
 - **Browser:** Modern browser with JavaScript enabled
 
@@ -70,6 +70,8 @@ RebornX is a content management system (CMS) based on XOOPS Version 2.0.5 (Octob
    GRANT ALL PRIVILEGES ON rebornx.* TO 'rebornx'@'localhost';
    FLUSH PRIVILEGES;
    ```
+   > **Note:** RebornX CMS uses MySQLi exclusively. The legacy `mysql` extension is not supported.
+
 4. **Copy** `mainfile.dist.php` to `mainfile.php` and adjust database credentials and paths.
 5. **Point your browser** to `http://your-server/rebornx/install/` and follow the on-screen installer.
 6. **Remove or secure** the `install/` directory after installation.

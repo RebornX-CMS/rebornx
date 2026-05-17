@@ -38,7 +38,7 @@ if ( !defined("XOOPS_MAINFILE_INCLUDED") ) {
 
 	// Database
 	// Choose the database to be used
-	define('XOOPS_DB_TYPE', 'mysql');
+	define('XOOPS_DB_TYPE', 'mysqli');
 
 	// Table Prefix
 	// This prefix will be added to all new tables created to avoid name conflict in the database. If you are unsure, just use the default 'xoops'.

@@ -53,7 +53,7 @@ class setting_manager {
         if($post){
             $this->readPost();
         }else{
-            $this->database = 'mysql';
+            $this->database = 'mysqli';
             $this->dbhost = 'localhost';
             $this->prefix = 'xoops';
             $this->db_pconnect = 0;
@@ -270,7 +270,7 @@ class setting_manager {
 
     function getDBList()
     {
-		return array('mysql');
+		return array('mysqli');
         //$dirname = '../class/database/';
         //$dirlist = array();
         //if (is_dir($dirname) && $handle = opendir($dirname)) {
