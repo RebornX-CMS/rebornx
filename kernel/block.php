@@ -54,7 +54,7 @@ class XoopsBlock extends XoopsObject
 	 *  
      * @param mixed $id
      **/
-    function __construct($id = null)
+    public function __construct($id = null)
     {
         $this->initVar('bid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('mid', XOBJ_DTYPE_INT, 0, false);
@@ -104,7 +104,7 @@ class XoopsBlock extends XoopsObject
 	 * <li>T : use text sanitizater (smilies disabled)</ul>
 	 * @return string content for output
      **/
-    function &getContent($format = 'S', $c_type = 'T')
+    public function &getContent($format = 'S', $c_type = 'T')
     {
         switch ( $format ) {
         case 'S':
@@ -138,7 +138,7 @@ class XoopsBlock extends XoopsObject
 	 * 
 	 * @return string HTML for the form, FALSE if not defined for this block 
      **/
-    function getOptions()
+    public function getOptions()
     {
         if ($this->getVar('block_type') != 'C') {
             $edit_func = $this->getVar('edit_func');
@@ -189,7 +189,7 @@ class XoopsBlockHandler extends XoopsObjectHandler
 	 * @param bool $isNew is the new block new??
 	 * @return object XoopsBlock reference to the new block 
      **/
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $block = new XoopsBlock();
         if ($isNew) {
@@ -205,7 +205,7 @@ class XoopsBlockHandler extends XoopsObjectHandler
 	 * @param int $id bid of the block to retrieve
 	 * @return object XoopsBlock reference to the block 
      **/
-    function &get($id)
+    public function &get($id)
     {
         $id = intval($id);
         if ($id > 0) {
@@ -229,7 +229,7 @@ class XoopsBlockHandler extends XoopsObjectHandler
 	 * @param object XoopsBlock $block reference to the block to insert
 	 * @return bool TRUE if succesful
      **/
-    function insert(&$block)
+    public function insert(&$block)
     {
         if (get_class($block) != 'xoopsblock') {
             return false;
@@ -265,7 +265,7 @@ class XoopsBlockHandler extends XoopsObjectHandler
 	 * @param object XoopsBlock $block reference to the block to delete 
 	 * @return bool TRUE if succesful
      **/
-    function delete(&$block)
+    public function delete(&$block)
     {
         if (get_class($block) != 'xoopsblock') {
             return false;
@@ -286,7 +286,7 @@ class XoopsBlockHandler extends XoopsObjectHandler
 	 * @param bool $id_as_key should the blocks' bid be the key for the returned array?
 	 * @return array {@link XoopsBlock}s matching the conditions
      **/
-    function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;
@@ -319,7 +319,7 @@ class XoopsBlockHandler extends XoopsObjectHandler
 	 * @param string $criteria conditions to match
 	 * @return array array of blocks matching the conditions 
      **/
-    function &getList($criteria = null)
+    public function &getList($criteria = null)
     {
         $blocks =& $this->getObjects($criteria, true);
         $ret = array();

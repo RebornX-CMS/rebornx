@@ -45,7 +45,7 @@ class XoopsImage extends XoopsObject
 	/**
 	 * Constructor
 	 **/
-	function __construct()
+	public function __construct()
 	{
 		$this->XoopsObject();
 		$this->initVar('image_id', XOBJ_DTYPE_INT, null, false);
@@ -80,7 +80,7 @@ class XoopsImageHandler extends XoopsObjectHandler
      * @param   boolean $isNew  Flag the object as "new"
      * @return  object
      **/
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $image = new XoopsImage();
         if ($isNew) {
@@ -96,7 +96,7 @@ class XoopsImageHandler extends XoopsObjectHandler
      * @param   boolean $getbinary  
      * @return  object  {@link XoopsImage}, FALSE on fail
      **/
-    function &get($id, $getbinary=true)
+    public function &get($id, $getbinary=true)
     {
         $id = intval($id);
         if ($id > 0) {
@@ -120,7 +120,7 @@ class XoopsImageHandler extends XoopsObjectHandler
      * @param   object  &$image {@link XoopsImage} 
      * @return  bool
      **/
-    function insert(&$image)
+    public function insert(&$image)
     {
         if (get_class($image) != 'xoopsimage') {
             return false;
@@ -174,7 +174,7 @@ class XoopsImageHandler extends XoopsObjectHandler
      * @param   object  &$image {@link XoopsImage} 
      * @return  bool
      **/
-    function delete(&$image)
+    public function delete(&$image)
     {
         if (get_class($image) != 'xoopsimage') {
             return false;
@@ -196,7 +196,7 @@ class XoopsImageHandler extends XoopsObjectHandler
      * @param   boolean $getbinary  
      * @return  array   Array of {@link XoopsImage} objects
      **/
-    function &getObjects($criteria = null, $id_as_key = false, $getbinary = false)
+    public function &getObjects($criteria = null, $id_as_key = false, $getbinary = false)
     {
         $ret = array();
         $limit = $start = 0;
@@ -235,7 +235,7 @@ class XoopsImageHandler extends XoopsObjectHandler
      * @param   object  $criteria   {@link CriteriaElement} 
      * @return  int
      **/
-    function getCount($criteria = null)
+    public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('image');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -255,7 +255,7 @@ class XoopsImageHandler extends XoopsObjectHandler
      * @param   bool    $image_display
      * @return  array   Array of {@link XoopsImage} objects
      **/
-    function &getList($imgcat_id, $image_display = null)
+    public function &getList($imgcat_id, $image_display = null)
     {
         $criteria = new CriteriaCompo(new Criteria('imgcat_id', intval($imgcat_id)));
         if (isset($image_display)) {

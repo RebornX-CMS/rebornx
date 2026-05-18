@@ -71,7 +71,7 @@ class XoopsDatabase
          * 
          * will always fail, because this is an abstract class!
 		 */
-	function __construct()
+	public function __construct()
 	{
 	
 	}
@@ -82,7 +82,7 @@ class XoopsDatabase
          * @see XoopsLogger
          * @param object $logger reference to a {@link XoopsLogger} object
 		 */
-		function setLogger(&$logger)
+		public function setLogger(&$logger)
 		{
 			$this->logger = $logger;
 		}
@@ -92,7 +92,7 @@ class XoopsDatabase
 		 * 
          * @param string $value table prefix
 		 */
-		function setPrefix($value)
+		public function setPrefix($value)
 		{
 			$this->prefix = $value;
 		}
@@ -105,7 +105,7 @@ class XoopsDatabase
          * @param string $tablename tablename
          * @return string prefixed tablename, just prefix if tablename is empty
 		 */
-		function prefix($tablename='')
+		public function prefix($tablename='')
 		{
 			if ( $tablename != '' ) {
 				return $this->prefix .'_'. $tablename;
@@ -125,7 +125,7 @@ class XoopsDatabase
 class Database
 {
 
-	function &getInstance()
+	public function &getInstance()
 	{
 		return XoopsDatabaseFactory::getDatabaseConnection();
 	}

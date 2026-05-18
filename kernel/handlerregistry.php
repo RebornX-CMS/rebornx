@@ -46,7 +46,7 @@ class XoopsHandlerRegistry
      * @var     array
      * @access	private
      */
-    var $_handlers = array();
+    public $_handlers = array();
 
 	/**
 	 * get a reference to the only instance of this class
@@ -58,7 +58,7 @@ class XoopsHandlerRegistry
      * @staticvar   object  The only instance of this class
      * @return      object  Reference to the only instance of this class
 	 */
-    function &instance()
+    public function &instance()
     {
         static $instance;
         if (!isset($instance)) {
@@ -73,7 +73,7 @@ class XoopsHandlerRegistry
      * @param	string  $name     Short name of a handler class
      * @param	object  &$handler {@link XoopsObjectHandler} class object
      */
-    function setHandler($name, &$handler)
+    public function setHandler($name, &$handler)
     {
         $this->_handlers['kernel'][$name] =& $handler;
     }
@@ -85,7 +85,7 @@ class XoopsHandlerRegistry
      * 
      * @return	object {@link XoopsObjectHandler}, FALSE if not registered
      */
-    function &getHandler($name)
+    public function &getHandler($name)
     {
         if (!isset($this->_handlers['kernel'][$name])) {
             return false;
@@ -98,7 +98,7 @@ class XoopsHandlerRegistry
      * 
      * @param	string  $name     Short name of a handler class
      */
-    function unsetHandler($name)
+    public function unsetHandler($name)
     {
         unset($this->_handlers['kernel'][$name]);
     }
@@ -110,7 +110,7 @@ class XoopsHandlerRegistry
      * @param	string  $name     Short name of a handler class
      * @param	object  &$handler {@link XoopsObjectHandler} class object
      */
-    function setModuleHandler($module, $name, &$handler)
+    public function setModuleHandler($module, $name, &$handler)
     {
         $this->_handlers['module'][$module][$name] =& $handler;
     }
@@ -123,7 +123,7 @@ class XoopsHandlerRegistry
      * 
      * @return	object {@link XoopsObjectHandler}, FALSE if not registered
      */
-    function &getModuleHandler($module, $name)
+    public function &getModuleHandler($module, $name)
     {
         if (!isset($this->_handlers['module'][$module][$name])) {
             return false;
@@ -137,7 +137,7 @@ class XoopsHandlerRegistry
      * @param	string  $module   Directory name of a module
      * @param	string  $name     Short name of a handler class
      */
-    function unsetModuleHandler($module, $name)
+    public function unsetModuleHandler($module, $name)
     {
         unset($this->_handlers['module'][$module][$name]);
     }

@@ -54,20 +54,20 @@ class XoopsFormElementTray extends XoopsFormElement {
 	 * @var array   
      * @access  private
 	 */
-	var $_elements = array();
+	public $_elements = array();
 
 	/**
      * required elements
 	 * @var array   
 	 */
-	var $_required = array();
+	public $_required = array();
 
 	/**
      * HTML to seperate the elements
 	 * @var	string  
 	 * @access  private
 	 */
-	var $_delimeter;
+	public $_delimeter;
 
 	/**
 	 * constructor
@@ -75,7 +75,7 @@ class XoopsFormElementTray extends XoopsFormElement {
      * @param	string  $caption    Caption for the group.
      * @param	string  $delimiter  HTML to separate the elements
 	 */
-	function __construct($caption, $delimeter="&nbsp;"){
+	public function __construct($caption, $delimeter="&nbsp;"){
 		$this->setCaption($caption);
 		$this->_delimeter = $delimeter;
 	}
@@ -85,7 +85,7 @@ class XoopsFormElementTray extends XoopsFormElement {
 	 * 
      * @return	bool true
 	 */	
-	function isContainer()
+	public function isContainer()
 	{
 		return true;
 	}
@@ -95,7 +95,7 @@ class XoopsFormElementTray extends XoopsFormElement {
 	 * 
      * @param	object  &$element    {@link XoopsFormElement} to add
 	 */
-	function addElement(&$formElement, $required=false){
+	public function addElement(&$formElement, $required=false){
 		$this->_elements[] = $formElement;
 		if ($required) {
 			if (!$formElement->isContainer()) {
@@ -115,7 +115,7 @@ class XoopsFormElementTray extends XoopsFormElement {
 	 * 
      * @return	array   array of {@link XoopsFormElement}s 
 	 */
-	function &getRequired()
+	public function &getRequired()
 	{
 		return $this->_required;
 	}
@@ -126,7 +126,7 @@ class XoopsFormElementTray extends XoopsFormElement {
 	 * @param	bool	$recurse	get elements recursively?
      * @return  array   Array of {@link XoopsFormElement} objects. 
 	 */
-	function &getElements($recurse = false){
+	public function &getElements($recurse = false){
 		if (!$recurse) {
 			return $this->_elements;
 		} else {
@@ -153,7 +153,7 @@ class XoopsFormElementTray extends XoopsFormElement {
 	 * 
      * @return	string  The delimiter
 	 */
-	function getDelimeter(){
+	public function getDelimeter(){
 		return $this->_delimeter;
 	}
 
@@ -162,7 +162,7 @@ class XoopsFormElementTray extends XoopsFormElement {
 	 * 
      * @return	string  HTML output
 	 */
-	function render(){
+	public function render(){
 		$count = 0;
 		$ret = "";
 		foreach ( $this->getElements() as $ele ) {

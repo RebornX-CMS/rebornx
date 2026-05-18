@@ -55,7 +55,7 @@ class XoopsConfigOption extends XoopsObject
     /**
      * Constructor
      */
-    function __construct()
+    public function __construct()
     {
         $this->XoopsObject();
         $this->initVar('confop_id', XOBJ_DTYPE_INT, null);
@@ -86,7 +86,7 @@ class XoopsConfigOptionHandler extends XoopsObjectHandler
      * 
      * @return	object  {@link XoopsConfigOption} 
      */
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $confoption = new XoopsConfigOption();
         if ($isNew) {
@@ -102,7 +102,7 @@ class XoopsConfigOptionHandler extends XoopsObjectHandler
      * 
      * @return	object  reference to the {@link XoopsConfigOption}, FALSE on fail
      */
-    function &get($id)
+    public function &get($id)
     {
         $id = intval($id);
         if ($id > 0) {
@@ -126,7 +126,7 @@ class XoopsConfigOptionHandler extends XoopsObjectHandler
      * @param	object  &$confoption    reference to a {@link XoopsConfigOption} 
      * @return	bool    TRUE if successfull.
      */
-    function insert(&$confoption)
+    public function insert(&$confoption)
     {
         if (get_class($confoption) != 'xoopsconfigoption') {
             return false;
@@ -162,7 +162,7 @@ class XoopsConfigOptionHandler extends XoopsObjectHandler
      * @param	object  &$confoption    reference to a {@link XoopsConfigOption} 
      * @return	bool    TRUE if successful
      */
-    function delete(&$confoption)
+    public function delete(&$confoption)
     {
         if (get_class($confoption) != 'xoopsconfigoption') {
             return false;
@@ -182,7 +182,7 @@ class XoopsConfigOptionHandler extends XoopsObjectHandler
      * 
      * @return	array   Array of {@link XoopsConfigOption}s 
      */
-    function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;

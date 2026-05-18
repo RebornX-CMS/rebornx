@@ -45,29 +45,29 @@ class XoopsUser extends XoopsObject
      * @var array
 	 * @access private
      */
-    var $_groups = array();
+    public $_groups = array();
     /**
      * @var bool is the user admin? 
 	 * @access private
      */
-    var $_isAdmin = null;
+    public $_isAdmin = null;
     /**
      * @var string user's rank
 	 * @access private
      */
-    var $_rank = null;
+    public $_rank = null;
     /**
      * @var bool is the user online?
      * @access private
      */
-    var $_isOnline = null;
+    public $_isOnline = null;
 
     /**
      * constructor 
      * @param array $id Array of key-value-pairs to be assigned to the user. (for backward compatibility only)
      * @param int $id ID of the user to be loaded from the database.
      */
-    function __construct($id = null)
+    public function __construct($id = null)
     {
         $this->initVar('uid', XOBJ_DTYPE_INT, null, false);
         $this->initVar('name', XOBJ_DTYPE_TXTBOX, null, false, 60);
@@ -122,7 +122,7 @@ class XoopsUser extends XoopsObject
      * @return bool returns false
      *
      */
-	function isGuest()
+	public function isGuest()
 	{
 		return false;
 	}
@@ -134,7 +134,7 @@ class XoopsUser extends XoopsObject
 	 * @param int $userid ID of the user to find
 	 * @return string name of the user. name for "anonymous" if not found.
      */
-    function getUnameFromId($userid)
+    public function getUnameFromId($userid)
     {
 		$userid = intval($userid);
 		if ($userid > 0) {
@@ -152,7 +152,7 @@ class XoopsUser extends XoopsObject
      *
 	 * @deprecated
      */
-    function incrementPost(){
+    public function incrementPost(){
         $member_handler =& xoops_gethandler('member');
         return $member_handler->updateUserByField($this, 'posts', $this->getVar('posts') + 1);
     }
@@ -161,7 +161,7 @@ class XoopsUser extends XoopsObject
 	 * 
 	 * @param array $groupsArr Array of groups that user belongs to
 	 */
-	function setGroups($groupsArr)
+	public function setGroups($groupsArr)
 	{
 		if (is_array($groupsArr)) {
 			$this->_groups =& $groupsArr;
@@ -172,7 +172,7 @@ class XoopsUser extends XoopsObject
 	 * 
 	 * @return array array of groups 
      */
-    function &getGroups()
+    public function &getGroups()
     {
         if (empty($this->_groups)) {
             $member_handler =& xoops_gethandler('member');
@@ -186,7 +186,7 @@ class XoopsUser extends XoopsObject
 	 * @return array array of groups
 	 * @deprecated
 	 */
-	function &groups()
+	public function &groups()
     {
         return $this->getGroups();
     }
@@ -195,7 +195,7 @@ class XoopsUser extends XoopsObject
      * @param int $module_id check if user is admin of this module
 	 * @return bool is the user admin of that module?
      */
-    function isAdmin($module_id = 0)
+    public function isAdmin($module_id = 0)
     {
         $moduleperm_handler =& xoops_gethandler('groupperm');
         return $moduleperm_handler->checkRight('module_admin', $module_id, $this->getGroups());
@@ -204,7 +204,7 @@ class XoopsUser extends XoopsObject
      * get the user's rank
 	 * @return array array of rank ID and title
      */
-    function rank()
+    public function rank()
     {
         if (!isset($this->_rank)) {
             $this->_rank = xoops_getrank($this->getVar('rank'), $this->getVar('posts'));
@@ -215,7 +215,7 @@ class XoopsUser extends XoopsObject
      * is the user activated?
      * @return bool
      */
-    function isActive()
+    public function isActive()
     {
         if ($this->getVar('level') == 0) {
             return false;
@@ -226,7 +226,7 @@ class XoopsUser extends XoopsObject
      * is the user currently logged in? 
      * @return bool
      */
-    function isOnline()
+    public function isOnline()
     {
         if (!isset($this->_isOnline)) {
             $onlinehandler =& xoops_gethandler('online');
@@ -246,7 +246,7 @@ class XoopsUser extends XoopsObject
      * get the users UID 
      * @return int
      */
-    function uid()
+    public function uid()
     {
         return $this->getVar("uid");
     }
@@ -256,7 +256,7 @@ class XoopsUser extends XoopsObject
 	 * @param string $format format for the output, see {@link XoopsObject::getVar()}
 	 * @return string 
      */
-    function name($format="S")
+    public function name($format="S")
     {
         return $this->getVar("name", $format);
     }
@@ -266,7 +266,7 @@ class XoopsUser extends XoopsObject
 	 * @param string $format format for the output, see {@link XoopsObject::getVar()}
      * @return string
      */
-    function uname($format="S")
+    public function uname($format="S")
     {
         return $this->getVar("uname", $format);
     }
@@ -277,132 +277,132 @@ class XoopsUser extends XoopsObject
 	 * @param string $format format for the output, see {@link XoopsObject::getVar()}
 	 * @return string
      */
-    function email($format="S")
+    public function email($format="S")
     {
         return $this->getVar("email", $format);
     }
     
-    function url($format="S")
+    public function url($format="S")
     {
         return $this->getVar("url", $format);
     }
     
-    function user_avatar($format="S")
+    public function user_avatar($format="S")
     {
         return $this->getVar("user_avatar");
     }
     
-    function user_regdate()
+    public function user_regdate()
     {
         return $this->getVar("user_regdate");
     }
     
-    function user_icq($format="S")
+    public function user_icq($format="S")
     {
         return $this->getVar("user_icq", $format);
     }
     
-    function user_from($format="S")
+    public function user_from($format="S")
     {
         return $this->getVar("user_from", $format);
     }
-    function user_sig($format="S")
+    public function user_sig($format="S")
     {
         return $this->getVar("user_sig", $format);
     }
     
-    function user_viewemail()
+    public function user_viewemail()
     {
         return $this->getVar("user_viewemail");
     }
     
-    function actkey()
+    public function actkey()
     {
         return $this->getVar("actkey");
     }
     
-    function user_aim($format="S")
+    public function user_aim($format="S")
     {
         return $this->getVar("user_aim", $format);
     }
     
-    function user_yim($format="S")
+    public function user_yim($format="S")
     {
         return $this->getVar("user_yim", $format);
     }
     
-    function user_msnm($format="S")
+    public function user_msnm($format="S")
     {
         return $this->getVar("user_msnm", $format);
     }
     
-    function pass()
+    public function pass()
     {
         return $this->getVar("pass");
     }
     
-    function posts()
+    public function posts()
     {
         return $this->getVar("posts");
     }
     
-    function attachsig()
+    public function attachsig()
     {
         return $this->getVar("attachsig");
     }
     
-    function level()
+    public function level()
     {
         return $this->getVar("level");
     }
     
-    function theme()
+    public function theme()
     {
         return $this->getVar("theme");
     }
     
-    function timezone()
+    public function timezone()
     {
         return $this->getVar("timezone_offset");
     }
     
-    function umode()
+    public function umode()
     {
         return $this->getVar("umode");
     }
     
-    function uorder()
+    public function uorder()
     {
         return $this->getVar("uorder");
     }
    
     // RMV-NOTIFY
-    function notify_method()
+    public function notify_method()
     {
         return $this->getVar("notify_method");
     }
 
-    function notify_mode()
+    public function notify_mode()
     {
         return $this->getVar("notify_mode");
     }
  
-    function user_occ($format="S")
+    public function user_occ($format="S")
     {
         return $this->getVar("user_occ", $format);
     }
     
-    function bio($format="S")
+    public function bio($format="S")
     {
         return $this->getVar("bio", $format);
     }
     
-    function user_intrest($format="S")
+    public function user_intrest($format="S")
     {
         return $this->getVar("user_intrest", $format);
     }
     
-    function last_login()
+    public function last_login()
     {
         return $this->getVar("last_login");
     }
@@ -424,7 +424,7 @@ class XoopsGuestUser extends XoopsUser
      * @return bool returns true
      *
      */
-	function isGuest()
+	public function isGuest()
 	{
 		return true;
 	}
@@ -449,7 +449,7 @@ class XoopsUserHandler extends XoopsObjectHandler
      * @param bool $isNew flag the new objects as "new"?
      * @return object XoopsUser
      */
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $user = new XoopsUser();
         if ($isNew) {
@@ -464,7 +464,7 @@ class XoopsUserHandler extends XoopsObjectHandler
      * @param int $id UID of the user
      * @return mixed reference to the {@link XoopsUser} object, FALSE if failed
      */
-    function &get($id)
+    public function &get($id)
     {
         if (intval($id) > 0) {
             $sql = 'SELECT * FROM '.$this->db->prefix('users').' WHERE uid='.$id;
@@ -488,7 +488,7 @@ class XoopsUserHandler extends XoopsObjectHandler
      * @param bool $force
      * @return bool FALSE if failed, TRUE if already present and unchanged or successful
      */
-    function insert(&$user, $force = false)
+    public function insert(&$user, $force = false)
     {
         if (!$user instanceof XoopsUser) {
             return false;
@@ -532,7 +532,7 @@ class XoopsUserHandler extends XoopsObjectHandler
      * @param bool $force
      * @return bool FALSE if failed.
      */
-    function delete(&$user, $force = false)
+    public function delete(&$user, $force = false)
     {
         if (!$user instanceof XoopsUser) {
             return false;
@@ -556,7 +556,7 @@ class XoopsUserHandler extends XoopsObjectHandler
      * @param bool $id_as_key use the UID as key for the array?
      * @return array array of {@link XoopsUser} objects
      */
-    function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;
@@ -592,7 +592,7 @@ class XoopsUserHandler extends XoopsObjectHandler
      * @param object $criteria {@link CriteriaElement} to match
      * @return int count of users
      */
-    function getCount($criteria = null)
+    public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('users');
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
@@ -612,7 +612,7 @@ class XoopsUserHandler extends XoopsObjectHandler
      * @param object $criteria {@link CriteriaElement} 
      * @return bool FALSE if deletion failed
      */
-    function deleteAll($criteria = null)
+    public function deleteAll($criteria = null)
     {
         $sql = 'DELETE FROM '.$this->db->prefix('users');
         if (isset($criteria) && $criteria instanceof CriteriaElement) {
@@ -633,7 +633,7 @@ class XoopsUserHandler extends XoopsObjectHandler
      * 
      * @return  bool
      **/
-    function updateAll($fieldname, $fieldvalue, $criteria = null)
+    public function updateAll($fieldname, $fieldvalue, $criteria = null)
     {
         $set_clause = is_numeric($fieldvalue) ? $fieldname.' = '.$fieldvalue : $fieldname.' = '.$this->db->quoteString($fieldvalue);
         $sql = 'UPDATE '.$this->db->prefix('users').' SET '.$set_clause;

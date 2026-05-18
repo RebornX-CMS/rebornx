@@ -35,7 +35,7 @@ class XoopsPollLog extends XoopsObject
 	public $db;
 
 	// constructor
-	function __construct($id=null)
+	public function __construct($id=null)
 	{
 		$this->db = Database::getInstance();
 		$this->initVar("log_id", XOBJ_DTYPE_INT, 0);
@@ -54,7 +54,7 @@ class XoopsPollLog extends XoopsObject
 	}
 
 	// public
-	function store()
+	public function store()
 	{
 		if ( !$this->cleanVars() ) {
 			return false;
@@ -73,7 +73,7 @@ class XoopsPollLog extends XoopsObject
 	}
 
 	// private
-	function load($id)
+	public function load($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix("xoopspoll_log")." WHERE log_id=".$id."";
 		$myrow = $this->db->fetchArray($this->db->query($sql));
@@ -81,7 +81,7 @@ class XoopsPollLog extends XoopsObject
 	}
 
 	// public
-	function delete()
+	public function delete()
 	{
 		$sql = sprintf("DELETE FROM %s WHERE log_id = %u", $this->db->prefix("xoopspoll_log"), $this->getVar("log_id"));
         	if ( !$this->db->query($sql) ) {
@@ -91,7 +91,7 @@ class XoopsPollLog extends XoopsObject
 	}
 
 	// public static
-	function &getAllByPollId($poll_id, $orderby="time ASC")
+	public function &getAllByPollId($poll_id, $orderby="time ASC")
 	{
 		$db = Database::getInstance();
 		$ret = array();
@@ -105,7 +105,7 @@ class XoopsPollLog extends XoopsObject
 	}
 
 	// public static
-	function hasVoted($poll_id, $ip, $user_id=null)
+	public function hasVoted($poll_id, $ip, $user_id=null)
 	{
 		$db = Database::getInstance();
 		$sql = "SELECT COUNT(*) FROM ".$db->prefix("xoopspoll_log")." WHERE poll_id=".intval($poll_id)." AND";
@@ -122,7 +122,7 @@ class XoopsPollLog extends XoopsObject
 	}
 
 	// public static
-	function deleteByPollId($poll_id)
+	public function deleteByPollId($poll_id)
 	{
 		$db = Database::getInstance();
 		$sql = sprintf("DELETE FROM %s WHERE poll_id = %u", $db->prefix("xoopspoll_log"), intval($poll_id));
@@ -133,7 +133,7 @@ class XoopsPollLog extends XoopsObject
 	}
 
 	// public static
-	function deleteByOptionId($option_id)
+	public function deleteByOptionId($option_id)
 	{
 		$db = Database::getInstance();
 		$sql = sprintf("DELETE FROM %s WHERE option_id = %u", $db->prefix("xoopspoll_log"), intval($option_id));
@@ -144,7 +144,7 @@ class XoopsPollLog extends XoopsObject
 	}
 
 	// public static
-	function getTotalVotersByPollId($poll_id)
+	public function getTotalVotersByPollId($poll_id)
 	{
 		$db = Database::getInstance();
 		$sql = "SELECT DISTINCT user_id FROM ".$db->prefix("xoopspoll_log")." WHERE poll_id=".intval($poll_id)." AND user_id > 0";
@@ -155,7 +155,7 @@ class XoopsPollLog extends XoopsObject
 	}
 
 	// public static
-	function getTotalVotesByPollId($poll_id)
+	public function getTotalVotesByPollId($poll_id)
 	{
 		$db = Database::getInstance();
 		$sql = "SELECT COUNT(*) FROM ".$db->prefix("xoopspoll_log")." WHERE poll_id = ".intval($poll_id);
@@ -164,7 +164,7 @@ class XoopsPollLog extends XoopsObject
 	}
 
 	// public static
-	function getTotalVotesByOptionId($option_id)
+	public function getTotalVotesByOptionId($option_id)
 	{
 		$db = Database::getInstance();
 		$sql = "SELECT COUNT(*) FROM ".$db->prefix("xoopspoll_log")." WHERE option_id = ".intval($option_id);

@@ -33,10 +33,10 @@
 **/
 class cache_manager {
 
-    var $s_files = array();
-    var $f_files = array();
+    public $s_files = array();
+    public $f_files = array();
 
-    function write($file, $source){
+    public function write($file, $source){
         if (false != $fp = fopen(XOOPS_CACHE_PATH.'/'.$file, 'w')) {
             fwrite($fp, $source);
             fclose($fp);
@@ -46,7 +46,7 @@ class cache_manager {
         }
     }
 
-    function report(){
+    public function report(){
         $content = "<table align='center'><tr><td align='left'>\n";
         foreach($this->s_files as $val){
             $content .= _OKIMG.sprintf(_INSTALL_L123, "<b>$val</b>")."<br />\n";

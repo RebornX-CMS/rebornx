@@ -37,13 +37,13 @@ class XoopsPollRenderer
 	public $poll;
 
 	// constructor
-	function __construct(&$poll)
+	public function __construct(&$poll)
 	{
 		$this->poll =& $poll;
 	}
 
 	// public
-	function renderForm()
+	public function renderForm()
 	{
 		$content = "<form action='".XOOPS_URL."/modules/xoopspoll/index.php' method='post'>";
 		$content .= "<table width='100%' border='0' cellpadding='4' cellspacing='1'>\n";
@@ -65,7 +65,7 @@ class XoopsPollRenderer
 		return $content;
 	}
 
-    function assignForm(&$tpl)
+    public function assignForm(&$tpl)
     {
 		$options_arr = XoopsPollOption::getAllByPollId($this->poll->getVar("poll_id"));
 		$option_type = "radio";
@@ -84,7 +84,7 @@ class XoopsPollRenderer
     }
 
 	// public
-	function renderResults()
+	public function renderResults()
 	{
 		if ( !$this->poll->hasExpired() ) {
 			$end_text = sprintf(_PL_ENDSAT, formatTimestamp($this->poll->getVar("end_time"), "m"));
@@ -117,7 +117,7 @@ class XoopsPollRenderer
 		echo "</td></tr></table></div><br />";
 	}
 
-    function assignResults(&$tpl)
+    public function assignResults(&$tpl)
     {
 		if ( !$this->poll->hasExpired() ) {
 			$end_text = sprintf(_PL_ENDSAT, formatTimestamp($this->poll->getVar("end_time"), "m"));

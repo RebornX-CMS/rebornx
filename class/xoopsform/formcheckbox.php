@@ -51,14 +51,14 @@ class XoopsFormCheckBox extends XoopsFormElement {
 	 * @var array   
 	 * @access	private
 	 */
-	var $_options = array();
+	public $_options = array();
 
 	/**
      * pre-selected values in array
 	 * @var	array   
 	 * @access	private
 	 */
-	var $_value = array();
+	public $_value = array();
 
 	/**
 	 * Constructor
@@ -67,7 +67,7 @@ class XoopsFormCheckBox extends XoopsFormElement {
      * @param	string  $name
      * @param	mixed   $value  Either one value as a string or an array of them.   
 	 */
-	function __construct($caption, $name, $value = null){
+	public function __construct($caption, $name, $value = null){
 		$this->setCaption($caption);
 		$this->setName($name);
 		if (isset($value)) {
@@ -80,7 +80,7 @@ class XoopsFormCheckBox extends XoopsFormElement {
 	 * 
      * @return	array
 	 */
-	function getValue(){
+	public function getValue(){
 		return $this->_value;
 	}
 
@@ -89,7 +89,7 @@ class XoopsFormCheckBox extends XoopsFormElement {
 	 * 
      * @param	array
 	 */
-	function setValue($value){
+	public function setValue($value){
 		$this->_value = array();
 		if (is_array($value)) {
 			foreach ($value as $v) {
@@ -106,7 +106,7 @@ class XoopsFormCheckBox extends XoopsFormElement {
      * @param	string  $value  
      * @param	string  $name   
 	 */
-	function addOption($value, $name=""){
+	public function addOption($value, $name=""){
 		if ($name != "") {
 			$this->_options[$value] = $name;
 		} else {
@@ -119,7 +119,7 @@ class XoopsFormCheckBox extends XoopsFormElement {
 	 * 
      * @param	array   $options    Associative array of value->name pairs
 	 */
-	function addOptionArray($options){
+	public function addOptionArray($options){
 		if ( is_array($options) ) {
 			foreach ( $options as $k=>$v ) {
 				$this->addOption($k, $v);
@@ -132,7 +132,7 @@ class XoopsFormCheckBox extends XoopsFormElement {
 	 * 
      * @return	array   Associative array of value->name pairs
 	 */
-	function getOptions(){
+	public function getOptions(){
 		return $this->_options;
 	}
 
@@ -141,7 +141,7 @@ class XoopsFormCheckBox extends XoopsFormElement {
 	 * 
      * @return	string
 	 */
-	function render(){
+	public function render(){
 		$ret = "";
 		if ( count($this->getOptions()) > 1 && substr($this->getName(), -2, 2) != "[]" ) {
 			$newname = $this->getName()."[]";

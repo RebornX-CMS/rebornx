@@ -57,37 +57,37 @@ class XoopsFormElement {
      * "name" attribute of the element
 	 * @var string  
 	 */
-	var $_name;
+	public $_name;
 
 	/**
      * caption of the element
 	 * @var	string  
 	 */
-	var $_caption;
+	public $_caption;
 
 	/**
      * hidden?
 	 * @var	bool    
 	 */
-	var $_hidden = false;
+	public $_hidden = false;
 
 	/**
      * extra attributes to go in the tag
 	 * @var	string  
 	 */
-	var $_extra;
+	public $_extra;
 
 	/**
      * required field?
 	 * @var	bool    
 	 */
-	var $_required = false;
+	public $_required = false;
 
 	/**
      * description of the field
 	 * @var	string  
 	 */
-	var $_description = "";
+	public $_description = "";
     /**#@-*/
 
     
@@ -95,7 +95,7 @@ class XoopsFormElement {
 	 * constructor
 	 * 
 	 */
-	function __construct(){
+	public function __construct(){
 		exit("This class cannot be instantiated!");
 	}
 
@@ -104,7 +104,7 @@ class XoopsFormElement {
 	 * 
      * @return	bool false
 	 */	
-	function isContainer()
+	public function isContainer()
 	{
 		return false;
 	}
@@ -114,7 +114,7 @@ class XoopsFormElement {
 	 * 
      * @param	string  $name   "name" attribute for the element
 	 */
-	function setName($name) {
+	public function setName($name) {
 		$this->_name = trim($name);
 	}
 
@@ -124,7 +124,7 @@ class XoopsFormElement {
      * @param	bool    encode?
      * @return	string  "name" attribute
 	 */
-	function getName($encode=true) {
+	public function getName($encode=true) {
 		if (false != $encode) {
 			return str_replace("&amp;", "&", str_replace("'","&#039;",htmlspecialchars($this->_name)));
 		}
@@ -136,7 +136,7 @@ class XoopsFormElement {
 	 * 
      * @param	string  $caption
 	 */
-	function setCaption($caption) {
+	public function setCaption($caption) {
 		$this->_caption = trim($caption);
 	}
 
@@ -145,7 +145,7 @@ class XoopsFormElement {
 	 * 
      * @return	string
 	 */
-	function getCaption() {
+	public function getCaption() {
 		return $this->_caption;
 	}
 
@@ -154,7 +154,7 @@ class XoopsFormElement {
 	 * 
      * @param	string  $description
 	 */
-	function setDescription($description) {
+	public function setDescription($description) {
 		$this->_description = trim($description);
 	}
 
@@ -163,7 +163,7 @@ class XoopsFormElement {
 	 * 
      * @return	string
 	 */
-	function getDescription() {
+	public function getDescription() {
 		return $this->_description;
 	}
 
@@ -171,7 +171,7 @@ class XoopsFormElement {
 	 * flag the element as "hidden"
 	 * 
 	 */
-	function setHidden() {
+	public function setHidden() {
 		$this->_hidden = true;
 	}
 
@@ -180,7 +180,7 @@ class XoopsFormElement {
 	 * 
      * @return	bool
 	 */
-	function isHidden() {
+	public function isHidden() {
 		return $this->_hidden;
 	}
 
@@ -192,7 +192,7 @@ class XoopsFormElement {
 	 * 
      * @param	string  $extra
 	 */
-	function setExtra($extra){
+	public function setExtra($extra){
 		$this->_extra = " ".trim($extra);
 	}
 
@@ -201,7 +201,7 @@ class XoopsFormElement {
 	 * 
      * @return	string
 	 */
-	function getExtra(){
+	public function getExtra(){
 		if (isset($this->_extra)) {
 			return $this->_extra;
 		}
@@ -213,7 +213,7 @@ class XoopsFormElement {
      * This method is abstract and must be overwritten by the child classes.
      * @abstract
 	 */
-	function render(){
+	public function render(){
 	}
 }
 ?>

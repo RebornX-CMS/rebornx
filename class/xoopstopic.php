@@ -49,7 +49,7 @@ class XoopsTopic
     public $s_groups;
     public $r_groups;
 
-	function __construct($table, $topicid=0)
+	public function __construct($table, $topicid=0)
 	{
 		$this->db = Database::getInstance();
 		$this->table = $table;
@@ -62,42 +62,42 @@ class XoopsTopic
 		}
 	}
 
-	function setTopicTitle($value)
+	public function setTopicTitle($value)
 	{
 		$this->topic_title = $value;
 	}
 
-	function setTopicImgurl($value)
+	public function setTopicImgurl($value)
 	{
 		$this->topic_imgurl = $value;
 	}
 
-	function setTopicPid($value)
+	public function setTopicPid($value)
 	{
 		$this->topic_pid = $value;
 	}
 
-	function getTopic($topicid)
+	public function getTopic($topicid)
 	{
 		$sql = "SELECT * FROM ".$this->table." WHERE topic_id=".$topicid."";
 		$array = $this->db->fetchArray($this->db->query($sql));
 		$this->makeTopic($array);
 	}
 
-	function makeTopic($array)
+	public function makeTopic($array)
 	{
 		foreach($array as $key=>$value){
 			$this->$key = $value;
 		}
 	}
 
-	function usePermission($mid)
+	public function usePermission($mid)
 	{
 		$this->mid = $mid;
 		$this->use_permission = true;
 	}
 
-	function store()
+	public function store()
 	{
 		$myts = MyTextSanitizer::getInstance();
 		$title = "";
@@ -191,23 +191,23 @@ class XoopsTopic
 		return true;
 	}
 
-	function delete()
+	public function delete()
 	{
 		$sql = sprintf("DELETE FROM %s WHERE topic_id = %u", $this->table, $this->topic_id);
 		$this->db->query($sql);
 	}
 
-	function topic_id()
+	public function topic_id()
 	{
 		return $this->topic_id;
 	}
 
-	function topic_pid()
+	public function topic_pid()
 	{
 		return $this->topic_pid;
 	}
 
-	function topic_title($format="S")
+	public function topic_title($format="S")
 	{
 		$myts = MyTextSanitizer::getInstance();
 		switch($format){
@@ -227,7 +227,7 @@ class XoopsTopic
 		return $title;
 	}
 
-	function topic_imgurl($format="S")
+	public function topic_imgurl($format="S")
 	{
 		$myts = MyTextSanitizer::getInstance();
 		switch($format){
@@ -247,14 +247,14 @@ class XoopsTopic
 		return $imgurl;
 	}
 
-	function prefix()
+	public function prefix()
 	{
 		if ( isset($this->prefix) ) {
 			return $this->prefix;
 		}
 	}
 
-	function getFirstChildTopics()
+	public function getFirstChildTopics()
 	{
 		$ret = array();
 		$xt = new XoopsTree($this->table, "topic_id", "topic_pid");
@@ -267,7 +267,7 @@ class XoopsTopic
 		return $ret;
 	}
 
-	function getAllChildTopics()
+	public function getAllChildTopics()
 	{
 		$ret = array();
 		$xt = new XoopsTree($this->table, "topic_id", "topic_pid");
@@ -280,7 +280,7 @@ class XoopsTopic
 		return $ret;
 	}
 
-	function getChildTopicsTreeArray()
+	public function getChildTopicsTreeArray()
 	{
 		$ret = array();
 		$xt = new XoopsTree($this->table, "topic_id", "topic_pid");
@@ -293,7 +293,7 @@ class XoopsTopic
 		return $ret;
 	}
 
-	function makeTopicSelBox($none=0, $seltopic=-1, $selname="", $onchange="")
+	public function makeTopicSelBox($none=0, $seltopic=-1, $selname="", $onchange="")
 	{
 		$xt = new XoopsTree($this->table, "topic_id", "topic_pid");
 		if ( $seltopic != -1 ) {
@@ -306,21 +306,21 @@ class XoopsTopic
 	}
 
 	//generates nicely formatted linked path from the root id to a given id
-	function getNiceTopicPathFromId($funcURL)
+	public function getNiceTopicPathFromId($funcURL)
 	{
 		$xt = new XoopsTree($this->table, "topic_id", "topic_pid");
 		$ret = $xt->getNicePathFromId($this->topic_id, "toppic_title", $funcURL);
 		return $ret;
 	}
 
-	function getAllChildTopicsId()
+	public function getAllChildTopicsId()
 	{
 		$xt = new XoopsTree($this->table, "topic_id", "topic_pid");
 		$ret = $xt->getAllChildId($this->topic_id, "toppic_title");
 		return $ret;
 	}
 
-	function getTopicsList()
+	public function getTopicsList()
 	{
 		$result = $this->db->query('SELECT topic_id, topic_pid, topic_title FROM '.$this->table);
 		$ret = array();
@@ -331,7 +331,7 @@ class XoopsTopic
 		return $ret;
 	}
 
-	function topicExists($pid, $title) {
+	public function topicExists($pid, $title) {
 		$sql = "SELECT COUNT(*) from ".$this->table." WHERE topic_pid = ".intval($pid)." AND topic_title = '".trim($title)."'";
 		$rs = $this->db->query($sql);
         list($count) = $this->db->fetchRow($rs);

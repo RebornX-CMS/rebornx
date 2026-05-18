@@ -49,7 +49,7 @@ if ( !defined("XOOPS_C_ERRORHANDLER_INCLUDED") ) {
          * 
          * @global  $xoopsConfig
 		 **/
-		function show($e_code, $pages=1)
+		public function show($e_code, $pages=1)
 		{
 			global $xoopsConfig, $xoopsUser, $xoopsRequestUri, $xoopsModule, $xoopsLogger, $_SERVER;
 			$errmsg = array(

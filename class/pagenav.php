@@ -43,10 +43,10 @@ class XoopsPageNav
 	/**#@+
 	 * @access	private
 	 */
-	var $total;
-	var $perpage;
-	var $current;
-	var $url;
+	public $total;
+	public $perpage;
+	public $current;
+	public $url;
     /**#@-*/
 
 	/**
@@ -58,7 +58,7 @@ class XoopsPageNav
 	 * @param   string  $start_name     Name for "start" or "offset"
 	 * @param   string  $extra_arg      Additional arguments to pass in the URL
 	 **/
-	function __construct($total_items, $items_perpage, $current_start, $start_name="start", $extra_arg="")
+	public function __construct($total_items, $items_perpage, $current_start, $start_name="start", $extra_arg="")
 	{
 		global $_SERVER;
 		$this->total = intval($total_items);
@@ -76,7 +76,7 @@ class XoopsPageNav
 	 * @param   integer $offset
 	 * @return  string
 	 **/
-	function renderNav($offset = 4)
+	public function renderNav($offset = 4)
 	{
 		$ret = '';
 		if ( $this->total <= $this->perpage ) {
@@ -118,7 +118,7 @@ class XoopsPageNav
 	 * @param   boolean     $showbutton Show the "Go" button?
 	 * @return  string
 	 **/
-	function renderSelect($showbutton = false)
+	public function renderSelect($showbutton = false)
 	{
 		if ( $this->total < $this->perpage ) {
 			return;
@@ -153,7 +153,7 @@ class XoopsPageNav
 	 * @param   integer     $offset
 	 * @return  string
 	 **/
-	function renderImageNav($offset = 4)
+	public function renderImageNav($offset = 4)
 	{
 		if ( $this->total < $this->perpage ) {
 			return;

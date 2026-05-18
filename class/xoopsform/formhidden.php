@@ -51,7 +51,7 @@ class XoopsFormHidden extends XoopsFormElement {
 	 * @var	string	
 	 * @access	private
 	 */
-	var $_value;
+	public $_value;
 
 	/**
 	 * Constructor
@@ -59,7 +59,7 @@ class XoopsFormHidden extends XoopsFormElement {
 	 * @param	string	$name	"name" attribute
 	 * @param	string	$value	"value" attribute
 	 */
-	function __construct($name, $value){
+	public function __construct($name, $value){
 		$this->setName($name);
 		$this->setHidden();
 		$this->setValue($value);
@@ -71,7 +71,7 @@ class XoopsFormHidden extends XoopsFormElement {
 	 * 
 	 * @return	string
 	 */
-	function getValue(){
+	public function getValue(){
 		return $this->_value;
 	}
 
@@ -80,7 +80,7 @@ class XoopsFormHidden extends XoopsFormElement {
 	 * 
 	 * @patam  $value	string
 	 */
-	function setValue($value){
+	public function setValue($value){
 		$this->_value = $value;
 	}
 
@@ -89,7 +89,7 @@ class XoopsFormHidden extends XoopsFormElement {
 	 * 
 	 * @return	string	HTML
 	 */
-	function render(){
+	public function render(){
 		return "<input type='hidden' name='".$this->getName()."' id='".$this->getName()."' value='".$this->getValue()."' />";
 	}
 }

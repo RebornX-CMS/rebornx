@@ -53,21 +53,21 @@ class XoopsFormPassword extends XoopsFormElement {
 	 * @var	int	
 	 * @access	private
 	 */
-	var $_size;
+	public $_size;
 
 	/**
      * Maximum length of the text
 	 * @var	int	
 	 * @access	private
 	 */
-	var $_maxlength;
+	public $_maxlength;
 
 	/**
      * Initial content of the field.
 	 * @var	string	
 	 * @access	private
 	 */
-	var $_value;
+	public $_value;
 
 	/**
 	 * Constructor
@@ -79,7 +79,7 @@ class XoopsFormPassword extends XoopsFormElement {
 	 * @param	int		$value		Initial value of the field. 
 	 * 								<b>Warning:</b> this is readable in cleartext in the page's source!
 	 */
-	function __construct($caption, $name, $size, $maxlength, $value=""){
+	public function __construct($caption, $name, $size, $maxlength, $value=""){
 		$this->setCaption($caption);
 		$this->setName($name);
 		$this->_size = intval($size);
@@ -92,7 +92,7 @@ class XoopsFormPassword extends XoopsFormElement {
 	 * 
 	 * @return	int
 	 */
-	function getSize(){
+	public function getSize(){
 		return $this->_size;
 	}
 
@@ -101,7 +101,7 @@ class XoopsFormPassword extends XoopsFormElement {
 	 * 
 	 * @return	int
 	 */
-	function getMaxlength(){
+	public function getMaxlength(){
 		return $this->_maxlength;
 	}
 
@@ -110,7 +110,7 @@ class XoopsFormPassword extends XoopsFormElement {
 	 * 
 	 * @return	string
 	 */
-	function getValue(){
+	public function getValue(){
 		return $this->_value;
 	}
 
@@ -119,7 +119,7 @@ class XoopsFormPassword extends XoopsFormElement {
 	 * 
 	 * @patam	$value	string
 	 */
-	function setValue($value){
+	public function setValue($value){
 		$this->_value = $value;
 	}
 
@@ -128,7 +128,7 @@ class XoopsFormPassword extends XoopsFormElement {
 	 * 
 	 * @return	string	HTML
 	 */
-	function render(){
+	public function render(){
 		return "<input type='password' name='".$this->getName()."' id='".$this->getName()."' size='".$this->getSize()."' maxlength='".$this->getMaxlength()."' value='".$this->getValue()."'".$this->getExtra()." />";
 	}
 }

@@ -57,7 +57,7 @@ class XoopsConfigCategory extends XoopsObject
      * Constructor
      * 
      */
-    function __construct()
+    public function __construct()
     {
         $this->XoopsObject();
         $this->initVar('confcat_id', XOBJ_DTYPE_INT, null);
@@ -89,7 +89,7 @@ class XoopsConfigCategoryHandler extends XoopsObjectHandler
      * 
      * @return	object  New {@link XoopsConfigCategory} 
      */
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $confcat = new XoopsConfigCategory();
         if ($isNew) {
@@ -105,7 +105,7 @@ class XoopsConfigCategoryHandler extends XoopsObjectHandler
      * 
      * @return	object  {@link XoopsConfigCategory}, FALSE on fail
      */
-    function &get($id)
+    public function &get($id)
     {
         $id = intval($id);
         if ($id > 0) {
@@ -130,7 +130,7 @@ class XoopsConfigCategoryHandler extends XoopsObjectHandler
      * 
      * @return	bool    TRUE on success
      */
-    function insert(&$confcat)
+    public function insert(&$confcat)
     {
         if (get_class($confcat) != 'xoopsconfigcategory') {
             return false;
@@ -167,7 +167,7 @@ class XoopsConfigCategoryHandler extends XoopsObjectHandler
      * 
      * @return	bool    TRUE on success
      */
-    function delete(&$confcat)
+    public function delete(&$confcat)
     {
         if (get_class($confcat) != 'xoopsconfigcategory') {
             return false;
@@ -187,7 +187,7 @@ class XoopsConfigCategoryHandler extends XoopsObjectHandler
      * 
      * @return	array   Array of {@link XoopsConfigCategory}s
      */
-    function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;

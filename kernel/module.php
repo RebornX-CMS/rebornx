@@ -46,16 +46,16 @@ class XoopsModule extends XoopsObject
     /**
      * @var string
      */
-    var $modinfo;
+    public $modinfo;
     /**
      * @var string
      */
-    var $adminmenu;
+    public $adminmenu;
 
     /**
      * Constructor
      */
-    function __construct()
+    public function __construct()
     {
         $this->XoopsObject();
         $this->initVar('mid', XOBJ_DTYPE_INT, null, false);
@@ -80,7 +80,7 @@ class XoopsModule extends XoopsObject
      * @param   string  $dirname    Directory Name
      * @param   boolean $verbose
      **/
-    function loadInfoAsVar($dirname, $verbose = true)
+    public function loadInfoAsVar($dirname, $verbose = true)
     {
         if ( !isset($this->modinfo) ) {
             $this->loadInfo($dirname, $verbose);
@@ -111,7 +111,7 @@ class XoopsModule extends XoopsObject
      * @return  array|string	Array of module information.
 	 * 			If {@link $name} is set, returns a singel module information item as string.
      **/
-    function &getInfo($name=null)
+    public function &getInfo($name=null)
     {
         if ( !isset($this->modinfo) ) {
             $this->loadInfo($this->getVar('dirname'));
@@ -130,7 +130,7 @@ class XoopsModule extends XoopsObject
      * 
      * @return	string  FALSE on fail
      */
-    function mainLink()
+    public function mainLink()
     {
         if ( $this->getVar('hasmain') == 1 ) {
             $ret = '<a href="'.XOOPS_URL.'/modules/'.$this->getVar('dirname').'/">'.$this->getVar('name').'</a>';
@@ -144,7 +144,7 @@ class XoopsModule extends XoopsObject
      * 
      * @return	string
      */
-    function &subLink()
+    public function &subLink()
     {
         $ret = array();
         if ( $this->getInfo('sub') && is_array($this->getInfo('sub')) ) {
@@ -158,7 +158,7 @@ class XoopsModule extends XoopsObject
     /**
      * Load the admin menu for the module
      */
-    function loadAdminMenu()
+    public function loadAdminMenu()
     {
         if ($this->getInfo('adminmenu') && $this->getInfo('adminmenu') != '' && file_exists(XOOPS_ROOT_PATH.'/modules/'.$this->getVar('dirname').'/'.$this->getInfo('adminmenu'))) {
             include_once XOOPS_ROOT_PATH.'/modules/'.$this->getVar('dirname').'/'.$this->getInfo('adminmenu');
@@ -171,7 +171,7 @@ class XoopsModule extends XoopsObject
      * 
      * @return	string
      */
-    function &getAdminMenu()
+    public function &getAdminMenu()
     {
         if ( !isset($this->adminmenu) ) {
             $this->loadAdminMenu();
@@ -185,7 +185,7 @@ class XoopsModule extends XoopsObject
      * @param	string  $dirname    Module directory
      * @param	bool    $verbose    Give an error on fail?
      */
-    function loadInfo($dirname, $verbose = true)
+    public function loadInfo($dirname, $verbose = true)
     {
         global $xoopsConfig;
         if (file_exists(XOOPS_ROOT_PATH.'/modules/'.$dirname.'/language/'.$xoopsConfig['language'].'/modinfo.php')) {
@@ -214,7 +214,7 @@ class XoopsModule extends XoopsObject
      * @param   integer $userid
      * @return  mixed   Search result.
      **/
-    function &search($term = '', $andor = 'AND', $limit = 0, $offset = 0, $userid = 0)
+    public function &search($term = '', $andor = 'AND', $limit = 0, $offset = 0, $userid = 0)
     {
         if ($this->getVar('hassearch') != 1) {
             return false;
@@ -239,19 +239,19 @@ class XoopsModule extends XoopsObject
      * For backward compatibility only! 
      * @deprecated
      */
-    function mid()
+    public function mid()
     {
         return $this->getVar('mid');
     }
-    function dirname()
+    public function dirname()
     {
         return $this->getVar('dirname');
     }
-    function name()
+    public function name()
     {
         return $this->getVar('name');
     }
-    function &getByDirName($dirname)
+    public function &getByDirName($dirname)
     {
         $modhandler =& xoops_gethandler('module');
         return $modhandler->getByDirname($dirname);
@@ -279,7 +279,7 @@ class XoopsModuleHandler extends XoopsObjectHandler
 	 * @var    array
 	 * @access private
 	 */
-	var $_cachedModule_mid = array();
+	public $_cachedModule_mid = array();
 
 	/**
 	 * holds an array of cached module references, indexed by module dirname
@@ -287,7 +287,7 @@ class XoopsModuleHandler extends XoopsObjectHandler
 	 * @var    array
 	 * @access private
 	 */
-	var $_cachedModule_dirname = array();
+	public $_cachedModule_dirname = array();
 
     /**
      * Create a new {@link XoopsModule} object
@@ -295,7 +295,7 @@ class XoopsModuleHandler extends XoopsObjectHandler
      * @param   boolean     $isNew   Flag the new object as "new"
      * @return  object
      **/
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $module = new XoopsModule();
         if ($isNew) {
@@ -311,7 +311,7 @@ class XoopsModuleHandler extends XoopsObjectHandler
      * 
      * @return	object  FALSE on fail
      */
-    function &get($id)
+    public function &get($id)
     {
         $id = intval($id);
         if ($id > 0) {
@@ -343,7 +343,7 @@ class XoopsModuleHandler extends XoopsObjectHandler
      * 
      * @return	object  FALSE on fail
      */
-    function &getByDirname($dirname)
+    public function &getByDirname($dirname)
     {
 		if (!empty($this->_cachedModule_dirname[$dirname])) {
 			return $this->_cachedModule_dirname[$dirname];
@@ -371,7 +371,7 @@ class XoopsModuleHandler extends XoopsObjectHandler
      * @param   object  &$module reference to a {@link XoopsModule} 
      * @return  bool
      **/
-    function insert(&$module)
+    public function insert(&$module)
     {
         if (get_class($module) != 'xoopsmodule') {
             return false;
@@ -413,7 +413,7 @@ class XoopsModuleHandler extends XoopsObjectHandler
      * @param   object  &$module
      * @return  bool
      **/
-    function delete(&$module)
+    public function delete(&$module)
     {
         if (get_class($module) != 'xoopsmodule') {
             return false;
@@ -473,7 +473,7 @@ class XoopsModuleHandler extends XoopsObjectHandler
      * @param   boolean $id_as_key  Use the ID as key into the array
      * @return  array
      **/
-    function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;
@@ -507,7 +507,7 @@ class XoopsModuleHandler extends XoopsObjectHandler
      * @param   object  $criteria   {@link CriteriaElement} 
      * @return  int
      **/
-    function getCount($criteria = null)
+    public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('modules');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -529,7 +529,7 @@ class XoopsModuleHandler extends XoopsObjectHandler
      *      if false, array keys will be module id
      * @return  array
      **/
-    function &getList($criteria = null, $dirname_as_key = false)
+    public function &getList($criteria = null, $dirname_as_key = false)
     {
         $ret = array();
         $modules =& $this->getObjects($criteria, true);

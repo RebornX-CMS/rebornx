@@ -47,7 +47,7 @@ class XoopsPrivmessage extends XoopsObject
 /**
  * constructor
  **/
-    function __construct()
+    public function __construct()
     {
         $this->XoopsObject();
         $this->initVar('msg_id', XOBJ_DTYPE_INT, null, false);
@@ -82,7 +82,7 @@ class XoopsPrivmessageHandler extends XoopsObjectHandler
  * @param 	bool 	$isNew 	Flag as "new"?
  * @return 	object
  **/
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $pm = new XoopsPrivmessage();
         if ($isNew) {
@@ -96,7 +96,7 @@ class XoopsPrivmessageHandler extends XoopsObjectHandler
  * @param 	int 	$id ID of the message
  * @return 	object
  **/
-    function &get($id)
+    public function &get($id)
     {
         $id = intval($id);
         if ($id > 0) {
@@ -119,7 +119,7 @@ class XoopsPrivmessageHandler extends XoopsObjectHandler
  * @param 	object 	$pm		{@link XoopsPrivmessage} object
  * @return 	bool
  **/
-    function insert(&$pm)
+    public function insert(&$pm)
     {
         if (get_class($pm) != 'xoopsprivmessage') {
             return false;
@@ -154,7 +154,7 @@ class XoopsPrivmessageHandler extends XoopsObjectHandler
  * @param 	object 	$pm 	{@link XoopsPrivmessage} object
  * @return 	bool
  **/
-    function delete(&$pm)
+    public function delete(&$pm)
     {
         if (get_class($pm) != 'xoopsprivmessage') {
             return false;
@@ -171,7 +171,7 @@ class XoopsPrivmessageHandler extends XoopsObjectHandler
  * @param 	bool 	$id_as_key 	use ID as key into the array?
  * @return 	array	Array of {@link XoopsPrivmessage} objects
  **/
-    function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;
@@ -205,7 +205,7 @@ class XoopsPrivmessageHandler extends XoopsObjectHandler
  * @param 	object 	$criteria = null 	{@link CriteriaElement} object
  * @return 	int
  **/
-    function getCount($criteria = null)
+    public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('priv_msgs');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -223,7 +223,7 @@ class XoopsPrivmessageHandler extends XoopsObjectHandler
  * @param 	object 	$pm 	{@link XoopsPrivmessage} object
  * @return 	bool
  **/
-    function setRead(&$pm)
+    public function setRead(&$pm)
     {
         if (get_class($pm) != 'xoopsprivmessage') {
             return false;

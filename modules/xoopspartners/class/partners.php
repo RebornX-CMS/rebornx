@@ -35,7 +35,7 @@ class PartnerSystem extends XoopsObject
 	public $db;
 
     // constructor
-	function __construct($id=null)
+	public function __construct($id=null)
 	{
 		$this->db = Database::getInstance();
 		$this->initVar("id", XOBJ_DTYPE_INT, null, false);
@@ -54,14 +54,14 @@ class PartnerSystem extends XoopsObject
 		}
 	}
 
-	function load($id)
+	public function load($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix("partners")." WHERE id=$id and status=1";
 		$myrow = $this->db->fetchArray($this->db->query($sql));
 		$this->assignVars($myrow);
 	}
 
-	function getAllPartners($criteria=array(), $asobject=false, $sort="hits", $order="DESC", $limit=0, $start=0)
+	public function getAllPartners($criteria=array(), $asobject=false, $sort="hits", $order="DESC", $limit=0, $start=0)
 	{
 		$db = Database::getInstance();
 		$ret = array();
@@ -91,7 +91,7 @@ class PartnerSystem extends XoopsObject
 		return $ret;
 	}
 
-	function setHits($id)
+	public function setHits($id)
 	{
 		$db = Database::getInstance();
 		$db->queryF("UPDATE ".$db->prefix("partners")." SET hits=hits+1 WHERE id=$id");

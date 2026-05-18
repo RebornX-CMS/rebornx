@@ -52,28 +52,28 @@ class XoopsFormSelect extends XoopsFormElement {
 	 * @var array   
 	 * @access	private
 	 */
-	var $_options = array();
+	public $_options = array();
 
 	/**
      * Allow multiple selections?
 	 * @var	bool    
 	 * @access	private
 	 */
-	var $_multiple = false;
+	public $_multiple = false;
 
 	/**
      * Number of rows. "1" makes a dropdown list.
 	 * @var	int 
 	 * @access	private
 	 */
-	var $_size;
+	public $_size;
 
 	/**
      * Pre-selcted values
 	 * @var	array   
 	 * @access	private
 	 */
-	var $_value = array();
+	public $_value = array();
 
 	/**
 	 * Constructor
@@ -84,7 +84,7 @@ class XoopsFormSelect extends XoopsFormElement {
 	 * @param	int		$size	    Number or rows. "1" makes a drop-down-list
      * @param	bool    $multiple   Allow multiple selections?
 	 */
-	function __construct($caption, $name, $value=null, $size=1, $multiple=false){
+	public function __construct($caption, $name, $value=null, $size=1, $multiple=false){
 		$this->setCaption($caption);
 		$this->setName($name);
 		$this->_multiple = $multiple;
@@ -99,7 +99,7 @@ class XoopsFormSelect extends XoopsFormElement {
 	 * 
      * @return	bool
 	 */
-	function isMultiple(){
+	public function isMultiple(){
 		return $this->_multiple;
 	}
 
@@ -108,7 +108,7 @@ class XoopsFormSelect extends XoopsFormElement {
 	 * 
      * @return	int
 	 */
-	function getSize(){
+	public function getSize(){
 		return $this->_size;
 	}
 
@@ -117,7 +117,7 @@ class XoopsFormSelect extends XoopsFormElement {
 	 * 
      * @return	array
 	 */
-	function getValue(){
+	public function getValue(){
 		return $this->_value;
 	}
 
@@ -126,7 +126,7 @@ class XoopsFormSelect extends XoopsFormElement {
 	 * 
      * @param	$value	mixed
 	 */
-	function setValue($value){
+	public function setValue($value){
 		if (is_array($value)) {
 			foreach ($value as $v) {
 				$this->_value[] = $v;
@@ -142,7 +142,7 @@ class XoopsFormSelect extends XoopsFormElement {
 	 * @param	string  $value  "value" attribute
      * @param	string  $name   "name" attribute
 	 */
-	function addOption($value, $name=""){
+	public function addOption($value, $name=""){
 		if ( $name != "" ) {
 			$this->_options[$value] = $name;
 		} else {
@@ -155,7 +155,7 @@ class XoopsFormSelect extends XoopsFormElement {
 	 * 
      * @param	array   $options    Associative array of value->name pairs
 	 */
-	function addOptionArray($options){
+	public function addOptionArray($options){
 		if ( is_array($options) ) {
 			foreach ( $options as $k=>$v ) {
 				$this->addOption($k, $v);
@@ -168,7 +168,7 @@ class XoopsFormSelect extends XoopsFormElement {
 	 * 
      * @return	array   Associative array of value->name pairs
 	 */
-	function getOptions(){
+	public function getOptions(){
 		return $this->_options;
 	}
 
@@ -177,7 +177,7 @@ class XoopsFormSelect extends XoopsFormElement {
 	 * 
      * @return	string  HTML
 	 */
-	function render(){
+	public function render(){
 		$ret = "<select  size='".$this->getSize()."'".$this->getExtra()."";
 		if ($this->isMultiple() != false) {
 			$ret .= " name='".$this->getName()."[]' id='".$this->getName()."[]' multiple='multiple'>\n";

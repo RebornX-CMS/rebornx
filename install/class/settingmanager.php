@@ -34,19 +34,19 @@ include_once './class/textsanitizer.php';
 **/
 class setting_manager {
 
-    var $database;
-    var $dbhost;
-    var $dbuname;
-    var $dbpass;
-    var $dbname;
-    var $prefix;
-    var $db_pconnect;
-    var $root_path;
-    var $xoops_url;
+    public $database;
+    public $dbhost;
+    public $dbuname;
+    public $dbpass;
+    public $dbname;
+    public $prefix;
+    public $db_pconnect;
+    public $root_path;
+    public $xoops_url;
 
-    var $sanitizer;
+    public $sanitizer;
 
-    function __construct($post=false){
+    public function __construct($post=false){
         global $_SERVER;
 
         $this->sanitizer = TextSanitizer::getInstance();
@@ -78,7 +78,7 @@ class setting_manager {
         }
     }
 
-    function readPost(){
+    public function readPost(){
         	global $_POST;
         if(isset($_POST['database']))
             $this->database = $this->sanitizer->stripSlashesGPC($_POST['database']);
@@ -100,7 +100,7 @@ class setting_manager {
             $this->xoops_url = $this->sanitizer->stripSlashesGPC($_POST['xoops_url']);
     }
 
-    function readConstant(){
+    public function readConstant(){
         if(defined('XOOPS_DB_TYPE'))
             $this->database = XOOPS_DB_TYPE;
         if(defined('XOOPS_DB_HOST'))
@@ -121,7 +121,7 @@ class setting_manager {
             $this->xoops_url = XOOPS_URL;
     }
 
-    function checkData(){
+    public function checkData(){
         $ret = '';
         $error = array();
 
@@ -150,7 +150,7 @@ class setting_manager {
         return $ret;
     }
 
-    function editform(){
+    public function editform(){
         $ret =
             "<table width='100%' class='outer' cellspacing='5'>
                 <tr>
@@ -198,7 +198,7 @@ class setting_manager {
         return $ret;
     }
 
-    function editform_sub($title, $desc, $name, $value){
+    public function editform_sub($title, $desc, $name, $value){
         return  "<tr valign='top' align='left'>
                     <td class='head'>
                         <b>".$title."</b><br />
@@ -211,7 +211,7 @@ class setting_manager {
                 ";
     }
 
-    function confirmForm(){
+    public function confirmForm(){
         $yesno = empty($this->db_pconnect) ? _INSTALL_L24 : _INSTALL_L23;
         $ret =
             "<table border='0' cellpadding='0' cellspacing='0' valign='top' width='90%'><tr><td class='bg2'>
@@ -268,7 +268,7 @@ class setting_manager {
     }
 
 
-    function getDBList()
+    public function getDBList()
     {
 		return array('mysqli');
         //$dirname = '../class/database/';

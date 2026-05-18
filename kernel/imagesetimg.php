@@ -35,7 +35,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 class XoopsImagesetimg extends XoopsObject
 {
-	function __construct()
+	public function __construct()
 	{
 		$this->XoopsObject();
 		$this->initVar('imgsetimg_id', XOBJ_DTYPE_INT, null, false);
@@ -57,7 +57,7 @@ class XoopsImagesetimg extends XoopsObject
 class XoopsImagesetimgHandler extends XoopsObjectHandler
 {
 
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $imgsetimg = new XoopsImagesetimg();
         if ($isNew) {
@@ -66,7 +66,7 @@ class XoopsImagesetimgHandler extends XoopsObjectHandler
         return $imgsetimg;
     }
 
-    function &get($id)
+    public function &get($id)
     {
         $id = intval($id);
         if ($id > 0) {
@@ -84,7 +84,7 @@ class XoopsImagesetimgHandler extends XoopsObjectHandler
         return false;
     }
 
-    function insert(&$imgsetimg)
+    public function insert(&$imgsetimg)
     {
         if (get_class($imgsetimg) != 'xoopsimagesetimg') {
             return false;
@@ -114,7 +114,7 @@ class XoopsImagesetimgHandler extends XoopsObjectHandler
         return true;
     }
 
-    function delete(&$imgsetimg)
+    public function delete(&$imgsetimg)
     {
         if (get_class($imgsetimg) != 'xoopsimagesetimg') {
             return false;
@@ -126,7 +126,7 @@ class XoopsImagesetimgHandler extends XoopsObjectHandler
         return true;
     }
 
-    function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;
@@ -154,7 +154,7 @@ class XoopsImagesetimgHandler extends XoopsObjectHandler
         return $ret;
     }
 
-    function getCount($criteria = null)
+    public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(i.imgsetimg_id) FROM '.$this->db->prefix('imgsetimg'). ' i LEFT JOIN '.$this->db->prefix('imgset_tplset_link'). ' l ON l.imgset_id=i.imgsetimg_imgset';
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -174,7 +174,7 @@ class XoopsImagesetimgHandler extends XoopsObjectHandler
  * @return type documentation
  * @author Kazumi Ono <onokazu@xoops.org>
  **/
-    function &getByImageset($imgset_id, $id_as_key = false)
+    public function &getByImageset($imgset_id, $id_as_key = false)
     {
         return $this->getObjects(new Criteria('imgsetimg_imgset', intval($imgset_id)), $id_as_key);
     }
@@ -186,7 +186,7 @@ class XoopsImagesetimgHandler extends XoopsObjectHandler
  * @return type documentation
  * @author Kazumi Ono <onokazu@xoops.org>
  **/
-    function imageExists($filename, $imgset_id)
+    public function imageExists($filename, $imgset_id)
     {
         $criteria = new CriteriaCompo(new Criteria('imgsetimg_file', $filename));
         $criteria->add(new Criteria('imgsetimg_imgset', intval($imgset_id)));

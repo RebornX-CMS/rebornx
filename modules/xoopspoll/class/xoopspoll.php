@@ -35,7 +35,7 @@ class XoopsPoll extends XoopsObject
 	public $db;
 
 	//constructor
-	function __construct($id=null)
+	public function __construct($id=null)
 	{
 		$this->db = Database::getInstance();
 		$this->initVar("poll_id", XOBJ_DTYPE_INT, null, false);
@@ -60,7 +60,7 @@ class XoopsPoll extends XoopsObject
 	}
 
 	// public
-	function store()
+	public function store()
 	{
 		if ( !$this->cleanVars() ) {
 			return false;
@@ -91,7 +91,7 @@ class XoopsPoll extends XoopsObject
 	}
 
 	// private
-	function load($id)
+	public function load($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix("xoopspoll_desc")." WHERE poll_id=".$id."";
 		$myrow = $this->db->fetchArray($this->db->query($sql));
@@ -99,7 +99,7 @@ class XoopsPoll extends XoopsObject
 	}
 
 	// public
-	function hasExpired()
+	public function hasExpired()
 	{
 		if ( $this->getVar("end_time") > time() ) {
 			return false;
@@ -108,7 +108,7 @@ class XoopsPoll extends XoopsObject
 	}
 
 	// public
-	function delete()
+	public function delete()
 	{
 		$sql = sprintf("DELETE FROM %s WHERE poll_id = %u", $this->db->prefix("xoopspoll_desc"), $this->getVar("poll_id"));
         	if ( !$this->db->query($sql) ) {
@@ -118,7 +118,7 @@ class XoopsPoll extends XoopsObject
 	}
 
 	// private, static
-	function &getAll($criteria=array(), $asobject=true, $orderby="end_time DESC", $limit=0, $start=0)
+	public function &getAll($criteria=array(), $asobject=true, $orderby="end_time DESC", $limit=0, $start=0)
 	{
 		$db = Database::getInstance();
 		$ret = array();
@@ -148,7 +148,7 @@ class XoopsPoll extends XoopsObject
 	}
 
 	// public
-	function vote($option_id, $ip, $user_id=null)
+	public function vote($option_id, $ip, $user_id=null)
 	{
 		if (!empty($option_id)) {
 			if (is_array($option_id)) {
@@ -188,7 +188,7 @@ class XoopsPoll extends XoopsObject
 	}
 
 	// public
-	function updateCount()
+	public function updateCount()
 	{
 		$votes = XoopsPollLog::getTotalVotesByPollId($this->getVar("poll_id"));
 		$voters = XoopsPollLog::getTotalVotersByPollId($this->getVar("poll_id"));

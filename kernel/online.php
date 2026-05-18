@@ -52,14 +52,14 @@ class XoopsOnlineHandler
      * @var	object
      * @access	private
      */
-    var $db;
+    public $db;
 
     /**
      * Constructor
      * 
      * @param	object  &$db    {@link XoopsHandlerFactory} 
      */
-    function __construct(&$db)
+    public function __construct(&$db)
     {
         $this->db =& $db;
     }
@@ -75,7 +75,7 @@ class XoopsOnlineHandler
      * 
      * @return	bool    TRUE on success
      */
-    function write($uid, $uname, $time, $module, $ip)
+    public function write($uid, $uname, $time, $module, $ip)
 	{
 		$uid = intval($uid);
 		if ($uid > 0) {
@@ -105,7 +105,7 @@ class XoopsOnlineHandler
      * 
      * @return	bool    TRUE on success
      */
-    function destroy($uid)
+    public function destroy($uid)
     {
 		$sql = sprintf("DELETE FROM %s WHERE online_uid = %u", $this->db->prefix('online'), $uid);
         if (!$result = $this->db->queryF($sql)) {
@@ -121,7 +121,7 @@ class XoopsOnlineHandler
      * 
      * @param	int $expire Expiration time in seconds
      */
-    function gc($expire)
+    public function gc($expire)
     {
 		$sql = sprintf("DELETE FROM %s WHERE online_updated < %u", $this->db->prefix('online'), time() - intval($expire));
         $this->db->queryF($sql);
@@ -133,7 +133,7 @@ class XoopsOnlineHandler
      * @param	object  $criteria   {@link CriteriaElement} 
      * @return	array   Array of associative arrays of online information
      */
-    function &getAll($criteria = null)
+    public function &getAll($criteria = null)
     {
         $ret = array();
         $limit = $start = 0;
@@ -159,7 +159,7 @@ class XoopsOnlineHandler
      * 
      * @param	object  $criteria   {@link CriteriaElement} 
      */
-    function getCount($criteria = null)
+    public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('online');
         if (is_object($criteria) && is_subclass_of($criteria, 'criteriaelement')) {

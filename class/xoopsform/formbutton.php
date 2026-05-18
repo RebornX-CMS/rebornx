@@ -53,14 +53,14 @@ class XoopsFormButton extends XoopsFormElement {
 	 * @var	string
 	 * @access	private
 	 */
-	var $_value;
+	public $_value;
 
 	/**
      * Type of the button. This could be either "button", "submit", or "reset"
 	 * @var	string
 	 * @access	private
 	 */
-	var $_type;
+	public $_type;
 
 	/**
 	 * Constructor
@@ -71,7 +71,7 @@ class XoopsFormButton extends XoopsFormElement {
      * @param	string  $type       Type of the button.
      * This could be either "button", "submit", or "reset"
 	 */
-	function __construct($caption, $name, $value="", $type="button"){
+	public function __construct($caption, $name, $value="", $type="button"){
 		$this->setCaption($caption);
 		$this->setName($name);
 		$this->_type = $type;
@@ -83,7 +83,7 @@ class XoopsFormButton extends XoopsFormElement {
 	 *
      * @return	string
 	 */
-	function getValue(){
+	public function getValue(){
 		return $this->_value;
 	}
 
@@ -92,7 +92,7 @@ class XoopsFormButton extends XoopsFormElement {
 	 *
      * @return	string
 	 */
-	function setValue($value){
+	public function setValue($value){
 		$this->_value = $value;
 	}
 
@@ -101,7 +101,7 @@ class XoopsFormButton extends XoopsFormElement {
 	 *
      * @return	string
 	 */
-	function getType(){
+	public function getType(){
 		return $this->_type;
 	}
 
@@ -110,7 +110,7 @@ class XoopsFormButton extends XoopsFormElement {
 	 *
      * @return	string
 	 */
-	function render(){
+	public function render(){
 		return "<input type='".$this->getType()."' class='formButton' name='".$this->getName()."'  id='".$this->getName()."' value='".$this->getValue()."'".$this->getExtra()." />";
 	}
 }

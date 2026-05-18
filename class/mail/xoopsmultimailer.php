@@ -148,7 +148,7 @@ class XoopsMultiMailer extends phpmailer {
 	 * 
 	 * @global	$xoopsConfig
 	 */
-	function __construct(){
+	public function __construct(){
 		global $xoopsConfig;
 	
 		$config_handler = xoops_gethandler('config');
@@ -177,7 +177,7 @@ class XoopsMultiMailer extends phpmailer {
      * @access private
      * @return string
      */
-    function addr_format($addr) {
+    public function addr_format($addr) {
         if(empty($addr[1]))
             $formatted = $addr[0];
         else

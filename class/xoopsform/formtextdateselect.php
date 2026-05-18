@@ -49,13 +49,13 @@
 class XoopsFormTextDateSelect extends XoopsFormText
 {
 
-	function __construct($caption, $name, $size = 15, $value= 0)
+	public function __construct($caption, $name, $size = 15, $value= 0)
 	{
 		$value = !is_numeric($value) ? time() : intval($value);
 		$this->XoopsFormText($caption, $name, $size, 25, $value);
 	}
 
-	function render()
+	public function render()
 	{
 		$jstime = formatTimestamp('F j Y, H:i:s', $this->getValue());
 		include_once XOOPS_ROOT_PATH.'/include/calendarjs.php';

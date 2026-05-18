@@ -31,7 +31,7 @@ class NewsStory extends XoopsStory
 {
 	public $newstopic;   // XoopsTopic object
 
-	function __construct($storyid=-1)
+	public function __construct($storyid=-1)
 	{
 		$this->db = Database::getInstance();
 		$this->table = $this->db->prefix("stories");
@@ -45,7 +45,7 @@ class NewsStory extends XoopsStory
 		}
 	}
 
-	function getAllPublished($limit=0, $start=0, $topic=0, $ihome=0, $asobject=true)
+	public function getAllPublished($limit=0, $start=0, $topic=0, $ihome=0, $asobject=true)
 	{
 		$db = Database::getInstance();
 		$myts = MyTextSanitizer::getInstance();
@@ -74,7 +74,7 @@ class NewsStory extends XoopsStory
 	}
 
 	// added new function to get all expired stories
-	function getAllExpired($limit=0, $start=0, $topic=0, $ihome=0, $asobject=true)
+	public function getAllExpired($limit=0, $start=0, $topic=0, $ihome=0, $asobject=true)
 	{
 		$db = Database::getInstance();
 		$myts = MyTextSanitizer::getInstance();
@@ -102,7 +102,7 @@ class NewsStory extends XoopsStory
 		return $ret;
 	}
 
-	function getAllAutoStory($limit=0, $asobject=true)
+	public function getAllAutoStory($limit=0, $asobject=true)
 	{
 		$db = Database::getInstance();
 		$myts = MyTextSanitizer::getInstance();
@@ -119,7 +119,7 @@ class NewsStory extends XoopsStory
 		return $ret;
 	}
 
-	function getAllSubmitted($limit=0, $asobject=true)
+	public function getAllSubmitted($limit=0, $asobject=true)
 	{
 		$db = Database::getInstance();
 		$myts = MyTextSanitizer::getInstance();
@@ -136,7 +136,7 @@ class NewsStory extends XoopsStory
 		return $ret;
 	}
 
-	function getByTopic($topicid)
+	public function getByTopic($topicid)
 	{
 		$ret = array();
 		$db = Database::getInstance();
@@ -147,7 +147,7 @@ class NewsStory extends XoopsStory
 		return $ret;
 	}
 
-	function countByTopic($topicid=0)
+	public function countByTopic($topicid=0)
 	{
 		$db = Database::getInstance();
 		$sql = "SELECT COUNT(*) FROM ".$db->prefix("stories")."
@@ -160,7 +160,7 @@ class NewsStory extends XoopsStory
 		return $count;
 	}
 
-	function countPublishedByTopic($topicid=0)
+	public function countPublishedByTopic($topicid=0)
 	{
 		$db = Database::getInstance();
 		$sql = "SELECT COUNT(*) FROM ".$db->prefix("stories")." WHERE published > 0 AND published <= ".time()." AND (expired = 0 OR expired > ".time().")";
@@ -175,18 +175,18 @@ class NewsStory extends XoopsStory
 	}
 
 
-	function topic_title()
+	public function topic_title()
 	{
 		return $this->newstopic->topic_title();
 	}
 
-	function adminlink()
+	public function adminlink()
 	{
 		$ret = "&nbsp;[ <a href='".XOOPS_URL."/modules/news/admin/index.php?op=edit&amp;storyid=".$this->storyid."'>"._EDIT."</a> | <a href='".XOOPS_URL."/modules/news/admin/index.php?op=delete&amp;storyid=".$this->storyid."'>"._DELETE."</a> ]&nbsp;";
 		return $ret;
 	}
 
-	function imglink()
+	public function imglink()
 	{
 		$ret = '';
 		if ($this->newstopic->topic_imgurl() != '' && file_exists(XOOPS_ROOT_PATH."/modules/news/images/topics/".$this->newstopic->topic_imgurl())) {
@@ -195,7 +195,7 @@ class NewsStory extends XoopsStory
 		return $ret;
 	}
 
-	function textlink()
+	public function textlink()
 	{
 		$ret = "<a href='".XOOPS_URL."/modules/news/index.php?storytopic=".$this->topicid()."'>".$this->newstopic->topic_title()."</a>";
 		return $ret;

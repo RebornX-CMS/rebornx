@@ -51,7 +51,7 @@ class XoopsFormLabel extends XoopsFormElement {
 	 * @var	string	
 	 * @access	private
 	 */
-	var $_value;
+	public $_value;
 
 	/**
 	 * Constructor
@@ -59,7 +59,7 @@ class XoopsFormLabel extends XoopsFormElement {
 	 * @param	string	$caption	Caption
 	 * @param	string	$value		Text
 	 */
-	function __construct($caption="", $value=""){
+	public function __construct($caption="", $value=""){
 		$this->setCaption($caption);
 		$this->_value = $value;
 	}
@@ -69,7 +69,7 @@ class XoopsFormLabel extends XoopsFormElement {
 	 * 
 	 * @return	string
 	 */
-	function getValue(){
+	public function getValue(){
 		return $this->_value;
 	}
 
@@ -78,7 +78,7 @@ class XoopsFormLabel extends XoopsFormElement {
 	 * 
 	 * @return	string
 	 */
-	function render(){
+	public function render(){
 		return $this->getValue();
 	}
 }

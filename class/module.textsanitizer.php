@@ -51,7 +51,7 @@ class MyTextSanitizer
 	/**
 	 *
 	 */
-	var $censorConf;
+	public $censorConf;
 
 	/*
 	* Constructor of this class
@@ -64,7 +64,7 @@ class MyTextSanitizer
     *
     * @todo Sofar, this does nuttin' ;-)
 	*/
-	function __construct()
+	public function __construct()
 	{
 
 	}
@@ -77,7 +77,7 @@ class MyTextSanitizer
      * @static
      * @staticvar   object
 	 */
-	function getInstance()
+	public function getInstance()
 	{
 		static $instance;
 		if (!isset($instance)) {
@@ -91,7 +91,7 @@ class MyTextSanitizer
      *
      * @return	array
 	 */
-	function getSmileys()
+	public function getSmileys()
 	{
 		return $this->smileys;
 	}
@@ -103,7 +103,7 @@ class MyTextSanitizer
      *
      * @return	string
      */
-    function smiley($message)
+    public function smiley($message)
 	{
 		$db = Database::getInstance();
 		if (empty($this->smileys)) {
@@ -127,7 +127,7 @@ class MyTextSanitizer
 	 * @param   string  $text
 	 * @return  string
 	 **/
-	function makeClickable($text)
+	public function makeClickable($text)
 	{
 		$patterns = array("/(^|[^]_a-z0-9-=\"'\/])([a-z]+?):\/\/([^, \r\n\"\(\)'<>]+)/i", "/(^|[^]_a-z0-9-=\"'\/])www\.([a-z0-9\-]+)\.([^, \r\n\"\(\)'<>]+)/i", "/(^|[^]_a-z0-9-=\"'\/])ftp\.([a-z0-9\-]+)\.([^, \r\n\"\(\)'<>]+)/i", "/(^|[^]_a-z0-9-=\"'\/:\.])([a-z0-9\-_\.]+?)@([^, \r\n\"\(\)'<>\[\]]+)/i");
 		$replacements = array("\\1<a href=\"\\2://\\3\" target=\"_blank\">\\2://\\3</a>", "\\1<a href=\"http://www.\\2.\\3\" target=\"_blank\">www.\\2.\\3</a>", "\\1<a href=\"ftp://ftp.\\2.\\3\" target=\"_blank\">ftp.\\2.\\3</a>", "\\1<a href=\"mailto:\\2@\\3\">\\2@\\3</a>");
@@ -142,7 +142,7 @@ class MyTextSanitizer
      *                              On FALSE, uses links to images.
 	 * @return  string
 	 **/
-	function xoopsCodeDecode($text, $allowimage = 1)
+	public function xoopsCodeDecode($text, $allowimage = 1)
 	{
 		$patterns = array();
 		$replacements = array();
@@ -210,7 +210,7 @@ class MyTextSanitizer
      *
      * @return	string
 	 */
-	function nl2Br($text)
+	public function nl2Br($text)
 	{
 		return preg_replace("/(\015\012)|(\015)|(\012)/","<br />",$text);
 	}
@@ -221,7 +221,7 @@ class MyTextSanitizer
 	 * @param   string  $text
 	 * @return  string
 	 **/
-	function addSlashes($text)
+	public function addSlashes($text)
 	{
 		$text = addslashes($text);
 		return $text;
@@ -233,7 +233,7 @@ class MyTextSanitizer
     *
     * @return	string
 	*/
-	function stripSlashesGPC($text)
+	public function stripSlashesGPC($text)
 	{
 		$text = stripslashes($text);
 		return $text;
@@ -246,7 +246,7 @@ class MyTextSanitizer
     *
     * @return	string
 	*/
-	function htmlSpecialChars($text)
+	public function htmlSpecialChars($text)
 	{
 		//return preg_replace("/&amp;/i", '&', htmlspecialchars($text, ENT_QUOTES));
 		return preg_replace(array("/&amp;/i", "/&nbsp;/i"), array('&', '&amp;nbsp;'), htmlspecialchars($text, ENT_QUOTES));
@@ -258,7 +258,7 @@ class MyTextSanitizer
 	 * @param   string  $text
 	 * @return  string
 	 **/
-	function undoHtmlSpecialChars(&$text)
+	public function undoHtmlSpecialChars(&$text)
 	{
 		return preg_replace(array("/&gt;/i", "/&lt;/i", "/&quot;/i", "/&#039;/i"), array(">", "<", "\"", "'"), $text);
 	}
@@ -274,7 +274,7 @@ class MyTextSanitizer
 	 * @param   bool    $br     convert linebreaks?
 	 * @return  string
 	 **/
-	function displayTarea(&$text, $html = 0, $smiley = 1, $xcode = 1, $image = 1, $br = 1)
+	public function displayTarea(&$text, $html = 0, $smiley = 1, $xcode = 1, $image = 1, $br = 1)
 	{
 		if ($html != 1) {
 			// html not allowed
@@ -312,7 +312,7 @@ class MyTextSanitizer
 	 * @param   bool    $br     convert linebreaks?
 	 * @return  string
 	 **/
-	function previewTarea(&$text, $html = 0, $smiley = 1, $xcode = 1, $image = 1, $br = 1)
+	public function previewTarea(&$text, $html = 0, $smiley = 1, $xcode = 1, $image = 1, $br = 1)
 	{
 		$text = $this->stripSlashesGPC($text);
 		if ($html != 1) {
@@ -348,7 +348,7 @@ class MyTextSanitizer
      *
      * @deprecated
 	 **/
-	function censorString(&$text)
+	public function censorString(&$text)
 	{
 		if (!isset($this->censorConf)) {
 			$config_handler = xoops_gethandler('config');
@@ -378,7 +378,7 @@ class MyTextSanitizer
 	/**#@+
 	 * @deprecated
 	 */
-	function sanitizeForDisplay($text, $allowhtml = 0, $smiley = 1, $bbcode = 1)
+	public function sanitizeForDisplay($text, $allowhtml = 0, $smiley = 1, $bbcode = 1)
 	{
 		if ( $allowhtml == 0 ) {
 			$text = $this->htmlSpecialChars($text);
@@ -398,7 +398,7 @@ class MyTextSanitizer
 		return $text;
 	}
 
-	function sanitizeForPreview($text, $allowhtml = 0, $smiley = 1, $bbcode = 1)
+	public function sanitizeForPreview($text, $allowhtml = 0, $smiley = 1, $bbcode = 1)
 	{
 		$text = $this->oopsStripSlashesGPC($text);
 		if ( $allowhtml == 0 ) {
@@ -419,74 +419,74 @@ class MyTextSanitizer
 		return $text;
 	}
 
-	function makeTboxData4Save($text)
+	public function makeTboxData4Save($text)
 	{
 		//$text = $this->undoHtmlSpecialChars($text);
 		return $this->addSlashes($text);
 	}
 
-	function makeTboxData4Show($text, $smiley=0)
+	public function makeTboxData4Show($text, $smiley=0)
 	{
 		$text = $this->htmlSpecialChars($text);
 		return $text;
 	}
 
-	function makeTboxData4Edit($text)
+	public function makeTboxData4Edit($text)
 	{
 		return $this->htmlSpecialChars($text);
 	}
 
-	function makeTboxData4Preview($text, $smiley=0)
+	public function makeTboxData4Preview($text, $smiley=0)
 	{
 		$text = $this->stripSlashesGPC($text);
 		$text = $this->htmlSpecialChars($text);
 		return $text;
 	}
 
-	function makeTboxData4PreviewInForm($text)
+	public function makeTboxData4PreviewInForm($text)
 	{
 		$text = $this->stripSlashesGPC($text);
 		return $this->htmlSpecialChars($text);
 	}
 
-	function makeTareaData4Save($text)
+	public function makeTareaData4Save($text)
 	{
 		return $this->addSlashes($text);
 	}
 
-	function makeTareaData4Show(&$text, $html=1, $smiley=1, $xcode=1)
+	public function makeTareaData4Show(&$text, $html=1, $smiley=1, $xcode=1)
 	{
 		return $this->displayTarea($text, $html, $smiley, $xcode);
 	}
 
-	function makeTareaData4Edit($text)
+	public function makeTareaData4Edit($text)
 	{
 		return $this->htmlSpecialChars($text);
 	}
 
-	function makeTareaData4Preview(&$text, $html=1, $smiley=1, $xcode=1)
+	public function makeTareaData4Preview(&$text, $html=1, $smiley=1, $xcode=1)
 	{
 		return $this->previewTarea($text, $html, $smiley, $xcode);
 	}
 
-	function makeTareaData4PreviewInForm($text)
+	public function makeTareaData4PreviewInForm($text)
 	{
 		//if magic_quotes_gpc is on, do stipslashes
 		$text = $this->stripSlashesGPC($text);
 		return $this->htmlSpecialChars($text);
 	}
 
-	function makeTareaData4InsideQuotes($text)
+	public function makeTareaData4InsideQuotes($text)
 	{
 		return $this->htmlSpecialChars($text);
 	}
 
-	function oopsStripSlashesGPC($text)
+	public function oopsStripSlashesGPC($text)
 	{
 		return $this->stripSlashesGPC($text);
 	}
 
-	function oopsStripSlashesRT($text)
+	public function oopsStripSlashesRT($text)
 	{
 		if (get_magic_quotes_runtime()) {
 			$text = stripslashes($text);
@@ -494,17 +494,17 @@ class MyTextSanitizer
 		return $text;
 	}
 
-	function oopsAddSlashes($text)
+	public function oopsAddSlashes($text)
 	{
 		return $this->addSlashes($text);
 	}
 
-	function oopsHtmlSpecialChars($text)
+	public function oopsHtmlSpecialChars($text)
 	{
 		return $this->htmlSpecialChars($text);
 	}
 
-	function oopsNl2Br($text)
+	public function oopsNl2Br($text)
 	{
 		return $this->nl2br($text);
 	}

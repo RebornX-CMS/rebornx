@@ -53,7 +53,7 @@ class XoopsFormFile extends XoopsFormElement {
 	 * @var	int	
 	 * @access	private
 	 */
-	var $_maxFileSize;
+	public $_maxFileSize;
 
 	/**
 	 * Constructor
@@ -62,7 +62,7 @@ class XoopsFormFile extends XoopsFormElement {
 	 * @param	string	$name			"name" attribute
 	 * @param	int		$maxfilesize	Maximum size for an uploaded file
 	 */
-	function __construct($caption, $name, $maxfilesize){
+	public function __construct($caption, $name, $maxfilesize){
 		$this->setCaption($caption);
 		$this->setName($name);
 		$this->_maxFileSize = intval($maxfilesize);
@@ -73,7 +73,7 @@ class XoopsFormFile extends XoopsFormElement {
 	 * 
 	 * @return	int
 	 */
-	function getMaxFileSize(){
+	public function getMaxFileSize(){
 		return $this->_maxFileSize;
 	}
 
@@ -82,7 +82,7 @@ class XoopsFormFile extends XoopsFormElement {
 	 * 
 	 * @return	string	HTML
 	 */
-	function render(){
+	public function render(){
 		return "<input type='hidden' name='MAX_FILE_SIZE' value='".$this->getMaxFileSize()."' /><input type='file' name='".$this->getName()."' id='".$this->getName()."'".$this->getExtra()." /><input type='hidden' name='xoops_upload_file[]' id='xoops_upload_file[]' value='".$this->getName()."' />";
 	}
 }

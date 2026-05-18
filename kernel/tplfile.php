@@ -34,7 +34,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 class XoopsTplfile extends XoopsObject
 {
 
-	function __construct()
+	public function __construct()
 	{
 		$this->XoopsObject();
 		$this->initVar('tpl_id', XOBJ_DTYPE_INT, null, false);
@@ -49,12 +49,12 @@ class XoopsTplfile extends XoopsObject
 		$this->initVar('tpl_source', XOBJ_DTYPE_SOURCE, null, false);
 	}
 
-	function &getSource()
+	public function &getSource()
 	{
 		return $this->getVar('tpl_source');
 	}
 
-	function getLastModified()
+	public function getLastModified()
 	{
 		return $this->getVar('tpl_lastmodified');
 	}
@@ -72,7 +72,7 @@ class XoopsTplfile extends XoopsObject
 class XoopsTplfileHandler extends XoopsObjectHandler
 {
 
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $tplfile = new XoopsTplfile();
         if ($isNew) {
@@ -81,7 +81,7 @@ class XoopsTplfileHandler extends XoopsObjectHandler
         return $tplfile;
     }
 
-    function &get($id, $getsource = false)
+    public function &get($id, $getsource = false)
     {
         $id = intval($id);
         if ($id > 0) {
@@ -103,7 +103,7 @@ class XoopsTplfileHandler extends XoopsObjectHandler
         return false;
     }
 
-    function loadSource(&$tplfile)
+    public function loadSource(&$tplfile)
     {
         if (get_class($tplfile) != 'xoopstplfile') {
             return false;
@@ -119,7 +119,7 @@ class XoopsTplfileHandler extends XoopsObjectHandler
 		return true;
     }
 
-    function insert(&$tplfile)
+    public function insert(&$tplfile)
     {
         if (get_class($tplfile) != 'xoopstplfile') {
             return false;
@@ -165,7 +165,7 @@ class XoopsTplfileHandler extends XoopsObjectHandler
         return true;
     }
 
-    function forceUpdate(&$tplfile)
+    public function forceUpdate(&$tplfile)
     {
         if (get_class($tplfile) != 'xoopstplfile') {
             return false;
@@ -196,7 +196,7 @@ class XoopsTplfileHandler extends XoopsObjectHandler
 		}
     }
 
-    function delete(&$tplfile)
+    public function delete(&$tplfile)
     {
         if (get_class($tplfile) != 'xoopstplfile') {
             return false;
@@ -211,7 +211,7 @@ class XoopsTplfileHandler extends XoopsObjectHandler
         return true;
     }
 
-    function &getObjects($criteria = null, $getsource = false, $id_as_key = false)
+    public function &getObjects($criteria = null, $getsource = false, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;
@@ -242,7 +242,7 @@ class XoopsTplfileHandler extends XoopsObjectHandler
         return $ret;
     }
 
-    function getCount($criteria = null)
+    public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('tplfile');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -255,7 +255,7 @@ class XoopsTplfileHandler extends XoopsObjectHandler
         return $count;
     }
 
-    function getModuleTplCount($tplset)
+    public function getModuleTplCount($tplset)
     {
         $ret = array();
         $sql = "SELECT tpl_module, COUNT(tpl_id) AS count FROM ".$this->db->prefix('tplfile')." WHERE tpl_tplset='".$tplset."' GROUP BY tpl_module";
@@ -271,7 +271,7 @@ class XoopsTplfileHandler extends XoopsObjectHandler
         return $ret;
     }
 
-    function &find($tplset = null, $type = null, $refid = null, $module = null, $file = null, $getsource = false)
+    public function &find($tplset = null, $type = null, $refid = null, $module = null, $file = null, $getsource = false)
     {
         $criteria = new CriteriaCompo();
         if (isset($tplset)) {
@@ -300,7 +300,7 @@ class XoopsTplfileHandler extends XoopsObjectHandler
         return $this->getObjects($criteria, $getsource, false);
     }
 
-    function templateExists($tplname, $tplset_name)
+    public function templateExists($tplname, $tplset_name)
     {
         $criteria = new CriteriaCompo(new Criteria('tpl_file', trim($tplname)));
         $criteria->add(new Criteria('tpl_tplset', trim($tplset_name)));

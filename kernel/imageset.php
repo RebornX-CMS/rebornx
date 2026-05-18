@@ -36,7 +36,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 class XoopsImageset extends XoopsObject
 {
 
-	function __construct()
+	public function __construct()
 	{
 		$this->XoopsObject();
 		$this->initVar('imgset_id', XOBJ_DTYPE_INT, null, false);
@@ -57,7 +57,7 @@ class XoopsImageset extends XoopsObject
 class XoopsImagesetHandler extends XoopsObjectHandler
 {
 
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $imgset = new XoopsImageset();
         if ($isNew) {
@@ -66,7 +66,7 @@ class XoopsImagesetHandler extends XoopsObjectHandler
         return $imgset;
     }
 
-    function &get($id)
+    public function &get($id)
     {
         if (intval($id) > 0) {
             $sql = 'SELECT * FROM '.$this->db->prefix('imgset').' WHERE imgset_id='.$id;
@@ -83,7 +83,7 @@ class XoopsImagesetHandler extends XoopsObjectHandler
         return false;
     }
 
-    function insert(&$imgset)
+    public function insert(&$imgset)
     {
         if (get_class($imgset) != 'xoopsimageset') {
             return false;
@@ -113,7 +113,7 @@ class XoopsImagesetHandler extends XoopsObjectHandler
         return true;
     }
 
-    function delete(&$imgset)
+    public function delete(&$imgset)
     {
         if (get_class($imgset) != 'xoopsimageset') {
             return false;
@@ -127,7 +127,7 @@ class XoopsImagesetHandler extends XoopsObjectHandler
         return true;
     }
 
-    function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;
@@ -154,7 +154,7 @@ class XoopsImagesetHandler extends XoopsObjectHandler
         return $ret;
     }
 
-    function linkThemeset($imgset_id, $tplset_name)
+    public function linkThemeset($imgset_id, $tplset_name)
     {
         $imgset_id = intval($imgset_id);
         $tplset_name = trim($tplset_name);
@@ -172,7 +172,7 @@ class XoopsImagesetHandler extends XoopsObjectHandler
         return true;
     }
 
-    function unlinkThemeset($imgset_id, $tplset_name)
+    public function unlinkThemeset($imgset_id, $tplset_name)
     {
         $imgset_id = intval($imgset_id);
         $tplset_name = trim($tplset_name);
@@ -187,7 +187,7 @@ class XoopsImagesetHandler extends XoopsObjectHandler
         return true;
     }
 
-    function &getList($refid = null, $tplset = null)
+    public function &getList($refid = null, $tplset = null)
     {
         $criteria = new CriteriaCompo();
         if (isset($refid)) {

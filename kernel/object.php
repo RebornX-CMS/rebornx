@@ -60,6 +60,7 @@ define('XOBJ_DTYPE_LTIME', 11);
  * @copyright copyright &copy; 2000 XOOPS.org
  * @package kernel
  **/
+#[\AllowDynamicProperties]
 class XoopsObject
 {
 
@@ -69,7 +70,7 @@ class XoopsObject
      * @var array
      * @access protected
      **/
-    var $vars = array();
+    public $vars = array();
 
     /**
     * variables cleaned for store in DB
@@ -77,7 +78,7 @@ class XoopsObject
     * @var array
     * @access protected
     */
-    var $cleanVars = array();
+    public $cleanVars = array();
 
     /**
     * is it a newly created object?
@@ -85,7 +86,7 @@ class XoopsObject
     * @var bool
     * @access private
     */
-    var $_isNew = false;
+    public $_isNew = false;
 
     /**
     * has any of the values been modified?
@@ -93,7 +94,7 @@ class XoopsObject
     * @var bool
     * @access private
     */
-    var $_isDirty = false;
+    public $_isDirty = false;
 
     /**
     * errors
@@ -101,14 +102,14 @@ class XoopsObject
     * @var array
     * @access private
     */
-    var $_errors = array();
+    public $_errors = array();
 
     /**
     * additional filters registered dynamically by a child class object
     * 
     * @access private
     */
-    var $_filters = array();
+    public $_filters = array();
 
     /**
     * constructor
@@ -116,7 +117,7 @@ class XoopsObject
     * normally, this is called from child classes only
     * @access public
     */
-    function __construct()
+    public function __construct()
     {
     }
 
@@ -125,15 +126,15 @@ class XoopsObject
     * 
     * @access public
     */
-    function setNew()
+    public function setNew()
     {
         $this->_isNew = true;
     }
-    function unsetNew()
+    public function unsetNew()
     {
         $this->_isNew = false;
     }
-    function isNew()
+    public function isNew()
     {
         return $this->_isNew;
     }
@@ -145,15 +146,15 @@ class XoopsObject
     * used for modified objects only
     * @access public
     */
-    function setDirty()
+    public function setDirty()
     {
         $this->_isDirty = true;
     }
-    function unsetDirty()
+    public function unsetDirty()
     {
         $this->_isDirty = false;
     }
-    function isDirty()
+    public function isDirty()
     {
         return $this->_isDirty;
     }
@@ -170,7 +171,7 @@ class XoopsObject
     * @param int $maxlength  for XOBJ_DTYPE_TXTBOX type only
     * @param string $option  does this data have any select options?
     */
-    function initVar($key, $data_type, $value = null, $required = false, $maxlength = null, $options = '')
+    public function initVar($key, $data_type, $value = null, $required = false, $maxlength = null, $options = '')
     {
         $this->vars[$key] = array('value' => $value, 'required' => $required, 'data_type' => $data_type, 'maxlength' => $maxlength, 'changed' => false, 'options' => $options);
     }
@@ -182,7 +183,7 @@ class XoopsObject
     * @param string $key name of the variable to assign
     * @param mixed $value value to assign
     */
-    function assignVar($key, $value)
+    public function assignVar($key, $value)
     {
         if (isset($value) && isset($this->vars[$key])) {
             $this->vars[$key]['value'] = $value;
@@ -195,7 +196,7 @@ class XoopsObject
     * @access private
     * @param array $var_array associative array of values to assign
     */
-    function assignVars($var_arr)
+    public function assignVars($var_arr)
     {
         foreach ($var_arr as $key => $value) {
             $this->assignVar($key, $value);
@@ -210,7 +211,7 @@ class XoopsObject
     * @param mixed $value value to assign
     * @param bool $not_gpc
     */
-    function setVar($key, $value, $not_gpc = false)
+    public function setVar($key, $value, $not_gpc = false)
     {
         if (!empty($key) && isset($value) && isset($this->vars[$key])) {
             $this->vars[$key]['value'] = $value;
@@ -227,7 +228,7 @@ class XoopsObject
     * @param array $var_arr associative array of values to assign
     * @param bool $not_gpc
     */
-    function setVars($var_arr, $not_gpc = false)
+    public function setVars($var_arr, $not_gpc = false)
     {
         foreach ($var_arr as $key => $value) {
             $this->setVar($key, $value, $not_gpc);
@@ -245,7 +246,7 @@ class XoopsObject
 	* @param array $var_arr associative array of values to assign
 	* @param string $pref prefix (only keys starting with the prefix will be set)
 	*/
-	function setFormVars($var_arr=null, $pref='xo_', $not_gpc=false) {
+	public function setFormVars($var_arr=null, $pref='xo_', $not_gpc=false) {
 		$len = strlen($pref);
 		foreach ($var_arr as $key => $value) {
 			if ($pref == substr($key,0,$len)) {
@@ -261,7 +262,7 @@ class XoopsObject
     * @access public
     * @return array associative array of key->value pairs
     */
-    function &getVars()
+    public function &getVars()
     {
         return $this->vars;
     }
@@ -274,7 +275,7 @@ class XoopsObject
     * @param string $format format to use for the output
     * @return mixed formatted value of the variable
     */
-    function &getVar($key, $format = 's')
+    public function &getVar($key, $format = 's')
     {
         $ret = $this->vars[$key]['value'];
         switch ($this->vars[$key]['data_type']) {
@@ -403,7 +404,7 @@ class XoopsObject
      * @return bool true if successful
      * @access public
      */
-    function cleanVars()
+    public function cleanVars()
     {
         $ts = MyTextSanitizer::getInstance();
         foreach ($this->vars as $k => $v) {
@@ -501,7 +502,7 @@ class XoopsObject
      * @param string $filtername name of the filter
      * @access public
      */
-    function registerFilter($filtername)
+    public function registerFilter($filtername)
     {
         $this->_filters[] = $filtername;
     }
@@ -511,7 +512,7 @@ class XoopsObject
      * 
      * @access private
      */
-    function _loadFilters()
+    public function _loadFilters()
     {
         //include_once XOOPS_ROOT_PATH.'/class/filters/filter.php';
         //foreach ($this->_filters as $f) {
@@ -525,7 +526,7 @@ class XoopsObject
      * @access public
      * @return object clone
      */
-    function &dclone()
+    public function &dclone()
     {
         $class = get_class($this);
         $clone = new $class();
@@ -543,7 +544,7 @@ class XoopsObject
      * @param string $value error to add
      * @access public
      */
-    function setErrors($err_str)
+    public function setErrors($err_str)
     {
         $this->_errors[] = trim($err_str);
     }
@@ -554,7 +555,7 @@ class XoopsObject
      * @return array an array of errors
      * @access public
      */
-    function getErrors()
+    public function getErrors()
     {
         return $this->_errors;
     }
@@ -565,7 +566,7 @@ class XoopsObject
      * @return string html listing the errors
      * @access public
      */
-    function getHtmlErrors()
+    public function getHtmlErrors()
     {
         $ret = '<h4>Errors</h4>';
         if (!empty($this->_errors)) {
@@ -599,7 +600,7 @@ class XoopsObjectHandler
 	 * @see XoopsDatabase
      * @access protected
      */
-    var $db;
+    public $db;
 
     // 
     /**
@@ -608,7 +609,7 @@ class XoopsObjectHandler
 	 * @param object $db reference to the {@link XoopsDatabase} object
      * @access protected
      */
-    function __construct(&$db)
+    public function __construct(&$db)
     {
         $this->db = $db;
     }
@@ -618,7 +619,7 @@ class XoopsObjectHandler
      * 
      * @abstract
      */
-    function &create()
+    public function &create()
     {
     }
 
@@ -628,7 +629,7 @@ class XoopsObjectHandler
 	 * @param int $int_id
      * @abstract
      */
-    function &get($int_id)
+    public function &get($int_id)
     {
     }
 
@@ -638,7 +639,7 @@ class XoopsObjectHandler
 	 * @param object $object
      * @abstract
      */
-    function insert(&$object)
+    public function insert(&$object)
     {
     }
 
@@ -648,7 +649,7 @@ class XoopsObjectHandler
 	 * @param object $object
      * @abstract
      */
-    function delete(&$object)
+    public function delete(&$object)
     {
     }
 

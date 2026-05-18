@@ -66,12 +66,12 @@ class XoopsConfigItem extends XoopsObject
      * @var	array
      * @access	private
      */
-    var $_confOptions = array();
+    public $_confOptions = array();
 
     /**
      * Constructor
      */
-    function __construct()
+    public function __construct()
     {
         $this->initVar('conf_id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('conf_modid', XOBJ_DTYPE_INT, null, false);
@@ -90,7 +90,7 @@ class XoopsConfigItem extends XoopsObject
      * 
      * @return	string
      */
-    function &getConfValueForOutput()
+    public function &getConfValueForOutput()
     {
         switch ($this->getVar('conf_valuetype')) {
         case 'int':
@@ -116,7 +116,7 @@ class XoopsConfigItem extends XoopsObject
      * @param	mixed   &$value Value
      * @param	bool    $force_slash
      */
-    function setConfValueForInput(&$value, $force_slash = false)
+    public function setConfValueForInput(&$value, $force_slash = false)
     {
         switch($this->getVar('conf_valuetype')) {
         case 'array':
@@ -139,7 +139,7 @@ class XoopsConfigItem extends XoopsObject
      * 
      * @param	mixed   $option either a {@link XoopsConfigItemOption} object or an array of them
      */
-    function setConfOptions($option)
+    public function setConfOptions($option)
     {
         if (is_array($option)) {
             $count = count($option);
@@ -158,7 +158,7 @@ class XoopsConfigItem extends XoopsObject
      * 
      * @return	array   array of {@link XoopsConfigItemOption} 
      */
-    function &getConfOptions()
+    public function &getConfOptions()
     {
         return $this->_confOptions;
     }
@@ -184,7 +184,7 @@ class XoopsConfigItemHandler extends XoopsObjectHandler
      * @param	bool    $isNew  Flag the config as "new"?
      * @return	object  reference to the new config
      */
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $config = new XoopsConfigItem();
         if ($isNew) {
@@ -199,7 +199,7 @@ class XoopsConfigItemHandler extends XoopsObjectHandler
      * @param	int $id ID of the config
      * @return	object  reference to the config, FALSE on fail
      */
-    function &get($id)
+    public function &get($id)
     {
         $id = intval($id);
         if ($id > 0) {
@@ -224,7 +224,7 @@ class XoopsConfigItemHandler extends XoopsObjectHandler
      * @param	object  &$config    {@link XoopsConfigItem} object
      * @return  mixed   FALSE on fail.
      */
-    function insert(&$config)
+    public function insert(&$config)
     {
         if (get_class($config) != 'xoopsconfigitem') {
             return false;
@@ -260,7 +260,7 @@ class XoopsConfigItemHandler extends XoopsObjectHandler
      * @param	object  &$config    Config to delete
      * @return	bool    Successful?
      */
-    function delete(&$config)
+    public function delete(&$config)
     {
         if (get_class($config) != 'xoopsconfigitem') {
             return false;
@@ -279,7 +279,7 @@ class XoopsConfigItemHandler extends XoopsObjectHandler
      * @param	bool    $id_as_key  return the config's id as key?
      * @return	array   Array of {@link XoopsConfigItem} objects
      */
-    function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;
@@ -313,7 +313,7 @@ class XoopsConfigItemHandler extends XoopsObjectHandler
      * @param	object  $criteria   {@link CriteriaElement} 
      * @return	int     Count of configs matching $criteria
      */
-    function &getCount($criteria = null)
+    public function &getCount($criteria = null)
     {
         $ret = array();
         $limit = $start = 0;

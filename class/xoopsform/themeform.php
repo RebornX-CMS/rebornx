@@ -61,7 +61,7 @@ class XoopsThemeForm extends XoopsForm
      * @param	string  $extra  HTML to be displayed in the empty row.
 	 * @param	string	$class	CSS class name for <td> tag
 	 */
-	function insertBreak($extra = '', $class= '')
+	public function insertBreak($extra = '', $class= '')
 	{
     	$class = ($class != '') ? " class='$class'" : '';
      	if ($extra != '') {
@@ -78,7 +78,7 @@ class XoopsThemeForm extends XoopsForm
      * 
 	 * @return	string
 	 */
-	function render()
+	public function render()
 	{
 		$required = $this->getRequired();
 		$ret = "<form name='".$this->getName()."' id='".$this->getName()."' action='".$this->getAction()."' method='".$this->getMethod()."' onsubmit='return xoopsFormValidate_".$this->getName()."();'".$this->getExtra().">\n<table width='100%' class='outer' cellspacing='1'><tr><th colspan='2'>".$this->getTitle()."</th></tr>";
@@ -105,7 +105,7 @@ class XoopsThemeForm extends XoopsForm
 		$js = "
 		<script type='text/javascript'>
 		<!--
-		function xoopsFormValidate_".$this->getName()."(){";
+		public function xoopsFormValidate_".$this->getName()."(){";
 		$required = $this->getRequired();
 		$reqcount = count($required);
 		for ($i = 0; $i < $reqcount; $i++) {

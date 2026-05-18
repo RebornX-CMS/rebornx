@@ -63,7 +63,7 @@ class XoopsErrorHandler
 	 * registering an error handler, the setting or 'error_reporting' is
 	 * ignored and *everything* is trapped.
 	 */
-	function __construct()
+	public function __construct()
 	{
 		set_error_handler('XoopsErrorHandler_HandleError');
 		register_shutdown_function('XoopsErrorHandler_Shutdown'); 
@@ -74,7 +74,7 @@ class XoopsErrorHandler
 	 *
 	 * @access public
 	 */
-	function &getInstance()
+	public function &getInstance()
 	{
 		static $instance = null;
 		if (empty($instance)) {
@@ -90,7 +90,7 @@ class XoopsErrorHandler
 	 * @param boolean $showErrors True if debug mode is on
 	 * @return void 
 	 */
-	function activate($showErrors=false)
+	public function activate($showErrors=false)
 	{ 
 		$this->_showErrors = $showErrors;
 	} 
@@ -102,7 +102,7 @@ class XoopsErrorHandler
 	 * @access public 
 	 * @return void 
 	 */
-	function handleError($error)
+	public function handleError($error)
 	{
 		$this->_errors[] = $error;
 		if ($error['errno'] == E_USER_ERROR) {
@@ -130,7 +130,7 @@ class XoopsErrorHandler
 	 * @access public 
 	 * @return void 
 	 */
-	function renderErrors()
+	public function renderErrors()
 	{
 		$output = '';
 		if ($this->_isFatal) {
@@ -184,7 +184,7 @@ class XoopsErrorHandler
  * @param int $errLine Line number on which error occurred
  * @return void 
  */
-function XoopsErrorHandler_HandleError($errNo, $errStr, $errFile, $errLine)
+public function XoopsErrorHandler_HandleError($errNo, $errStr, $errFile, $errLine)
 { 
 	// NOTE: we only store relative pathnames
 	$new_error = array( 
@@ -203,7 +203,7 @@ function XoopsErrorHandler_HandleError($errNo, $errStr, $errFile, $errLine)
  * @access public 
  * @return void 
  */
-function XoopsErrorHandler_Shutdown()
+public function XoopsErrorHandler_Shutdown()
 {
 	$error_handler = XoopsErrorHandler::getInstance();
 	echo $error_handler->renderErrors();

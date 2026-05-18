@@ -35,7 +35,7 @@ class XoopsPollOption extends XoopsObject
 	public $db;
 
 	// constructor
-	function __construct($id=null)
+	public function __construct($id=null)
 	{
 		$this->db = Database::getInstance();
 		$this->initVar("option_id", XOBJ_DTYPE_INT, null, false);
@@ -53,7 +53,7 @@ class XoopsPollOption extends XoopsObject
 	}
 
 	// public
-	function store()
+	public function store()
 	{
 		if ( !$this->cleanVars() ) {
 			return false;
@@ -79,7 +79,7 @@ class XoopsPollOption extends XoopsObject
 	}
 
 	// private
-	function load($id)
+	public function load($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix("xoopspoll_option")." WHERE option_id=".$id."";
 		$myrow = $this->db->fetchArray($this->db->query($sql));
@@ -87,7 +87,7 @@ class XoopsPollOption extends XoopsObject
 	}
 
 	// public
-	function delete()
+	public function delete()
 	{
 		$sql = sprintf("DELETE FROM %s WHERE option_id = %u", $this->db->prefix("xoopspoll_option"), $this->getVar("option_id"));
         	if ( !$this->db->query($sql) ) {
@@ -97,7 +97,7 @@ class XoopsPollOption extends XoopsObject
 	}
 
 	// public
-	function updateCount()
+	public function updateCount()
 	{
 		$votes = XoopsPollLog::getTotalVotesByOptionId($this->getVar("option_id"));
 		$sql ="UPDATE ".$this->db->prefix("xoopspoll_option")." SET option_count=$votes WHERE option_id=".$this->getVar("option_id")."";
@@ -105,7 +105,7 @@ class XoopsPollOption extends XoopsObject
 	}
 
 	// public static
-	function &getAllByPollId($poll_id)
+	public function &getAllByPollId($poll_id)
 	{
 		$db = Database::getInstance();
 		$ret = array();
@@ -119,7 +119,7 @@ class XoopsPollOption extends XoopsObject
 	}
 
 	// public static
-	function deleteByPollId($poll_id)
+	public function deleteByPollId($poll_id)
 	{
 		$db = Database::getInstance();
 		$sql = sprintf("DELETE FROM %s WHERE poll_id = %u", $db->prefix("xoopspoll_option"), intval($poll_id));
@@ -130,7 +130,7 @@ class XoopsPollOption extends XoopsObject
 	}
 
 	// public static
-	function resetCountByPollId($poll_id)
+	public function resetCountByPollId($poll_id)
 	{
 		$db = Database::getInstance();
 		$sql = "UPDATE ".$db->prefix("xoopspoll_option")." SET option_count=0 WHERE poll_id=".intval($poll_id);

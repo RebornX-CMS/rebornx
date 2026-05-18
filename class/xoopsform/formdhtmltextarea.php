@@ -60,7 +60,7 @@ class XoopsFormDhtmlTextArea extends XoopsFormTextArea
 	 * @var	string
 	 * @access	private
 	 */
-	var $_hiddenText;
+	public $_hiddenText;
 
 	/**
 	 * Constructor
@@ -72,7 +72,7 @@ class XoopsFormDhtmlTextArea extends XoopsFormTextArea
      * @param	int     $cols       Number of columns
      * @param	string  $hiddentext Hidden Text
 	 */
-	function __construct($caption, $name, $value, $rows=5, $cols=50, $hiddentext="xoopsHiddenText")
+	public function __construct($caption, $name, $value, $rows=5, $cols=50, $hiddentext="xoopsHiddenText")
 	{
 		$this->XoopsFormTextArea($caption, $name, $value, $rows, $cols);
 		$this->_hiddenText = $hiddentext;
@@ -83,7 +83,7 @@ class XoopsFormDhtmlTextArea extends XoopsFormTextArea
 	 *
      * @return	string  HTML
 	 */
-	function render()
+	public function render()
 	{
 		$ret = "<a name='moresmiley'></a><img onmouseover='style.cursor=\"hand\"' src='".XOOPS_URL."/images/url.gif' alt='url' onclick='xoopsCodeUrl(\"".$this->getName()."\", \"".htmlspecialchars(_ENTERURL, ENT_QUOTES)."\", \"".htmlspecialchars(_ENTERWEBTITLE, ENT_QUOTES)."\");' />&nbsp;<img onmouseover='style.cursor=\"hand\"' src='".XOOPS_URL."/images/email.gif' alt='email' onclick='javascript:xoopsCodeEmail(\"".$this->getName()."\", \"".htmlspecialchars(_ENTEREMAIL, ENT_QUOTES)."\");' />&nbsp;<img onclick='javascript:xoopsCodeImg(\"".$this->getName()."\", \"".htmlspecialchars(_ENTERIMGURL, ENT_QUOTES)."\", \"".htmlspecialchars(_ENTERIMGPOS, ENT_QUOTES)."\", \"".htmlspecialchars(_IMGPOSRORL, ENT_QUOTES)."\", \"".htmlspecialchars(_ERRORIMGPOS, ENT_QUOTES)."\");' onmouseover='style.cursor=\"hand\"' src='".XOOPS_URL."/images/imgsrc.gif' alt='imgsrc' />&nbsp;<img onmouseover='style.cursor=\"hand\"' onclick='javascript:openWithSelfMain(\"".XOOPS_URL."/imagemanager.php?target=".$this->getName()."\",\"imgmanager\",400,430);' src='".XOOPS_URL."/images/image.gif' alt='image' />&nbsp;<img src='".XOOPS_URL."/images/code.gif' onmouseover='style.cursor=\"hand\"' alt='code' onclick='javascript:xoopsCodeCode(\"".$this->getName()."\", \"".htmlspecialchars(_ENTERCODE, ENT_QUOTES)."\");' />&nbsp;<img onclick='javascript:xoopsCodeQuote(\"".$this->getName()."\", \"".htmlspecialchars(_ENTERQUOTE, ENT_QUOTES)."\");' onmouseover='style.cursor=\"hand\"' src='".XOOPS_URL."/images/quote.gif' alt='quote' /><br />\n";
 
@@ -123,7 +123,7 @@ class XoopsFormDhtmlTextArea extends XoopsFormTextArea
      *
 	 * @return	string HTML
 	 */
-	function _renderSmileys()
+	public function _renderSmileys()
 	{
 		$myts = MyTextSanitizer::getInstance();
 		$smiles = $myts->getSmileys();

@@ -31,7 +31,7 @@
 class XoopsheadlineHeadline extends XoopsObject
 {
 
-	function __construct()
+	public function __construct()
 	{
 		$this->XoopsObject();
 		$this->initVar('headline_id', XOBJ_DTYPE_INT, null, false);
@@ -52,7 +52,7 @@ class XoopsheadlineHeadline extends XoopsObject
 		$this->initVar('headline_updated', XOBJ_DTYPE_INT, 0, false);
 	}
 
-	function cacheExpired()
+	public function cacheExpired()
 	{
 		if (time() - $this->getVar('headline_updated') > $this->getVar('headline_cachetime')) {
 			return true;
@@ -65,12 +65,12 @@ class xoopsheadlineHeadlineHandler
 {
 	public $db;
 
-	function __construct($db)
+	public function __construct($db)
 	{
 		$this->db = $db;
 	}
 
-	function getInstance($db)
+	public function getInstance($db)
 	{
 		static $instance;
 		if (!isset($instance)) {
@@ -79,12 +79,12 @@ class xoopsheadlineHeadlineHandler
 		return $instance;
 	}
 
-	function create()
+	public function create()
 	{
 		return new XoopsheadlineHeadline();
 	}
 
-	function get($id)
+	public function get($id)
 	{
 		$id = intval($id);
 		if ($id > 0) {
@@ -102,7 +102,7 @@ class xoopsheadlineHeadlineHandler
 		return false;
 	}
 
-	function insert(&$headline)
+	public function insert(&$headline)
 	{
 		if (get_class($headline) != 'xoopsheadlineheadline') {
 			return false;
@@ -129,7 +129,7 @@ class xoopsheadlineHeadlineHandler
 		return $headline_id;
 	}
 
-	function delete(&$headline)
+	public function delete(&$headline)
 	{
 		if (get_class($headline) != 'xoopsheadlineheadline') {
 			return false;
@@ -141,7 +141,7 @@ class xoopsheadlineHeadlineHandler
 		return true;
 	}
 
-	function &getObjects($criteria = null)
+	public function &getObjects($criteria = null)
 	{
 		$ret = array();
 		$limit = $start = 0;
@@ -165,7 +165,7 @@ class xoopsheadlineHeadlineHandler
 		return $ret;
 	}
 
-	function getCount($criteria = null)
+	public function getCount($criteria = null)
 	{
 		$sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('xoopsheadline');
 		if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {

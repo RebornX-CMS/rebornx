@@ -49,13 +49,13 @@ class XoopsHeadlineRenderer
 	public $_parser;
 
 
-	function __construct(&$headline)
+	public function __construct(&$headline)
 	{
 		$this->_hl = $headline;
 		$this->_tpl = new XoopsTpl();
 	}
 
-	function updateCache()
+	public function updateCache()
 	{
 		if (!$fp = fopen($this->_hl->getVar('headline_rssurl'), 'r')) {
 			$this->_setErrors('Could not open file: '.$this->_hl->getVar('headline_rssurl'));
@@ -72,7 +72,7 @@ class XoopsHeadlineRenderer
 		return $headline_handler->insert($this->_hl);
 	}
 
-	function renderFeed($force_update = false)
+	public function renderFeed($force_update = false)
 	{
 		if ($force_update || $this->_hl->cacheExpired()) {
 			if (!$this->updateCache()) {
@@ -109,7 +109,7 @@ class XoopsHeadlineRenderer
 		return true;
 	}
 
-	function renderBlock($force_update = false)
+	public function renderBlock($force_update = false)
 	{
 		if ($force_update || $this->_hl->cacheExpired()) {
 			if (!$this->updateCache()) {
@@ -143,7 +143,7 @@ class XoopsHeadlineRenderer
 
 
 	
-	function &_parse()
+	public function &_parse()
 	{
 		if (isset($this->_parser)) {
 			return true;
@@ -170,22 +170,22 @@ class XoopsHeadlineRenderer
 		return true;
 	}
 
-	function &getFeed()
+	public function &getFeed()
 	{
 		return $this->_feed;
 	}
 
-	function &getBlock()
+	public function &getBlock()
 	{
 		return $this->_block;
 	}
 
-	function _setErrors($err)
+	public function _setErrors($err)
 	{
 		$this->_errors[] = $err;
 	}
 
-	function &getErrors($ashtml = true)
+	public function &getErrors($ashtml = true)
 	{
 		if (!$ashtml) {
 			return $this->_errors;
@@ -204,14 +204,14 @@ class XoopsHeadlineRenderer
 	// overide this method in /language/your_language/headlinerenderer.php
 	// this method is called by the array_walk function
 	// return void
-	function convertFromUtf8(&$value, $key)
+	public function convertFromUtf8(&$value, $key)
 	{
 	}
 
 	// abstract
 	// overide this method in /language/your_language/headlinerenderer.php
 	// return string
-	function &convertToUtf8(&$xmlfile)
+	public function &convertToUtf8(&$xmlfile)
 	{
 		return $xmlfile;
 	}

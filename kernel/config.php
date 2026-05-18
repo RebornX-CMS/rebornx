@@ -65,7 +65,7 @@ class XoopsConfigHandler
      * @var     object
      * @access	private
      */
-    var $_cHandler;
+    public $_cHandler;
 
     /**
      * holds reference to config option handler(DAO) class
@@ -73,7 +73,7 @@ class XoopsConfigHandler
      * @var	    object
      * @access	private
      */
-    var $_oHandler;
+    public $_oHandler;
 
 	/**
 	 * holds an array of cached references to config value arrays,
@@ -82,14 +82,14 @@ class XoopsConfigHandler
 	 * @var     array
 	 * @access  private
 	 */
-	var $_cachedConfigs = array();
+	public $_cachedConfigs = array();
 
     /**
      * Constructor
      * 
      * @param	object  &$db    reference to database object
      */
-    function __construct(&$db)
+    public function __construct(&$db)
     {
         $this->_cHandler = new XoopsConfigItemHandler($db);
         $this->_oHandler = new XoopsConfigOptionHandler($db);
@@ -101,7 +101,7 @@ class XoopsConfigHandler
      * @see     XoopsConfigItem
      * @return	object  reference to the new {@link XoopsConfigItem}
      */
-    function &createConfig()
+    public function &createConfig()
     {
         return $this->_cHandler->create();
     }
@@ -113,7 +113,7 @@ class XoopsConfigHandler
      * @param	bool    $withoptions    load the config's options now?
      * @return	object  reference to the {@link XoopsConfig} 
      */
-    function &getConfig($id, $withoptions = false)
+    public function &getConfig($id, $withoptions = false)
     {
         $config = $this->_cHandler->get($id);
         if ($withoptions == true) {
@@ -127,7 +127,7 @@ class XoopsConfigHandler
      * 
      * @param	object  &$config    reference to the {@link XoopsConfigItem} 
      */
-    function insertConfig(&$config)
+    public function insertConfig(&$config)
     {
         if (!$this->_cHandler->insert($config)) {
             return false;
@@ -152,7 +152,7 @@ class XoopsConfigHandler
      * 
      * @param	object  &$config    reference to a {@link XoopsConfigItem} 
      */
-    function deleteConfig(&$config)
+    public function deleteConfig(&$config)
     {
         if (!$this->_cHandler->delete($config)) {
             return false;
@@ -183,7 +183,7 @@ class XoopsConfigHandler
      * 
      * @return	array   Array of {@link XoopsConfigItem} objects
      */
-    function &getConfigs($criteria = null, $id_as_key = false, $with_options = false)
+    public function &getConfigs($criteria = null, $id_as_key = false, $with_options = false)
     {
         return $this->_cHandler->getObjects($criteria, $id_as_key);
     }
@@ -193,7 +193,7 @@ class XoopsConfigHandler
      * 
      * @param	object  $criteria   {@link CriteriaElement} 
      */
-    function getConfigCount($criteria = null)
+    public function getConfigCount($criteria = null)
     {
         return $this->_cHandler->getCount($criteria);
     }
@@ -206,7 +206,7 @@ class XoopsConfigHandler
      * 
      * @return	array   array of {@link XoopsConfig}s 
      */
-    function &getConfigsByCat($category, $module = 0)
+    public function &getConfigsByCat($category, $module = 0)
     {
 		if (!empty($this->_cachedConfigs[$module][$category])) {
 			return $this->_cachedConfigs[$module][$category];
@@ -232,7 +232,7 @@ class XoopsConfigHandler
      * 
      * @return	object  {@link XoopsConfigOption} 
      */
-    function &createConfigOption(){
+    public function &createConfigOption(){
         return $this->_oHandler->create();
     }
 
@@ -243,7 +243,7 @@ class XoopsConfigHandler
      * 
      * @return	object  {@link XoopsConfigOption} 
      */
-    function &getConfigOption($id)
+    public function &getConfigOption($id)
     {
         return $this->_oHandler->get($id);
     }
@@ -256,7 +256,7 @@ class XoopsConfigHandler
      * 
      * @return	array   Array of {@link XoopsConfigOption}s
      */
-    function &getConfigOptions($criteria = null, $id_as_key = false)
+    public function &getConfigOptions($criteria = null, $id_as_key = false)
     {
         return $this->_oHandler->getObjects($criteria, $id_as_key);
     }
@@ -268,7 +268,7 @@ class XoopsConfigHandler
      * 
      * @return	int     Count of {@link XoopsConfigOption}s matching $criteria
      */
-    function getConfigOptionsCount($criteria = null)
+    public function getConfigOptionsCount($criteria = null)
     {
         return $this->_oHandler->getCount($criteria);
     }
@@ -281,7 +281,7 @@ class XoopsConfigHandler
      * 
      * @return	array   Associative array of name=>value pairs.
      */
-    function &getConfigList($conf_modid, $conf_catid = 0)
+    public function &getConfigList($conf_modid, $conf_catid = 0)
     {
 		if (!empty($this->_cachedConfigs[$conf_modid][$conf_catid])) {
 			return $this->_cachedConfigs[$conf_modid][$conf_catid];

@@ -656,13 +656,13 @@ function xoops_groupperm_deletebymoditem($module_id, $perm_name, $item_id = null
 
 function &xoops_utf8_encode(&$text)
 {
-	if (XOOPS_USE_MULTIBYTES == 1) {
-		if (function_exists('mb_convert_encoding')) {
-			return mb_convert_encoding($text, 'UTF-8', 'auto');
-		}
-		return $text;
+	if (function_exists('mb_convert_encoding')) {
+		return mb_convert_encoding($text, 'UTF-8', 'auto');
 	}
-	return utf8_encode($text);
+	if (function_exists('utf8_encode')) {
+		return utf8_encode($text);
+	}
+	return $text;
 }
 
 function &xoops_convert_encoding(&$text)

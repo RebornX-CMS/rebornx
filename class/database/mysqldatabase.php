@@ -66,7 +66,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
      * @param bool $selectdb select the database now?
      * @return bool successful?
 	 */
-	function connect($selectdb = true)
+	public function connect($selectdb = true)
 	{
 		$this->conn = @mysqli_connect(XOOPS_DB_HOST, XOOPS_DB_USER, XOOPS_DB_PASS);
 	
@@ -93,7 +93,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
      * @param string $sequence name of the sequence from which to get the next ID
      * @return int always 0, because mysql has support for autoincrement
 	 */
-	function genId($sequence)
+	public function genId($sequence)
 	{
 		return 0; // will use auto_increment
 	}
@@ -104,7 +104,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
      * @param resource $result
      * @return array
 	 */
-	function fetchRow($result)
+	public function fetchRow($result)
 	{
 		return @mysqli_fetch_row($result);
 	}
@@ -114,7 +114,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
 	 * 
      * @return array
 	 */
-	function fetchArray($result)
+	public function fetchArray($result)
 	{
 		return @mysqli_fetch_array($result, MYSQLI_ASSOC);
 	}
@@ -124,7 +124,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
 	 * 
      * @return int
 	 */
-	function getInsertId()
+	public function getInsertId()
 	{
 		return mysqli_insert_id($this->conn);
 	}
@@ -135,7 +135,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
      * @param resource query result
      * @return int
 	 */
-	function getRowsNum($result)
+	public function getRowsNum($result)
 	{
 		return @mysqli_num_rows($result);
 	}
@@ -145,7 +145,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
 	 *
      * @return int
 	 */
-	function getAffectedRows()
+	public function getAffectedRows()
 	{
 		return mysqli_affected_rows($this->conn);
 	}
@@ -154,7 +154,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
 	 * Close MySQL connection
 	 * 
 	 */
-	function close()
+	public function close()
 	{
 		mysqli_close($this->conn);
 	}
@@ -165,7 +165,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
      * @param resource query result
      * @return bool TRUE on success or FALSE on failure. 
 	 */
-	function freeRecordSet($result)
+	public function freeRecordSet($result)
 	{
 		return mysqli_free_result($result);
 	}
@@ -175,7 +175,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
 	 * 
      * @return bool Returns the error text from the last MySQL function, or '' (the empty string) if no error occurred. 
 	 */
-	function error()
+	public function error()
 	{
 		return @mysqli_error($this->conn);
 	}
@@ -185,7 +185,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
 	 * 
      * @return int Returns the error number from the last MySQL function, or 0 (zero) if no error occurred. 
 	 */
-	function errno()
+	public function errno()
 	{
 		return @mysqli_errno($this->conn);
 	}
@@ -196,7 +196,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
      * @param string $str unescaped string text
      * @return string escaped string text with single quotes around
      */
-    function quoteString($str)
+    public function quoteString($str)
     {
          $str = "'".str_replace('\\"', '"', addslashes($str))."'";
          return $str;
@@ -211,7 +211,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
      * @return resource query result or FALSE if successful
      * or TRUE if successful and no result
      */
-    function &queryF($sql, $limit=0, $start=0)
+    public function &queryF($sql, $limit=0, $start=0)
 	{
 		if ( !empty($limit) ) {
 			if (empty($start)) {
@@ -241,7 +241,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
      * 
      * @abstract
 	 */
-	function &query($sql, $limit=0, $start=0)
+	public function &query($sql, $limit=0, $start=0)
 	{
 
     }
@@ -253,7 +253,7 @@ class XoopsMySQLDatabase extends XoopsDatabase
      * 
      * @return bool FALSE if failed reading SQL file or TRUE if the file has been read and queries executed
 	 */
-	function queryFromFile($file){
+	public function queryFromFile($file){
         if (false !== ($fp = fopen($file, 'r'))) {
 			include_once XOOPS_ROOT_PATH.'/class/database/sqlutility.php';
             $sql_queries = trim(fread($fp, filesize($file)));
@@ -294,7 +294,7 @@ class XoopsMySQLDatabaseSafe extends XoopsMySQLDatabase
      * @return resource query result or FALSE if successful
      * or TRUE if successful and no result
      */
-	function &query($sql, $limit=0, $start=0)
+	public function &query($sql, $limit=0, $start=0)
 	{
 		return $this->queryF($sql, $limit, $start);
 	}
@@ -326,7 +326,7 @@ class XoopsMySQLDatabaseProxy extends XoopsMySQLDatabase
      * @param int $start offset of first record to return
      * @return resource query result or FALSE if unsuccessful
      */
-	function &query($sql, $limit=0, $start=0)
+	public function &query($sql, $limit=0, $start=0)
 	{
 		if (strtolower(substr($sql, 0, 6)) == 'select') {
 		//if (preg_match("/^SELECT.*/i", $sql)) {

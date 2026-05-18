@@ -16,14 +16,14 @@ class XmlTagHandler
     /****************************************************************************
 
     ****************************************************************************/
-    function __construct()
+    public function __construct()
     {
     }
 
     /****************************************************************************
 
     ****************************************************************************/
-    function getName()
+    public function getName()
     {
         return '';
     }
@@ -31,7 +31,7 @@ class XmlTagHandler
     /****************************************************************************
 
     ****************************************************************************/
-    function handleBeginElement(&$parser, &$attributes)
+    public function handleBeginElement(&$parser, &$attributes)
     {
 
     }
@@ -39,7 +39,7 @@ class XmlTagHandler
     /****************************************************************************
 
     ****************************************************************************/
-    function handleEndElement(&$parser)
+    public function handleEndElement(&$parser)
     {
 
     }
@@ -47,7 +47,7 @@ class XmlTagHandler
     /****************************************************************************
 
     ****************************************************************************/
-    function handleCharacterData(&$parser,  &$data)
+    public function handleCharacterData(&$parser,  &$data)
     {
 
     }

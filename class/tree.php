@@ -43,11 +43,11 @@ class XoopsObjectTree {
 	/**#@+
 	 * @access	private
 	 */
-	var $_parentId;
-	var $_myId;
-	var $_rootId = null;
-	var $_tree = array();
-	var $_objects;
+	public $_parentId;
+	public $_myId;
+	public $_rootId = null;
+	public $_tree = array();
+	public $_objects;
     /**#@-*/
 
 	/**
@@ -58,7 +58,7 @@ class XoopsObjectTree {
 	 * @param   string     $parentId   field name of parent object ID
 	 * @param   string     $rootId     field name of root object ID
 	 **/
-	function __construct(&$objectArr, $myId, $parentId, $rootId = null)
+	public function __construct(&$objectArr, $myId, $parentId, $rootId = null)
 	{
 		$this->_objects = $objectArr;
 		$this->_myId = $myId;
@@ -74,7 +74,7 @@ class XoopsObjectTree {
 	 * 
 	 * @access	private
 	 **/
-	function _initialize()
+	public function _initialize()
 	{
 		foreach (array_keys($this->_objects) as $i) {
             $key1 = $this->_objects[$i]->getVar($this->_myId);
@@ -93,7 +93,7 @@ class XoopsObjectTree {
 	 * 
 	 * @return  array   Associative array comprising the tree 
 	 **/
-	function &getTree()
+	public function &getTree()
 	{
 		return $this->_tree;
 	}
@@ -104,7 +104,7 @@ class XoopsObjectTree {
 	 * @param   string  $key    ID of the object to retrieve
      * @return  object  Object within the tree
 	 **/
-	function &getByKey($key)
+	public function &getByKey($key)
 	{
 		return $this->_tree[$key]['obj'];
 	}
@@ -115,7 +115,7 @@ class XoopsObjectTree {
 	 * @param   string  $key    ID of the parent object
 	 * @return  array   Array of children of the parent
 	 **/
-	function &getFirstChild($key)
+	public function &getFirstChild($key)
 	{
 		$ret = array();
 		if (isset($this->_tree[$key]['child'])) {
@@ -133,7 +133,7 @@ class XoopsObjectTree {
 	 * @param   array   $ret    (Empty when called from client) Array of children from previous recursions.
 	 * @return  array   Array of child nodes.
 	 **/
-	function &getAllChild($key, $ret = array())
+	public function &getAllChild($key, $ret = array())
 	{
 		if (isset($this->_tree[$key]['child'])) {
 			foreach ($this->_tree[$key]['child'] as $childkey) {
@@ -156,7 +156,7 @@ class XoopsObjectTree {
 	 * @param   int $uplevel (empty when called from outside) level of recursion
 	 * @return  array   Array of parent nodes. 
 	 **/
-	function &getAllParent($key, $ret = array(), $uplevel = 1)
+	public function &getAllParent($key, $ret = array(), $uplevel = 1)
 	{
 		if (isset($this->_tree[$key]['parent']) && isset($this->_tree[$this->_tree[$key]['parent']]['obj'])) {
 			$ret[$uplevel] = $this->_tree[$this->_tree[$key]['parent']]['obj'];
@@ -182,7 +182,7 @@ class XoopsObjectTree {
      * 
      * @access	private 
 	 **/
-	function _makeSelBoxOptions($fieldName, $selected, $key, &$ret, $prefix_orig, $prefix_curr = '')
+	public function _makeSelBoxOptions($fieldName, $selected, $key, &$ret, $prefix_orig, $prefix_curr = '')
 	{
         if ($key > 0) {
             $value = $this->_tree[$key]['obj']->getVar($this->_myId);
@@ -212,7 +212,7 @@ class XoopsObjectTree {
 	 * @param   integer $key             ID of the object to display as the root of select options
 	 * @return  string  HTML select box
 	 **/
-	function &makeSelBox($name, $fieldName, $prefix='-', $selected='', $addEmptyOption = false, $key=0)
+	public function &makeSelBox($name, $fieldName, $prefix='-', $selected='', $addEmptyOption = false, $key=0)
     {
         $ret = '<select name='.$name.'>';
         if (false != $addEmptyOption) {

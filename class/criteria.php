@@ -90,7 +90,7 @@ class CriteriaElement
     /**
      * Constructor
      **/
-    function __construct()
+    public function __construct()
     {
 
     }
@@ -98,7 +98,7 @@ class CriteriaElement
     /**
      * Render the criteria element
      */
-    function render()
+    public function render()
     {
 
     }
@@ -109,7 +109,7 @@ class CriteriaElement
     /** 
      * @param	string  $sort
      */
-    function setSort($sort)
+    public function setSort($sort)
     {
         $this->sort = $sort;
     }
@@ -117,7 +117,7 @@ class CriteriaElement
     /**
      * @return	string
      */
-    function getSort()
+    public function getSort()
     {
         return $this->sort;
     }
@@ -125,7 +125,7 @@ class CriteriaElement
     /**
      * @param	string  $order
      */
-    function setOrder($order)
+    public function setOrder($order)
     {
         if ('DESC' == strtoupper($order)) {
             $this->order = 'DESC';
@@ -135,7 +135,7 @@ class CriteriaElement
     /**
      * @return	string
      */
-    function getOrder()
+    public function getOrder()
     {
         return $this->order;
     }
@@ -143,7 +143,7 @@ class CriteriaElement
     /**
      * @param	int $limit
      */
-    function setLimit($limit=0)
+    public function setLimit($limit=0)
     {
         $this->limit = intval($limit);
     }
@@ -151,7 +151,7 @@ class CriteriaElement
     /**
      * @return	int
      */
-    function getLimit()
+    public function getLimit()
     {
         return $this->limit;
     }
@@ -159,7 +159,7 @@ class CriteriaElement
     /**
      * @param	int $start
      */
-    function setStart($start=0)
+    public function setStart($start=0)
     {
         $this->start = intval($start);
     }
@@ -167,7 +167,7 @@ class CriteriaElement
     /**
      * @return	int
      */
-    function getStart()
+    public function getStart()
     {
         return $this->start;
     }
@@ -175,14 +175,14 @@ class CriteriaElement
     /**
      * @param	string  $group
      */
-    function setGroupby($group){
+    public function setGroupby($group){
         $this->groupby = $group;
     }
 
     /**
      * @return	string
      */
-    function getGroupby(){
+    public function getGroupby(){
         return ' GROUP BY '.$this->groupby;
     }
     /**#@-*/
@@ -218,7 +218,7 @@ class CriteriaCompo extends CriteriaElement
      * @param   object  $ele
      * @param   string  $condition
      **/
-    function __construct($ele=null, $condition='AND')
+    public function __construct($ele=null, $condition='AND')
     {
         if (isset($ele) && is_object($ele)) {
             $this->add($ele, $condition);
@@ -233,7 +233,7 @@ class CriteriaCompo extends CriteriaElement
      * 
      * @return  object  reference to this collection
      **/
-    function &add(&$criteriaElement, $condition='AND')
+    public function &add(&$criteriaElement, $condition='AND')
     {
         $this->criteriaElements[] = $criteriaElement;
         $this->conditions[] = $condition;
@@ -245,7 +245,7 @@ class CriteriaCompo extends CriteriaElement
      * 
      * @return	string
      */
-    function render()
+    public function render()
     {
         $ret = '';
         $count = count($this->criteriaElements);
@@ -264,7 +264,7 @@ class CriteriaCompo extends CriteriaElement
      * 
      * @return	string
      */
-    function renderWhere()
+    public function renderWhere()
     {
         $ret = $this->render();
         $ret = ($ret != '') ? 'WHERE ' . $ret : $ret;
@@ -277,7 +277,7 @@ class CriteriaCompo extends CriteriaElement
      * @return string
      * @author Nathan Dial ndial@trillion21.com
      */
-    function renderLdap(){
+    public function renderLdap(){
         $retval = '';
         $count = count($this->criteriaElements);
         if ($count > 0) {
@@ -313,9 +313,9 @@ class Criteria extends CriteriaElement
     /**
      * @var	string
      */
-    var $column;
-    var $operator;
-    var $value;
+    public $column;
+    public $operator;
+    public $value;
 
     /**
      * Constructor
@@ -324,7 +324,7 @@ class Criteria extends CriteriaElement
      * @param   string  $value
      * @param   string  $operator
      **/
-    function __construct($column, $value='', $operator='=')
+    public function __construct($column, $value='', $operator='=')
     {
         $this->column = $column;
         $this->value = $value;
@@ -336,7 +336,7 @@ class Criteria extends CriteriaElement
      * 
      * @return  string
      **/
-    function render()
+    public function render()
     {
         $clause = $this->column.' '.$this->operator;
         if (isset($this->value)) {
@@ -356,7 +356,7 @@ class Criteria extends CriteriaElement
      * @return string
      * @author Nathan Dial ndial@trillion21.com
      */
-    function renderLdap(){
+    public function renderLdap(){
         $clause = "(" . $this->column . $this->operator . $this->value . ")";
         return $clause;
     }
@@ -366,7 +366,7 @@ class Criteria extends CriteriaElement
      * 
      * @return	string
      */
-    function renderWhere()
+    public function renderWhere()
     {
         return 'WHERE '.$this->render();
     }

@@ -52,21 +52,21 @@ class XoopsFormTextArea extends XoopsFormElement {
 	 * @var	int 
 	 * @access  private
 	 */
-	var $_cols;
+	public $_cols;
 
 	/**
 	 * number of rows
      * @var	int 
 	 * @access  private
 	 */
-	var $_rows;
+	public $_rows;
 
 	/**
      * initial content
 	 * @var	string  
 	 * @access  private
 	 */
-	var $_value;
+	public $_value;
 
 	/**
 	 * Constuctor
@@ -77,7 +77,7 @@ class XoopsFormTextArea extends XoopsFormElement {
      * @param	int     $rows       number of rows
      * @param	int     $cols       number of columns   
 	 */
-	function __construct($caption, $name, $value="", $rows=5, $cols=50){
+	public function __construct($caption, $name, $value="", $rows=5, $cols=50){
 		$this->setCaption($caption);
 		$this->setName($name);
 		$this->_rows = intval($rows);
@@ -90,7 +90,7 @@ class XoopsFormTextArea extends XoopsFormElement {
 	 * 
      * @return	int
 	 */
-	function getRows(){
+	public function getRows(){
 		return $this->_rows;
 	}
 
@@ -99,7 +99,7 @@ class XoopsFormTextArea extends XoopsFormElement {
 	 * 
      * @return	int
 	 */
-	function getCols(){
+	public function getCols(){
 		return $this->_cols;
 	}
 
@@ -108,7 +108,7 @@ class XoopsFormTextArea extends XoopsFormElement {
 	 * 
      * @return	string
 	 */
-	function getValue(){
+	public function getValue(){
 		return $this->_value;
 	}
 
@@ -117,7 +117,7 @@ class XoopsFormTextArea extends XoopsFormElement {
 	 * 
      * @param	$value	string
 	 */
-	function setValue($value){
+	public function setValue($value){
 		$this->_value = $value;
 	}
 
@@ -126,7 +126,7 @@ class XoopsFormTextArea extends XoopsFormElement {
 	 * 
      * @return	sting HTML
 	 */
-	function render(){
+	public function render(){
 		return "<textarea name='".$this->getName()."' id='".$this->getName()."' rows='".$this->getRows()."' cols='".$this->getCols()."'".$this->getExtra().">".$this->getValue()."</textarea>";
 	}
 }

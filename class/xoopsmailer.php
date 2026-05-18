@@ -65,63 +65,63 @@ class XoopsMailer
 	 * @access	private
 	 * @since	21.02.2003 14:14:13
 	 */
-	var $multimailer;
+	public $multimailer;
 
 	// sender email address
 	// private
-	var $fromEmail;
+	public $fromEmail;
 
 	// sender name
 	// private
-	var $fromName;
+	public $fromName;
 
 	// RMV-NOTIFY
 	// sender UID
 	// private
-	var $fromUser;
+	public $fromUser;
 
 	// array of user class objects
 	// private
-	var $toUsers;
+	public $toUsers;
 
 	// array of email addresses
 	// private
-	var $toEmails;
+	public $toEmails;
 
 	// custom headers
 	// private
-	var $addHeaders;
+	public $addHeaders;
 
 	// subjet of mail
 	// private
-	var $subject;
+	public $subject;
 
 	// body of mail
 	// private
-	var $body;
+	public $body;
 
 	// error messages
 	// private
-	var $errors;
+	public $errors;
 
 	// messages upon success
 	// private
-	var $success;
+	public $success;
 
 	// private
-	var $isMail;
+	public $isMail;
 
 	// private
-	var $isPM;
+	public $isPM;
 
 	// private
-	var $assignedTags;
+	public $assignedTags;
 
 	// private
-	var $template;
+	public $template;
 
 	// private
-	var $templatedir;
+	public $templatedir;
 
 	// protected
     public $charSet = 'iso-8859-1';
@@ -130,15 +130,15 @@ class XoopsMailer
     public $encoding = '8bit';
 
     // priority
-    var $priority;
+    public $priority;
 
     // headers
-    var $headers;
+    public $headers;
 
     // line ending
-    var $LE;
+    public $LE;
 
-	function __construct()
+	public function __construct()
 	{
 
 		$this->multimailer = new XoopsMultiMailer();
@@ -147,7 +147,7 @@ class XoopsMailer
 
 	// public
 	// reset all properties to default
-	function reset()
+	public function reset()
 	{
 		$this->fromEmail = "";
 		$this->fromName = "";
@@ -170,7 +170,7 @@ class XoopsMailer
 	}
 
 	// public
-	function setTemplateDir($value)
+	public function setTemplateDir($value)
 	{
 		if ( substr($value, -1, 1) != "/" ) {
 			$value .= "/";
@@ -179,26 +179,26 @@ class XoopsMailer
 	}
 
 	// public
-	function setTemplate($value)
+	public function setTemplate($value)
 	{
 		$this->template = $value;
 	}
 
 	// pupblic
-	function setFromEmail($value)
+	public function setFromEmail($value)
 	{
 		$this->fromEmail = trim($value);
 	}
 
 	// public
-	function setFromName($value)
+	public function setFromName($value)
 	{
 		$this->fromName = trim($value);
 	}
 
 	// RMV-NOTIFY
 	// public
-	function setFromUser(&$user)
+	public function setFromUser(&$user)
 	{
         if ( get_class($user) == "XoopsUser" || $user instanceof XoopsUser ) {
 			$this->fromUser = $user;
@@ -206,38 +206,38 @@ class XoopsMailer
 	}
 
 	// public
-	function setPriority($value)
+	public function setPriority($value)
 	{
 		$this->priority = trim($value);
 	}
 
 
 	// public
-	function setSubject($value)
+	public function setSubject($value)
 	{
 		$this->subject = trim($value);
 	}
 
 	// public
-	function setBody($value)
+	public function setBody($value)
 	{
 		$this->body = trim($value);
 	}
 
 	// public
-	function useMail()
+	public function useMail()
 	{
 		$this->isMail = true;
 	}
 
 	// public
-	function usePM()
+	public function usePM()
 	{
 		$this->isPM = true;
 	}
 
 	// public
-	function send($debug = false)
+	public function send($debug = false)
 	{
 		global $xoopsConfig;
 		if ( $this->body == "" && $this->template == "" ) {
@@ -363,7 +363,7 @@ class XoopsMailer
 	}
 
 	// private
-	function sendPM($uid, $subject, $body)
+	public function sendPM($uid, $subject, $body)
 	{
 		global $xoopsUser;
 		$pm_handler = xoops_gethandler('privmessage');
@@ -390,7 +390,7 @@ class XoopsMailer
 	 * @return	boolean	FALSE on error.
 	 */
 
-	function sendMail($email, $subject, $body, $headers)
+	public function sendMail($email, $subject, $body, $headers)
 	{
 		$subject = $this->encodeSubject($subject);
 		$this->encodeBody($body);
@@ -409,7 +409,7 @@ class XoopsMailer
 	}
 
 	// public
-	function getErrors($ashtml = true)
+	public function getErrors($ashtml = true)
 	{
 		if ( !$ashtml ) {
 			return $this->errors;
@@ -427,7 +427,7 @@ class XoopsMailer
 	}
 
 	// public
-	function getSuccess($ashtml = true)
+	public function getSuccess($ashtml = true)
 	{
 		if ( !$ashtml ) {
 			return $this->success;
@@ -443,7 +443,7 @@ class XoopsMailer
 	}
 
 	// public
-	function assign($tag, $value=null)
+	public function assign($tag, $value=null)
 	{
 		if ( is_array($tag) ) {
 			foreach ( $tag as $k => $v ) {
@@ -462,13 +462,13 @@ class XoopsMailer
 	}
 
 	// public
-	function addHeaders($value)
+	public function addHeaders($value)
 	{
 		$this->headers[] = trim($value).$this->LE;
 	}
 
 	// public
-	function setToEmails($email)
+	public function setToEmails($email)
 	{
 		if ( !is_array($email) ) {
 			if (preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i",$email) ) {
@@ -482,7 +482,7 @@ class XoopsMailer
 	}
 
 	// public
-	function setToUsers(&$user)
+	public function setToUsers(&$user)
 	{
 		if ( !is_array($user) ) {
 			if ( $user instanceof XoopsUser ) {
@@ -496,7 +496,7 @@ class XoopsMailer
 	}
 
 	// public
-	function setToGroups($group)
+	public function setToGroups($group)
 	{
 		if ( !is_array($group) ) {
 			if ( get_class($group) == "XoopsGroup" || $group instanceof XoopsGroup ) {
@@ -512,21 +512,21 @@ class XoopsMailer
 
 	// abstract
 	// to be overidden by lang specific mail class, if needed
-	function encodeFromName($text)
+	public function encodeFromName($text)
 	{
 		return $text;
 	}
 
 	// abstract
 	// to be overidden by lang specific mail class, if needed
-	function encodeSubject($text)
+	public function encodeSubject($text)
 	{
 		return $text;
 	}
 
 	// abstract
 	// to be overidden by lang specific mail class, if needed
-	function encodeBody(&$text)
+	public function encodeBody(&$text)
 	{
 
 	}

@@ -52,7 +52,7 @@ class ForumPosts
 	public $istopic = false;
 	public $islocked = false;
 
-	function __construct($id=null)
+	public function __construct($id=null)
 	{
 		$this->db =& Database::getInstance();
 		if ( is_array($id) ) {
@@ -62,20 +62,20 @@ class ForumPosts
 		}
 	}
 
-	function setTopicId($value){
+	public function setTopicId($value){
 		$this->topic_id = $value;
 	}
 
-	function getTopicId() {
+	public function getTopicId() {
 		return isset($this->topic_id) ? $this->topic_id : 0;
 	}
 
-	function setOrder($value){
+	public function setOrder($value){
 		$this->order = $value;
 	}
 
 
-	function getAllPosts($topic_id, $order="ASC", $perpage=0, $start=0){
+	public function getAllPosts($topic_id, $order="ASC", $perpage=0, $start=0){
 		$db = Database::getInstance();
 		$sql = 'SELECT p.*, t.post_text FROM '.$db->prefix('bb_posts').' p, '.$db->prefix('bb_posts_text').' t WHERE p.topic_id='.$topic_id.' AND p.post_id = t.post_id ORDER BY p.post_id ';
 		$sql .= ($order != "DESC") ? "ASC" : "DESC";
@@ -87,47 +87,47 @@ class ForumPosts
 		return $ret;
 	}
 
-	function setParent($value){
+	public function setParent($value){
 		$this->pid=$value;
 	}
 
-	function setSubject($value){
+	public function setSubject($value){
 		$this->subject=$value;
 	}
 
-	function setText($value){
+	public function setText($value){
 		$this->post_text=$value;
 	}
 
-	function setUid($value){
+	public function setUid($value){
 		$this->uid=$value;
 	}
 
-	function setForum($value){
+	public function setForum($value){
 		$this->forum_id=$value;
 	}
 
-	function setIp($value){
+	public function setIp($value){
 		$this->poster_ip=$value;
 	}
 
-	function setNohtml($value=0){
+	public function setNohtml($value=0){
 		$this->nohtml=$value;
 	}
 
-	function setNosmiley($value=0){
+	public function setNosmiley($value=0){
 		$this->nosmiley=$value;
 	}
 
-	function setIcon($value){
+	public function setIcon($value){
 		$this->icon=$value;
 	}
 
-	function setAttachsig($value){
+	public function setAttachsig($value){
 		$this->attachsig=$value;
 	}
 
-	function store() {
+	public function store() {
 		$myts = MyTextSanitizer::getInstance();
 		$subject =$myts->censorString($this->subject);
 		$post_text =$myts->censorString($this->post_text);
@@ -218,7 +218,7 @@ class ForumPosts
 		return $this->post_id;
 	}
 
-	function getPost($id) {
+	public function getPost($id) {
 		$sql = 'SELECT p.*, t.post_text, tp.topic_status FROM '.$this->db->prefix('bb_posts').' p LEFT JOIN '.$this->db->prefix('bb_posts_text').' t ON p.post_id=t.post_id LEFT JOIN '.$this->db->prefix('bb_topics').' tp ON tp.topic_id=p.topic_id WHERE p.post_id='.$id;
 		$array = $this->db->fetchArray($this->db->query($sql));
 		$this->post_id = $array['post_id'];
@@ -242,13 +242,13 @@ class ForumPosts
 		}
 	}
 
-	function makePost($array){
+	public function makePost($array){
 		foreach($array as $key=>$value){
 			$this->$key = $value;
 		}
 	}
 
-	function delete() {
+	public function delete() {
 		$sql = sprintf("DELETE FROM %s WHERE post_id = %u", $this->db->prefix("bb_posts"), $this->post_id);
 		if ( !$result = $this->db->query($sql) ) {
 			return false;
@@ -292,7 +292,7 @@ class ForumPosts
 		}
 	}
 
-	function subject($format="Show") {
+	public function subject($format="Show") {
 		$myts = MyTextSanitizer::getInstance();
 		$smiley = 1;
 		if ( $this->nosmiley() ) {
@@ -315,7 +315,7 @@ class ForumPosts
 		return $subject;
 	}
 
-	function text($format="Show"){
+	public function text($format="Show"){
 		$myts = MyTextSanitizer::getInstance();
 		$smiley = 1;
 		$html = 1;
@@ -346,66 +346,66 @@ class ForumPosts
 		return $text;
 	}
 
-	function postid() {
+	public function postid() {
 		return $this->post_id;
 	}
 
-	function posttime(){
+	public function posttime(){
 		return $this->post_time;
 	}
 
-	function uid(){
+	public function uid(){
 		return $this->uid;
 	}
 
-	function uname(){
+	public function uname(){
 		return XoopsUser::getUnameFromId($this->uid);
 	}
 
-	function posterip(){
+	public function posterip(){
 		return $this->poster_ip;
 	}
 
-	function parent(){
+	public function parent(){
 		return $this->pid;
 	}
 
-	function topic(){
+	public function topic(){
 		return $this->topic_id;
 	}
 
-	function nohtml(){
+	public function nohtml(){
 		return $this->nohtml;
 	}
 
-	function nosmiley(){
+	public function nosmiley(){
 		return $this->nosmiley;
 	}
 
-	function icon(){
+	public function icon(){
 		return $this->icon;
 	}
 
-	function forum(){
+	public function forum(){
 		return $this->forum_id;
 	}
 
-	function attachsig(){
+	public function attachsig(){
 		return $this->attachsig;
 	}
 
-	function prefix(){
+	public function prefix(){
 		return $this->prefix;
 	}
 
-	function istopic() {
+	public function istopic() {
 		if ($this->istopic) {
 			return true;
 		}
 		return false;
 	}
 
-	function islocked() {
+	public function islocked() {
 		if ($this->islocked) {
 			return true;
 		}

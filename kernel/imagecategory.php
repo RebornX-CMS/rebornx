@@ -35,9 +35,9 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 class XoopsImagecategory extends XoopsObject
 {
-	var $_imageCount;
+	public $_imageCount;
 
-	function __construct()
+	public function __construct()
 	{
 		$this->XoopsObject();
 		$this->initVar('imgcat_id', XOBJ_DTYPE_INT, null, false);
@@ -51,12 +51,12 @@ class XoopsImagecategory extends XoopsObject
 		$this->initVar('imgcat_storetype', XOBJ_DTYPE_OTHER, null, false);
 	}
 
-	function setImageCount($value)
+	public function setImageCount($value)
 	{
 		$this->_imageCount = intval($value);
 	}
 
-	function getImageCount()
+	public function getImageCount()
 	{
 		return $this->_imageCount;
 	}
@@ -74,7 +74,7 @@ class XoopsImagecategory extends XoopsObject
 class XoopsImagecategoryHandler extends XoopsObjectHandler
 {
 
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $imgcat = new XoopsImagecategory();
         if ($isNew) {
@@ -83,7 +83,7 @@ class XoopsImagecategoryHandler extends XoopsObjectHandler
         return $imgcat;
     }
 
-    function &get($id)
+    public function &get($id)
     {
         if (intval($id) > 0) {
             $sql = 'SELECT * FROM '.$this->db->prefix('imagecategory').' WHERE imgcat_id='.$id;
@@ -100,7 +100,7 @@ class XoopsImagecategoryHandler extends XoopsObjectHandler
         return false;
     }
 
-    function insert(&$imgcat)
+    public function insert(&$imgcat)
     {
         if (get_class($imgcat) != 'xoopsimagecategory') {
             return false;
@@ -130,7 +130,7 @@ class XoopsImagecategoryHandler extends XoopsObjectHandler
         return true;
     }
 
-    function delete(&$imgcat)
+    public function delete(&$imgcat)
     {
         if (get_class($imgcat) != 'xoopsimagecategory') {
             return false;
@@ -142,7 +142,7 @@ class XoopsImagecategoryHandler extends XoopsObjectHandler
         return true;
     }
 
-    function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;
@@ -172,7 +172,7 @@ class XoopsImagecategoryHandler extends XoopsObjectHandler
     }
 
 
-    function getCount($criteria = null)
+    public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('imagecategory').' i LEFT JOIN '.$this->db->prefix('group_permission')." l ON l.gperm_itemid=i.imgcat_id WHERE (l.gperm_name = 'imgcat_read' OR l.gperm_name = 'imgcat_write')";
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -186,7 +186,7 @@ class XoopsImagecategoryHandler extends XoopsObjectHandler
         return $count;
     }
 
-    function &getList($groups = array(), $perm = 'imgcat_read', $display = null, $storetype = null)
+    public function &getList($groups = array(), $perm = 'imgcat_read', $display = null, $storetype = null)
     {
         $criteria = new CriteriaCompo();
         if (is_array($groups) && !empty($groups)) {

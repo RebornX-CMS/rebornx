@@ -15,22 +15,22 @@
 
 class SaxParser
 {
-    var $level;
-    var $parser;
+    public $level;
+    public $parser;
 
-    var $isCaseFolding;
-    var $targetEncoding;
+    public $isCaseFolding;
+    public $targetEncoding;
 
     /* Custom Handler Variables */
-    var $tagHandlers = array();
+    public $tagHandlers = array();
 
     /* Tag stack */
-    var $tags = array();
+    public $tags = array();
 
     /* Xml Source Input */
-    var $xmlInput;
+    public $xmlInput;
 
-    var $errors = array();
+    public $errors = array();
 
     /****************************************************************************
         Creates a SaxParser object using a FileInput to represent the stream
@@ -38,7 +38,7 @@ class SaxParser
         createStringInput to construct xml input source objects to supply
         to the constructor, or the implementor can construct them individually.
     ****************************************************************************/
-    function __construct(&$input)
+    public function __construct(&$input)
     {
         $this->level = 0;
         $this->parser = xml_parser_create('UTF-8');
@@ -59,7 +59,7 @@ class SaxParser
         Property Methods
     ---------------------------------------------------------------------------*/
 
-    function getCurrentLevel()
+    public function getCurrentLevel()
     {
         return $this->level;
     }
@@ -68,7 +68,7 @@ class SaxParser
         * @param $isCaseFolding
         * @returns void
     ****************************************************************************/
-    function setCaseFolding($isCaseFolding)
+    public function setCaseFolding($isCaseFolding)
     {
         assert(is_bool($isCaseFolding));
 
@@ -79,7 +79,7 @@ class SaxParser
     /****************************************************************************
         * @returns void
     ****************************************************************************/
-    function useIsoEncoding()
+    public function useIsoEncoding()
     {
         $this->targetEncoding = 'ISO-8859-1';
         xml_parser_set_option($this->parser, XML_OPTION_TARGET_ENCODING, $this->targetEncoding);
@@ -88,7 +88,7 @@ class SaxParser
     /****************************************************************************
         * @returns void
     ****************************************************************************/
-    function useAsciiEncoding()
+    public function useAsciiEncoding()
     {
         $this->targetEncoding = 'US-ASCII';
         xml_parser_set_option($this->parser, XML_OPTION_TARGET_ENCODING, $this->targetEncoding);
@@ -97,7 +97,7 @@ class SaxParser
     /****************************************************************************
         * @returns void
     ****************************************************************************/
-    function useUtfEncoding()
+    public function useUtfEncoding()
     {
         $this->targetEncoding = 'UTF-8';
         xml_parser_set_option($this->parser, XML_OPTION_TARGET_ENCODING, $this->targetEncoding);
@@ -107,12 +107,12 @@ class SaxParser
         Returns the name of the xml tag being parsed
         * @returns string
     ****************************************************************************/
-    function getCurrentTag()
+    public function getCurrentTag()
     {
         return $this->tags[count($this->tags) - 1];
     }
 
-    function getParentTag()
+    public function getParentTag()
     {
         if (isset($this->tags[count($this->tags) - 2])) {
             return $this->tags[count($this->tags) - 2];
@@ -129,7 +129,7 @@ class SaxParser
     /****************************************************************************
         * @returns void
     ****************************************************************************/
-    function parse()
+    public function parse()
     {
         if (!is_resource($this->input)) {
             if (!xml_parse($this->parser, $this->input)) {
@@ -156,7 +156,7 @@ class SaxParser
     /****************************************************************************
         * @returns void
     ****************************************************************************/
-    function free()
+    public function free()
     {
         xml_parser_free($this->parser);
     }
@@ -165,7 +165,7 @@ class SaxParser
         * @private
         * @returns string
     ****************************************************************************/
-    function getXmlError()
+    public function getXmlError()
     {
         return sprintf("XmlParse error: %s at line %d", xml_error_string(xml_get_error_code($this->parser)), xml_get_current_line_number($this->parser));
     }
@@ -183,7 +183,7 @@ class SaxParser
         subclass.
         * @returns void
     ****************************************************************************/
-    function addTagHandler(&$tagHandler)
+    public function addTagHandler(&$tagHandler)
     {
         $name = $tagHandler->getName();
         if (is_array($name)) {
@@ -210,7 +210,7 @@ class SaxParser
         * @private
         * @returns void
     ****************************************************************************/
-    function handleBeginElement($parser, $tagName, $attributesArray)
+    public function handleBeginElement($parser, $tagName, $attributesArray)
     {
         array_push($this->tags, $tagName);
         $this->level++;
@@ -229,7 +229,7 @@ class SaxParser
         * @private
         * @returns void
     ****************************************************************************/
-    function handleEndElement($parser, $tagName)
+    public function handleEndElement($parser, $tagName)
     {
         array_pop($this->tags);
         if (isset($this->tagHandlers[$tagName]) && is_subclass_of($this->tagHandlers[$tagName], 'xmltaghandler')) {
@@ -247,7 +247,7 @@ class SaxParser
         * @param $data string.  Character data inside the tag
         * @returns void
     ****************************************************************************/
-    function handleCharacterData($parser, $data)
+    public function handleCharacterData($parser, $data)
     {
         $tagHandler = $this->tagHandlers[$this->getCurrentTag()];
         if (isset($tagHandler) && is_subclass_of($tagHandler, 'xmltaghandler')) {
@@ -261,7 +261,7 @@ class SaxParser
         * @param $parser int.  The handle to the parser.
         * @returns void
     ****************************************************************************/
-    function handleProcessingInstruction($parser, &$target, &$data)
+    public function handleProcessingInstruction($parser, &$target, &$data)
     {
         if($target == 'php') {
             eval($data);
@@ -272,7 +272,7 @@ class SaxParser
         * @param $parser int.  The handle to the parser.
         * @returns void
     ****************************************************************************/
-    function handleDefault($parser, $data)
+    public function handleDefault($parser, $data)
     {
 
     }
@@ -281,7 +281,7 @@ class SaxParser
         * @param $parser int.  The handle to the parser.
         * @returns void
     ****************************************************************************/
-    function handleUnparsedEntityDecl($parser, $entityName, $base, $systemId, $publicId, $notationName)
+    public function handleUnparsedEntityDecl($parser, $entityName, $base, $systemId, $publicId, $notationName)
     {
 
     }
@@ -290,7 +290,7 @@ class SaxParser
         * @param $parser int.  The handle to the parser.
         * @returns void
     ****************************************************************************/
-    function handleNotationDecl($parser, $notationName, $base, $systemId, $publicId)
+    public function handleNotationDecl($parser, $notationName, $base, $systemId, $publicId)
     {
 
     }
@@ -299,7 +299,7 @@ class SaxParser
         * @param $parser int.  The handle to the parser.
         * @returns void
     ****************************************************************************/
-    function handleExternalEntityRef($parser, $openEntityNames, $base, $systemId, $publicId)
+    public function handleExternalEntityRef($parser, $openEntityNames, $base, $systemId, $publicId)
     {
 
     }
@@ -309,7 +309,7 @@ class SaxParser
 	 *
 	 * @abstract
 	 */
-	function handleBeginElementDefault($parser, $tagName, $attributesArray)
+	public function handleBeginElementDefault($parser, $tagName, $attributesArray)
 	{
 	}
 
@@ -318,7 +318,7 @@ class SaxParser
 	 *
 	 * @abstract
 	 */
-	function handleEndElementDefault($parser, $tagName)
+	public function handleEndElementDefault($parser, $tagName)
 	{
 	}
 
@@ -327,7 +327,7 @@ class SaxParser
 	 *
 	 * @abstract
 	 */
-	function handleCharacterDataDefault($parser, $data)
+	public function handleCharacterDataDefault($parser, $data)
 	{
 	}
 
@@ -336,7 +336,7 @@ class SaxParser
 	 *
 	 * @param	$error	string	an error message
 	 */
-    function setErrors($error)
+    public function setErrors($error)
     {
         $this->errors[] = trim($error);
     }
@@ -347,7 +347,7 @@ class SaxParser
 	 * @param	$ashtml	bool	return as html?
 	 * @return	mixed
 	 */
-    function &getErrors($ashtml = true)
+    public function &getErrors($ashtml = true)
     {
         if (!$ashtml) {
             return $this->errors;

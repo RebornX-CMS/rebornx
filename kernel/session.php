@@ -52,7 +52,7 @@ class XoopsSessionHandler
      * @var	object
      * @access	private
      */
-    var $db;
+    public $db;
 
     /**
      * Constructor
@@ -60,7 +60,7 @@ class XoopsSessionHandler
      * @param	object  &$mf    reference to a XoopsManagerFactory
      * 
      */
-    function __construct(&$db)
+    public function __construct(&$db)
     {
         $this->db =& $db;
     }
@@ -73,7 +73,7 @@ class XoopsSessionHandler
      * 
      * @return	bool
      */
-    function open($save_path, $session_name)
+    public function open($save_path, $session_name)
 	{
         return true;
     }
@@ -83,7 +83,7 @@ class XoopsSessionHandler
      * 
      * @return	bool
      */
-    function close()
+    public function close()
 	{
         return true;
     }
@@ -95,7 +95,7 @@ class XoopsSessionHandler
      * 
      * @return	array   Session data
      */
-    function read($sess_id)
+    public function read($sess_id)
 	{
         $sql = "SELECT sess_data FROM ".$this->db->prefix('session')." WHERE sess_id = '$sess_id'";
         if (false != $result = $this->db->query($sql)) {
@@ -114,7 +114,7 @@ class XoopsSessionHandler
      * 
      * @return  bool    
      **/
-    function write($sess_id, $sess_data)
+    public function write($sess_id, $sess_data)
 	{
         global $_SERVER;
 		list($count) = $this->db->fetchRow($this->db->query("SELECT COUNT(*) FROM ".$this->db->prefix('session')." WHERE sess_id='".$sess_id."'"));
@@ -136,7 +136,7 @@ class XoopsSessionHandler
      * 
      * @return  bool
      **/
-    function destroy($sess_id)
+    public function destroy($sess_id)
     {
 		$sql = sprintf("DELETE FROM %s WHERE sess_id = '%s'", $this->db->prefix('session'), $sess_id);
         if ( !$result = $this->db->queryF($sql) ) {
@@ -150,7 +150,7 @@ class XoopsSessionHandler
      * 
      * @param   int $expire Time in seconds until a session expires
      **/
-    function gc($expire)
+    public function gc($expire)
     {
         $mintime = time() - intval($expire);
 		$sql = sprintf("DELETE FROM %s WHERE sess_updated < %u", $this->db->prefix('session'), $mintime);

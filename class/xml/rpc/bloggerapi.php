@@ -34,7 +34,7 @@ require_once XOOPS_ROOT_PATH.'/class/xml/rpc/xmlrpcapi.php';
 class BloggerApi extends XoopsXmlRpcApi
 {
 
-    function __construct(&$params, &$response, &$module)
+    public function __construct(&$params, &$response, &$module)
     {
         $this->XoopsXmlRpcApi($params, $response, $module);
         $this->_setXoopsTagMap('storyid', 'postid');
@@ -42,7 +42,7 @@ class BloggerApi extends XoopsXmlRpcApi
         $this->_setXoopsTagMap('uid', 'userid');
     }
 
-    function newPost()
+    public function newPost()
     {
         if (!$this->_checkUser($this->params[2], $this->params[3])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -89,7 +89,7 @@ class BloggerApi extends XoopsXmlRpcApi
         }
     }
 
-    function editPost()
+    public function editPost()
     {
         if (!$this->_checkUser($this->params[2], $this->params[3])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -134,7 +134,7 @@ class BloggerApi extends XoopsXmlRpcApi
         }
     }
 
-    function deletePost()
+    public function deletePost()
     {
         if (!$this->_checkUser($this->params[2], $this->params[3])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -147,7 +147,7 @@ class BloggerApi extends XoopsXmlRpcApi
         }
     }
 
-    function getPost()
+    public function getPost()
     {
         if (!$this->_checkUser($this->params[2], $this->params[3])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -185,7 +185,7 @@ class BloggerApi extends XoopsXmlRpcApi
         }
     }
 
-    function getRecentPosts()
+    public function getRecentPosts()
     {
         if (!$this->_checkUser($this->params[2], $this->params[3])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -233,7 +233,7 @@ class BloggerApi extends XoopsXmlRpcApi
         }
     }
 
-    function getUsersBlogs()
+    public function getUsersBlogs()
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -248,7 +248,7 @@ class BloggerApi extends XoopsXmlRpcApi
         }
     }
 
-    function getUserInfo()
+    public function getUserInfo()
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -264,7 +264,7 @@ class BloggerApi extends XoopsXmlRpcApi
         }
     }
 
-    function getTemplate()
+    public function getTemplate()
     {
         if (!$this->_checkUser($this->params[2], $this->params[3])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -283,7 +283,7 @@ class BloggerApi extends XoopsXmlRpcApi
         }
     }
 
-    function setTemplate()
+    public function setTemplate()
     {
         if (!$this->_checkUser($this->params[2], $this->params[3])) {
             $this->response->add(new XoopsXmlRpcFault(104));

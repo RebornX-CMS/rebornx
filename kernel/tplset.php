@@ -34,7 +34,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 class XoopsTplset extends XoopsObject
 {
 
-	function __construct()
+	public function __construct()
 	{
 		$this->XoopsObject();
 		$this->initVar('tplset_id', XOBJ_DTYPE_INT, null, false);
@@ -57,7 +57,7 @@ class XoopsTplset extends XoopsObject
 class XoopsTplsetHandler extends XoopsObjectHandler
 {
 
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $tplset = new XoopsTplset();
         if ($isNew) {
@@ -66,7 +66,7 @@ class XoopsTplsetHandler extends XoopsObjectHandler
         return $tplset;
     }
 
-    function &get($id)
+    public function &get($id)
     {
         $id = intval($id);
         if ($id > 0) {
@@ -84,7 +84,7 @@ class XoopsTplsetHandler extends XoopsObjectHandler
         return false;
     }
 
-    function &getByName($tplset_name)
+    public function &getByName($tplset_name)
     {
         $tplset_name = trim($tplset_name);
         if ($tplset_name != '') {
@@ -102,7 +102,7 @@ class XoopsTplsetHandler extends XoopsObjectHandler
         return false;
     }
 
-    function insert(&$tplset)
+    public function insert(&$tplset)
     {
         if (get_class($tplset) != 'xoopstplset') {
             return false;
@@ -132,7 +132,7 @@ class XoopsTplsetHandler extends XoopsObjectHandler
         return true;
     }
 
-    function delete(&$tplset)
+    public function delete(&$tplset)
     {
         if (get_class($tplset) != 'xoopstplset') {
             return false;
@@ -146,7 +146,7 @@ class XoopsTplsetHandler extends XoopsObjectHandler
         return true;
     }
 
-    function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;
@@ -174,7 +174,7 @@ class XoopsTplsetHandler extends XoopsObjectHandler
     }
 
 
-    function getCount($criteria = null)
+    public function getCount($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM '.$this->db->prefix('tplset');
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
@@ -187,7 +187,7 @@ class XoopsTplsetHandler extends XoopsObjectHandler
         return $count;
     }
 
-    function &getList($criteria = null)
+    public function &getList($criteria = null)
 	{
         $ret = array();
 		$tplsets = $this->getObjects($criteria, true);

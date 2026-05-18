@@ -46,6 +46,7 @@ require_once SMARTY_DIR.'Smarty.class.php';
  * @author		Kazumi Ono 	<onokazu@xoops.org>
  * @copyright	(c) 2000-2003 The Xoops Project - www.xoops.org
  */
+#[\AllowDynamicProperties]
 class XoopsTpl extends Smarty
 {
 
@@ -58,7 +59,7 @@ class XoopsTpl extends Smarty
 	/**
 	 * Constructor
 	 **/
-	function __construct()
+	public function __construct()
 	{
 		global $xoopsConfig;
 		parent::__construct();
@@ -94,7 +95,7 @@ class XoopsTpl extends Smarty
      * 
      * @param   string  $dirname    Directory path without a trailing slash
 	 **/
-	function xoops_setTemplateDir($dirname)
+	public function xoops_setTemplateDir($dirname)
 	{
 		$this->template_dir = $dirname;
 	}
@@ -104,7 +105,7 @@ class XoopsTpl extends Smarty
 	 * 
 	 * @return  string
 	 **/
-	function xoops_getTemplateDir()
+	public function xoops_getTemplateDir()
 	{
 		return $this->template_dir;
 	}
@@ -114,7 +115,7 @@ class XoopsTpl extends Smarty
 	 * 
 	 * @param   boolean     $flag
 	 **/
-	function xoops_setDebugging($flag=false)
+	public function xoops_setDebugging($flag=false)
 	{
 		$this->debugging = is_bool($flag) ? $flag : false;
 	}
@@ -124,7 +125,7 @@ class XoopsTpl extends Smarty
 	 * 
 	 * @param   integer     $num
 	 **/
-	function xoops_setCaching($num=0)
+	public function xoops_setCaching($num=0)
 	{
 		$this->caching = (int)$num;
 	}
@@ -134,7 +135,7 @@ class XoopsTpl extends Smarty
 	 * 
 	 * @param   integer     $num    Cache lifetime
 	 **/
-	function xoops_setCacheTime($num=0)
+	public function xoops_setCacheTime($num=0)
 	{
 		$num = (int)$num;
 		if ($num <= 0) {
@@ -149,7 +150,7 @@ class XoopsTpl extends Smarty
 	 * 
 	 * @param   string  $dirname    Full directory path without a trailing slash
 	 **/
-	function xoops_setCompileDir($dirname)
+	public function xoops_setCompileDir($dirname)
 	{
 		$this->compile_dir = $dirname;
 	}
@@ -159,7 +160,7 @@ class XoopsTpl extends Smarty
 	 * 
 	 * @param   string  $dirname    Full directory path without a trailing slash
 	 **/
-	function xoops_setCacheDir($dirname)
+	public function xoops_setCacheDir($dirname)
 	{
 		$this->cache_dir = $dirname;
 	}
@@ -170,7 +171,7 @@ class XoopsTpl extends Smarty
 	 * @param   string  $data
 	 * @return  string  Rendered output  
 	 **/
-	function xoops_fetchFromData(&$data)
+	public function xoops_fetchFromData(&$data)
 	{
 		$dummyfile = XOOPS_CACHE_PATH.'/dummy_'.time();
 		$fp = fopen($dummyfile, 'w');
@@ -185,7 +186,7 @@ class XoopsTpl extends Smarty
 	/**
 	 * 
 	 **/
-	function xoops_canUpdateFromFile()
+	public function xoops_canUpdateFromFile()
 	{
 		return $this->_canUpdateFromFile;
 	}

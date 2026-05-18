@@ -52,21 +52,21 @@ class XoopsFormText extends XoopsFormElement {
 	 * @var	int 
      * @access	private
 	 */
-	var $_size;
+	public $_size;
 
 	/**
      * Maximum length of the text
 	 * @var	int 
 	 * @access	private
 	 */
-	var $_maxlength;
+	public $_maxlength;
 
 	/**
      * Initial text
 	 * @var	string  
 	 * @access	private
 	 */
-	var $_value;
+	public $_value;
 
 	/**
 	 * Constructor
@@ -77,7 +77,7 @@ class XoopsFormText extends XoopsFormElement {
 	 * @param	int		$maxlength	Maximum length of text
      * @param	string  $value      Initial text
 	 */
-	function __construct($caption, $name, $size, $maxlength, $value=""){
+	public function __construct($caption, $name, $size, $maxlength, $value=""){
 		$this->setCaption($caption);
 		$this->setName($name);
 		$this->_size = intval($size);
@@ -90,7 +90,7 @@ class XoopsFormText extends XoopsFormElement {
 	 * 
      * @return	int
 	 */
-	function getSize(){
+	public function getSize(){
 		return $this->_size;
 	}
 
@@ -99,7 +99,7 @@ class XoopsFormText extends XoopsFormElement {
 	 * 
      * @return	int
 	 */
-	function getMaxlength(){
+	public function getMaxlength(){
 		return $this->_maxlength;
 	}
 
@@ -108,7 +108,7 @@ class XoopsFormText extends XoopsFormElement {
 	 * 
      * @return  string
 	 */
-	function getValue(){
+	public function getValue(){
 		return $this->_value;
 	}
 
@@ -117,7 +117,7 @@ class XoopsFormText extends XoopsFormElement {
 	 * 
      * @param	$value  string
 	 */
-	function setValue($value){
+	public function setValue($value){
 		$this->_value = $value;
 	}
 
@@ -126,7 +126,7 @@ class XoopsFormText extends XoopsFormElement {
 	 * 
      * @return	string  HTML
 	 */
-	function render(){
+	public function render(){
 		return "<input type='text' name='".$this->getName()."' id='".$this->getName()."' size='".$this->getSize()."' maxlength='".$this->getMaxlength()."' value='".$this->getValue()."'".$this->getExtra()." />";
 	}
 }

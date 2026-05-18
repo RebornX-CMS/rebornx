@@ -50,7 +50,7 @@
 class XoopsFormDateTime extends XoopsFormElementTray
 {
 
-	function __construct($caption, $name, $size = 15, $value=0)
+	public function __construct($caption, $name, $size = 15, $value=0)
 	{
 		$this->XoopsFormElementTray($caption, '&nbsp;');
 		$value = intval($value);

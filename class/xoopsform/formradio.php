@@ -53,14 +53,14 @@ class XoopsFormRadio extends XoopsFormElement {
 	 * @var	array	
 	 * @access	private
 	 */
-	var $_options = array();
+	public $_options = array();
 
 	/**
      * Pre-selected value
 	 * @var	string	
 	 * @access	private
 	 */
-	var $_value;
+	public $_value;
 
 	/**
 	 * Constructor
@@ -69,7 +69,7 @@ class XoopsFormRadio extends XoopsFormElement {
 	 * @param	string	$name		"name" attribute
 	 * @param	string	$value		Pre-selected value
 	 */
-	function __construct($caption, $name, $value = null){
+	public function __construct($caption, $name, $value = null){
 		$this->setCaption($caption);
 		$this->setName($name);
 		if (isset($value)) {
@@ -82,7 +82,7 @@ class XoopsFormRadio extends XoopsFormElement {
 	 * 
 	 * @return	string
 	 */
-	function getValue(){
+	public function getValue(){
 		return $this->_value;
 	}
 
@@ -91,7 +91,7 @@ class XoopsFormRadio extends XoopsFormElement {
 	 * 
 	 * @param	$value	string
 	 */
-	function setValue($value){
+	public function setValue($value){
 		$this->_value = $value;
 	}
 
@@ -101,7 +101,7 @@ class XoopsFormRadio extends XoopsFormElement {
 	 * @param	string	$value	"value" attribute - This gets submitted as form-data.
 	 * @param	string	$name	"name" attribute - This is displayed. If empty, we use the "value" instead.
 	 */
-	function addOption($value, $name=""){
+	public function addOption($value, $name=""){
 		if ( $name != "" ) {
 			$this->_options[$value] = $name;
 		} else {
@@ -114,7 +114,7 @@ class XoopsFormRadio extends XoopsFormElement {
 	 * 
 	 * @param	array	$options	Associative array of value->name pairs.
 	 */
-	function addOptionArray($options){
+	public function addOptionArray($options){
 		if ( is_array($options) ) {
 			foreach ( $options as $k=>$v ) {
 				$this->addOption($k, $v);
@@ -127,7 +127,7 @@ class XoopsFormRadio extends XoopsFormElement {
 	 * 
 	 * @return	array	Associative array of value->name pairs.
 	 */
-	function getOptions(){
+	public function getOptions(){
 		return $this->_options;
 	}
 
@@ -136,7 +136,7 @@ class XoopsFormRadio extends XoopsFormElement {
 	 * 
 	 * @return	string	HTML
 	 */
-	function render(){
+	public function render(){
 		$ret = "";
 		foreach ( $this->getOptions() as $value => $name ) {
 			$ret .= "<input type='radio' name='".$this->getName()."' value='".$value."'";

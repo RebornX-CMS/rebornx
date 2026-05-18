@@ -28,12 +28,12 @@
 if (function_exists('mb_convert_encoding')) {
 	class XoopsHeadlineRendererLocal extends XoopsHeadlineRenderer
 	{
-		function convertFromUtf8(&$value, $key)
+		public function convertFromUtf8(&$value, $key)
 		{
 			$value = (is_string($value) && function_exists('mb_convert_encoding')) ? mb_convert_encoding($value, "EUC-JP", "auto"): $value;
 		}
 
-		function &convertToUtf8(&$xmlfile)
+		public function &convertToUtf8(&$xmlfile)
 		{
 			if (preg_match("/^<\?xml .* encoding=(['\"]?)(Shift_JIS|euc-jp)\\1/i", $xmlfile)) {
 				$xmlfile = mb_convert_encoding(preg_replace("/ encoding=(['\"]?)(Shift_JIS|euc-jp)\\1/i", ' encoding="utf-8"', $xmlfile), "UTF-8", "AUTO");

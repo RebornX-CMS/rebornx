@@ -33,7 +33,7 @@ require_once XOOPS_ROOT_PATH.'/class/xml/rpc/xmlrpcapi.php';
 
 class MetaWeblogApi extends XoopsXmlRpcApi
 {
-    function __construct(&$params, &$response, &$module)
+    public function __construct(&$params, &$response, &$module)
     {
         $this->XoopsXmlRpcApi($params, $response, $module);
         $this->_setXoopsTagMap('storyid', 'postid');
@@ -42,7 +42,7 @@ class MetaWeblogApi extends XoopsXmlRpcApi
         //$this->_setXoopsTagMap('hometext', 'description');
     }
 
-    function newPost()
+    public function newPost()
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             
@@ -98,7 +98,7 @@ class MetaWeblogApi extends XoopsXmlRpcApi
         }
     }
 
-    function editPost()
+    public function editPost()
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -152,7 +152,7 @@ class MetaWeblogApi extends XoopsXmlRpcApi
         }
     }
 
-    function getPost()
+    public function getPost()
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -193,7 +193,7 @@ class MetaWeblogApi extends XoopsXmlRpcApi
         }
     }
 
-    function getRecentPosts()
+    public function getRecentPosts()
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -244,7 +244,7 @@ class MetaWeblogApi extends XoopsXmlRpcApi
         }
     }
 
-    function getCategories()
+    public function getCategories()
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             $this->response->add(new XoopsXmlRpcFault(104));

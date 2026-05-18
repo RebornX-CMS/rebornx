@@ -63,7 +63,7 @@ class XoopsFormRadioYN extends XoopsFormRadio
 	 * @param	string	$yes		String for "Yes"
 	 * @param	string	$no			String for "No"
 	 */
-	function __construct($caption, $name, $value=null, $yes=_YES, $no=_NO)
+	public function __construct($caption, $name, $value=null, $yes=_YES, $no=_NO)
 	{
 		$this->XoopsFormRadio($caption, $name, $value);
 		$this->addOption(1, $yes);

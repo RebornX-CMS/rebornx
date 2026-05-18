@@ -36,9 +36,9 @@ require_once XOOPS_ROOT_PATH."/kernel/object.php";
 
 class XoopsBlock extends XoopsObject
 {
-	var $db;
+	public $db;
 
-	function __construct($id = null)
+	public function __construct($id = null)
 	{
 		$this->db = Database::getInstance();
 		$this->initVar('bid', XOBJ_DTYPE_INT, null, false);
@@ -74,14 +74,14 @@ class XoopsBlock extends XoopsObject
 		}
 	}
 
-	function load($id)
+	public function load($id)
 	{
 		$sql = 'SELECT * FROM '.$this->db->prefix('newblocks').' WHERE bid = '.$id;
 		$arr = $this->db->fetchArray($this->db->query($sql));
 		$this->assignVars($arr);
 	}
 
-	function store()
+	public function store()
 	{
 		if ( !$this->cleanVars() ) {
 			return false;
@@ -110,7 +110,7 @@ class XoopsBlock extends XoopsObject
 		return $bid;
 	}
 
-	function delete()
+	public function delete()
 	{
 		$sql = sprintf("DELETE FROM %s WHERE bid = %u", $this->db->prefix('newblocks'), $this->getVar('bid'));
 		if ( !$this->db->query($sql) ) {
@@ -130,7 +130,7 @@ class XoopsBlock extends XoopsObject
 	* @param $c_type    type of block content
 	* @returns string
 	*/
-	function getContent($format = 'S', $c_type = 'T')
+	public function getContent($format = 'S', $c_type = 'T')
 	{
 		switch ( $format ) {
 		case 'S':
@@ -164,7 +164,7 @@ class XoopsBlock extends XoopsObject
 		}
 	}
 
-	function &buildBlock()
+	public function &buildBlock()
 	{
 		global $xoopsConfig, $xoopsOption;
 		$block = array();
@@ -210,7 +210,7 @@ class XoopsBlock extends XoopsObject
 	* If position is 1, content in DB is positioned
 	* after the original content
 	*/
-	function &buildContent($position,$content="",$contentdb="")
+	public function &buildContent($position,$content="",$contentdb="")
 	{
 		if ( $position == 0 ) {
 			$ret = $contentdb.$content;
@@ -220,7 +220,7 @@ class XoopsBlock extends XoopsObject
 		return $ret;
 	}
 
-	function &buildTitle($originaltitle, $newtitle="")
+	public function &buildTitle($originaltitle, $newtitle="")
 	{
 		if ($newtitle != "") {
 			$ret = $newtitle;
@@ -230,7 +230,7 @@ class XoopsBlock extends XoopsObject
 		return $ret;
 	}
 
-	function isCustom()
+	public function isCustom()
 	{
 		if ( $this->getVar("block_type") == "C" ) {
 			return true;
@@ -242,7 +242,7 @@ class XoopsBlock extends XoopsObject
    	* gets html form for editting block options
 	*
 	*/
-	function getOptions()
+	public function getOptions()
 	{
 		global $xoopsConfig;
 		if ( $this->getVar("block_type") != "C" ) {
@@ -285,7 +285,7 @@ class XoopsBlock extends XoopsObject
 	* @param $orderby   order of the blocks
 	* @returns array of block objects
 	*/
-	function &getAllBlocksByGroup($groupid, $asobject=true, $side=null, $visible=null, $orderby="b.weight,b.bid", $isactive=1)
+	public function &getAllBlocksByGroup($groupid, $asobject=true, $side=null, $visible=null, $orderby="b.weight,b.bid", $isactive=1)
 	{
 		$db = Database::getInstance();
 		$ret = array();
@@ -339,7 +339,7 @@ class XoopsBlock extends XoopsObject
 		return $ret;
 	}
 
-	function &getAllBlocks($rettype="object", $side=null, $visible=null, $orderby="side,weight,bid", $isactive=1)
+	public function &getAllBlocks($rettype="object", $side=null, $visible=null, $orderby="side,weight,bid", $isactive=1)
 	{
 		$db = Database::getInstance();
 		$ret = array();
@@ -388,7 +388,7 @@ class XoopsBlock extends XoopsObject
 		return $ret;
 	}
 
-	function &getByModule($moduleid, $asobject=true)
+	public function &getByModule($moduleid, $asobject=true)
 	{
 		$db = Database::getInstance();
 		if ( $asobject == true ) {
@@ -408,7 +408,7 @@ class XoopsBlock extends XoopsObject
 		return $ret;
 	}
 
-	function &getAllByGroupModule($groupid, $module_id=0, $toponlyblock=false, $visible=null, $orderby='b.weight,b.bid', $isactive=1)
+	public function &getAllByGroupModule($groupid, $module_id=0, $toponlyblock=false, $visible=null, $orderby='b.weight,b.bid', $isactive=1)
 	{
 		$db = Database::getInstance();
 		$ret = array();
@@ -457,7 +457,7 @@ class XoopsBlock extends XoopsObject
 		return $ret;
 	}
 
-	function &getNonGroupedBlocks($module_id=0, $toponlyblock=false, $visible=null, $orderby='b.weight,b.bid', $isactive=1)
+	public function &getNonGroupedBlocks($module_id=0, $toponlyblock=false, $visible=null, $orderby='b.weight,b.bid', $isactive=1)
 	{
 		$db = Database::getInstance();
 		$ret = array();

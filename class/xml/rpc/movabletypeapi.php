@@ -33,12 +33,12 @@ require_once XOOPS_ROOT_PATH.'/class/xml/rpc/xmlrpcapi.php';
 
 class MovableTypeApi extends XoopsXmlRpcApi
 {
-    function __construct(&$params, &$response, &$module)
+    public function __construct(&$params, &$response, &$module)
     {
         $this->XoopsXmlRpcApi($params, $response, $module);
     }
 
-    function getCategoryList()
+    public function getCategoryList()
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -62,17 +62,17 @@ class MovableTypeApi extends XoopsXmlRpcApi
         }
     }
 
-    function getPostCategories()
+    public function getPostCategories()
     {
         $this->response->add(new XoopsXmlRpcFault(107));
     }
 
-    function setPostCategories()
+    public function setPostCategories()
     {
         $this->response->add(new XoopsXmlRpcFault(107));
     }
 
-    function supportedMethods()
+    public function supportedMethods()
     {
         $this->response->add(new XoopsXmlRpcFault(107));
     }

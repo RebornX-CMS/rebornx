@@ -51,7 +51,7 @@ class XoopsDownloader
 	/**
 	 * Constructor
 	 */
-	function __construct()
+	public function __construct()
 	{
 		//EMPTY
 	}
@@ -63,7 +63,7 @@ class XoopsDownloader
      * 
      * @access	private
 	 */
-	function _header($filename)
+	public function _header($filename)
 	{
 		if (function_exists('mb_http_output')) {
 			mb_http_output('pass');
@@ -87,7 +87,7 @@ class XoopsDownloader
 	 * @param   string  $filepath
 	 * @param   string   $newfilename
 	 **/
-	function addFile($filepath, $newfilename=null)
+	public function addFile($filepath, $newfilename=null)
 	{
 		//EMPTY
 	}
@@ -98,7 +98,7 @@ class XoopsDownloader
 	 * @param   string  $filepath
 	 * @param   string  $newfilename
 	 **/
-	function addBinaryFile($filepath, $newfilename=null)
+	public function addBinaryFile($filepath, $newfilename=null)
 	{
 		//EMPTY
 	}
@@ -110,7 +110,7 @@ class XoopsDownloader
 	 * @param   string    $filename
 	 * @param   integer   $time
 	 **/
-	function addFileData(&$data, $filename, $time=0)
+	public function addFileData(&$data, $filename, $time=0)
 	{
 		//EMPTY
 	}
@@ -122,7 +122,7 @@ class XoopsDownloader
 	 * @param   string  $filename
 	 * @param   integer $time
 	 **/
-	function addBinaryFileData(&$data, $filename, $time=0)
+	public function addBinaryFileData(&$data, $filename, $time=0)
 	{
 		//EMPTY
 	}
@@ -133,7 +133,7 @@ class XoopsDownloader
 	 * @param   string  $name
 	 * @param   boolean $gzip
 	 **/
-	function download($name, $gzip = true)
+	public function download($name, $gzip = true)
 	{
 		//EMPTY
 	}

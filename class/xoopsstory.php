@@ -61,7 +61,7 @@ class XoopsStory
     public $topicstable;
     public $comments;
 
-	function __construct($storyid=-1)
+	public function __construct($storyid=-1)
 	{
 		$this->db = Database::getInstance();
 		$this->table = "";
@@ -73,97 +73,97 @@ class XoopsStory
 		}
 	}
 
-	function setStoryId($value)
+	public function setStoryId($value)
 	{
 		$this->storyid = intval($value);
 	}
 
-	function setTopicId($value)
+	public function setTopicId($value)
 	{
 		$this->topicid = intval($value);
 	}
 
-	function setUid($value)
+	public function setUid($value)
 	{
 		$this->uid = intval($value);
 	}
 
-	function setTitle($value)
+	public function setTitle($value)
 	{
 		$this->title = $value;
 	}
 
-	function setHometext($value)
+	public function setHometext($value)
 	{
 		$this->hometext = $value;
 	}
 
-	function setBodytext($value)
+	public function setBodytext($value)
 	{
 		$this->bodytext = $value;
 	}
 
-	function setPublished($value)
+	public function setPublished($value)
 	{
 		$this->published = intval($value);
 	}
 
-	function setExpired($value)
+	public function setExpired($value)
 	{
 		$this->expired = intval($value);
 	}
 
-	function setHostname($value)
+	public function setHostname($value)
 	{
 		$this->hostname = $value;
 	}
 
-	function setNohtml($value=0)
+	public function setNohtml($value=0)
 	{
 		$this->nohtml = $value;
 	}
 
-	function setNosmiley($value=0)
+	public function setNosmiley($value=0)
 	{
 		$this->nosmiley = $value;
 	}
 
-	function setIhome($value)
+	public function setIhome($value)
 	{
 		$this->ihome = $value;
 	}
 
-	function setNotifyPub($value)
+	public function setNotifyPub($value)
 	{
 		$this->notifypub = $value;
 	}
 
-	function setType($value)
+	public function setType($value)
 	{
 		$this->type = $value;
 	}
 
-	function setApproved($value)
+	public function setApproved($value)
 	{
 		$this->approved = intval($value);
 	}
 
-	function setTopicdisplay($value)
+	public function setTopicdisplay($value)
 	{
 		$this->topicdisplay = $value;
 	}
 
-	function setTopicalign($value)
+	public function setTopicalign($value)
 	{
 		$this->topicalign = $value;
 	}
 
-	function setComments($value)
+	public function setComments($value)
 	{
 		$this->comments = intval($value);
 	}
 
-	function store($approved=false)
+	public function store($approved=false)
 	{
 		//$newpost = 0;
 		$myts = MyTextSanitizer::getInstance();
@@ -211,21 +211,21 @@ class XoopsStory
 		return $newstoryid;
 	}
 
-	function getStory($storyid)
+	public function getStory($storyid)
 	{
 		$sql = "SELECT * FROM ".$this->table." WHERE storyid=".$storyid."";
 		$array = $this->db->fetchArray($this->db->query($sql));
 		$this->makeStory($array);
 	}
 
-	function makeStory($array)
+	public function makeStory($array)
 	{
 		foreach ( $array as $key=>$value ){
 			$this->$key = $value;
 		}
 	}
 
-	function delete()
+	public function delete()
 	{
 		$sql = sprintf("DELETE FROM %s WHERE storyid = %u", $this->table, $this->storyid);
 		if( !$result = $this->db->query($sql) ) {
@@ -234,7 +234,7 @@ class XoopsStory
 		return true;
 	}
 
-	function updateCounter()
+	public function updateCounter()
 	{
 		$sql = sprintf("UPDATE %s SET counter = counter+1 WHERE storyid = %u", $this->table, $this->storyid);
 		if ( !$result = $this->db->queryF($sql) ) {
@@ -243,7 +243,7 @@ class XoopsStory
 		return true;
 	}
 
-	function updateComments($total)
+	public function updateComments($total)
 	{
 		$sql = sprintf("UPDATE %s SET comments = %u WHERE storyid = %u", $this->table, $total, $this->storyid);
 		if ( !$result = $this->db->queryF($sql) ) {
@@ -252,27 +252,27 @@ class XoopsStory
 		return true;
 	}
 
-	function topicid()
+	public function topicid()
 	{
 		return $this->topicid;
 	}
 
-	function topic()
+	public function topic()
 	{
 		return new XoopsTopic($this->topicstable, $this->topicid);
 	}
 
-	function uid()
+	public function uid()
 	{
 		return $this->uid;
 	}
 
-	function uname()
+	public function uname()
 	{
 		return XoopsUser::getUnameFromId($this->uid);
 	}
 
-	function title($format="Show")
+	public function title($format="Show")
 	{
 		$myts = MyTextSanitizer::getInstance();
 		$smiley = 1;
@@ -296,7 +296,7 @@ class XoopsStory
 		return $title;
 	}
 
-	function hometext($format="Show")
+	public function hometext($format="Show")
 	{
 		$myts = MyTextSanitizer::getInstance();
 		$html = 1;
@@ -325,7 +325,7 @@ class XoopsStory
 		return $hometext;
 	}
 
-	function bodytext($format="Show")
+	public function bodytext($format="Show")
 	{
 		$myts = MyTextSanitizer::getInstance();
 		$html = 1;
@@ -354,67 +354,67 @@ class XoopsStory
 		return $bodytext;
 	}
 
-	function counter()
+	public function counter()
 	{
 		return $this->counter;
 	}
 
-	function created()
+	public function created()
 	{
 		return $this->created;
 	}
 
-	function published()
+	public function published()
 	{
 		return $this->published;
 	}
 
-	function expired()
+	public function expired()
 	{
 		return $this->expired;
 	}
 
-	function hostname()
+	public function hostname()
 	{
 		return $this->hostname;
 	}
 
-	function storyid()
+	public function storyid()
 	{
 		return $this->storyid;
 	}
 
-	function nohtml()
+	public function nohtml()
 	{
 		return $this->nohtml;
 	}
 
-	function nosmiley()
+	public function nosmiley()
 	{
 		return $this->nosmiley;
 	}
 
-	function notifypub()
+	public function notifypub()
 	{
 		return $this->notifypub;
 	}
 
-	function type()
+	public function type()
 	{
 		return $this->type;
 	}
 
-	function ihome()
+	public function ihome()
 	{
 		return $this->ihome;
 	}
 
-	function topicdisplay()
+	public function topicdisplay()
 	{
 		return $this->topicdisplay;
 	}
 
-	function topicalign($astext=true)
+	public function topicalign($astext=true)
 	{
 		if ( $astext ) {
 			if ( $this->topicalign == "R" ) {
@@ -427,7 +427,7 @@ class XoopsStory
 		return $this->topicalign;
 	}
 
-	function comments()
+	public function comments()
 	{
 		return $this->comments;
 	}

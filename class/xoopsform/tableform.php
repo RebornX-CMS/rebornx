@@ -61,7 +61,7 @@ class XoopsTableForm extends XoopsForm
 	 * 
      * @return	string
 	 */
-	function render()
+	public function render()
 	{
 		$ret = $this->getTitle()."\n<form name='".$this->getName()."' id='".$this->getName()."' action='".$this->getAction()."' method='".$this->getMethod()."'".$this->getExtra().">\n<table border='0' width='100%'>\n";
 		foreach ( $this->getElements() as $ele ) {

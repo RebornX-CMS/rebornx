@@ -48,10 +48,10 @@ include_once XOOPS_ROOT_PATH.'/language/'.$GLOBALS['xoopsConfig']['language'].'/
 
 class XoopsComments extends XoopsObject
 {
-	var $ctable;
+	public $ctable;
     public $db;
 
-	function __construct($ctable, $id=null)
+	public function __construct($ctable, $id=null)
 	{
 		$this->ctable = $ctable;
 		$this->db = Database::getInstance();
@@ -80,14 +80,14 @@ class XoopsComments extends XoopsObject
 		}
 	}
 
-	function load($id)
+	public function load($id)
 	{
 		$sql = "SELECT * FROM ".$this->ctable." WHERE comment_id=".$id."";
 		$arr = $this->db->fetchArray($this->db->query($sql));
 		$this->assignVars($arr);
 	}
 
-	function store()
+	public function store()
 	{
 		if ( !$this->cleanVars() ) {
 			return false;
@@ -119,7 +119,7 @@ class XoopsComments extends XoopsObject
 		return $comment_id;
 	}
 
-	function delete()
+	public function delete()
 	{
 		$sql = sprintf("DELETE FROM %s WHERE comment_id = %u", $this->ctable, $this->getVar('comment_id'));
 		if ( !$result = $this->db->query($sql) ) {
@@ -147,7 +147,7 @@ class XoopsComments extends XoopsObject
 		return ($size + 1);
 	}
 
-	function &getCommentTree()
+	public function &getCommentTree()
 	{
 		$mytree = new XoopsTree($this->ctable, "comment_id", "pid");
 		$ret = array();
@@ -158,7 +158,7 @@ class XoopsComments extends XoopsObject
 		return $ret;
 	}
 
-	function getAllComments($criteria=array(), $asobject=true, $orderby="comment_id ASC", $limit=0, $start=0)
+	public function getAllComments($criteria=array(), $asobject=true, $orderby="comment_id ASC", $limit=0, $start=0)
 	{
 		$ret = array();
 		$where_query = "";
@@ -187,7 +187,7 @@ class XoopsComments extends XoopsObject
 	}
 
 	/* Methods below will be moved to maybe another class? */
-	function printNavBar($item_id, $mode="flat", $order=1)
+	public function printNavBar($item_id, $mode="flat", $order=1)
 	{
 		global $_SERVER, $xoopsConfig, $xoopsUser;
 		echo "<form method='get' action='".$_SERVER['PHP_SELF']."'><table width='100%' border='0' cellspacing='1' cellpadding='2'><tr><td class='bg1' align='center'><select name='mode'><option value='nocomments'";
@@ -220,12 +220,12 @@ class XoopsComments extends XoopsObject
 		echo "</td></tr></table></form>";
 	}
 
-	function showThreadHead()
+	public function showThreadHead()
 	{
 		openThread();
 	}
 
-	function showThreadPost($order, $mode, $adminview=0, $color_num=1)
+	public function showThreadPost($order, $mode, $adminview=0, $color_num=1)
 	{
 		global $xoopsConfig, $xoopsUser;
 		$edit_image = "";
@@ -324,17 +324,17 @@ class XoopsComments extends XoopsObject
 		}
 	}
 
-	function showThreadFoot()
+	public function showThreadFoot()
 	{
 		closeThread();
 	}
 
-	function showTreeHead($width="100%")
+	public function showTreeHead($width="100%")
 	{
 		echo "<table border='0' class='outer' cellpadding='0' cellspacing='0' align='center' width='$width'><tr class='bg3' align='center'><td colspan='3'>". _CM_REPLIES ."</td></tr><tr class='bg3' align='left'><td width='60%' class='fg2'>". _CM_TITLE ."</td><td width='20%' class='fg2'>". _CM_POSTER ."</td><td class='fg2'>". _CM_POSTED ."</td></tr>";
 	}
 
-	function showTreeItem($order, $mode, $color_num)
+	public function showTreeItem($order, $mode, $color_num)
 	{
 		global $_SERVER;
 		if ( $color_num == 1 ) {
@@ -352,7 +352,7 @@ class XoopsComments extends XoopsObject
 		echo "<tr class='$bg' align='left'><td>".$prefix."<img src='".XOOPS_URL."/images/".$icon."'>&nbsp;<a href='".$_SERVER['PHP_SELF']."?item_id=".$this->getVar("item_id")."&comment_id=".$this->getVar("comment_id")."&mode=".$mode."&order=".$order."#".$this->getVar("comment_id")."'>".$this->getVar("subject")."</a></td><td><a href='".XOOPS_URL."/userinfo.php?uid=".$this->getVar("user_id")."'>".XoopsUser::getUnameFromId($this->getVar("user_id"))."</a></td><td>".$date."</td></tr>";
 	}
 
-	function showTreeFoot()
+	public function showTreeFoot()
 	{
 		echo "</table><br />";
 	}

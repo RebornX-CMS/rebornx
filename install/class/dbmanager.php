@@ -37,25 +37,25 @@ include_once XOOPS_ROOT_PATH.'/class/database/sqlutility.php';
 **/
 class db_manager {
 
-    var $s_tables = array();
-    var $f_tables = array();
-	var $db;
+    public $s_tables = array();
+    public $f_tables = array();
+	public $db;
 
-    function __construct(){
+    public function __construct(){
         $this->db = XoopsDatabaseFactory::getDatabase();
         $this->db->setPrefix(XOOPS_DB_PREFIX);
         $this->db->setLogger(XoopsLogger::instance());
     }
 
-    function isConnectable(){
+    public function isConnectable(){
         return ($this->db->connect(false) != false) ? true : false;
     }
     
-    function dbExists(){
+    public function dbExists(){
         return ($this->db->connect() != false) ? true : false;
     }
     
-    function createDB()
+    public function createDB()
     {
         $this->db->connect(false);
     
@@ -64,7 +64,7 @@ class db_manager {
         return ($result != false) ? true : false;
     }
 
-    function queryFromFile($sql_file_path){
+    public function queryFromFile($sql_file_path){
         $tables = array();
 
         if (!file_exists($sql_file_path)) {
@@ -131,7 +131,7 @@ class db_manager {
         return true;
     }
 
-    function report(){
+    public function report(){
         $content = "<table align='center'><tr><td align='left'>\n";
         if (isset($this->s_tables['create'])) {
             foreach($this->s_tables['create'] as $key => $val){
@@ -178,22 +178,22 @@ class db_manager {
         return $content;
     }
 
-    function query($sql){
+    public function query($sql){
         $this->db->connect();
         return $this->db->query($sql);
     }
 
-    function prefix($table){
+    public function prefix($table){
         $this->db->connect();
         return $this->db->prefix($table);
     }
 
-    function fetchArray($ret){
+    public function fetchArray($ret){
         $this->db->connect();
         return $this->db->fetchArray($ret);
     }
 
-    function insert($table, $query){
+    public function insert($table, $query){
         $this->db->connect();
         $table = $this->db->prefix($table);
         $query = 'INSERT INTO '.$table.' '.$query;
@@ -214,11 +214,11 @@ class db_manager {
         }
     }
 
-    function isError(){
+    public function isError(){
         return (isset($this->f_tables)) ? true : false;
     }
 
-    function deleteTables($tables){
+    public function deleteTables($tables){
         $deleted = array();
         $this->db->connect();
         foreach ($tables as $key => $val) {
@@ -229,7 +229,7 @@ class db_manager {
         return $deleted;
     }
 
-	function tableExists($table){
+	public function tableExists($table){
 		$table = trim($table);
 		$ret = false;
 		if ($table != '') {

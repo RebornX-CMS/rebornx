@@ -32,19 +32,19 @@
 class XoopsXmlRpcDocument
 {
 
-    var $_tags = array();
+    public $_tags = array();
 
-    function __construct()
+    public function __construct()
     {
 
     }
 
-    function add(&$tagobj)
+    public function add(&$tagobj)
     {
         $this->_tags[] = $tagobj;
     }
 
-    function render()
+    public function render()
     {
     }
 
@@ -52,7 +52,7 @@ class XoopsXmlRpcDocument
 
 class XoopsXmlRpcResponse extends XoopsXmlRpcDocument
 {
-	function render()
+	public function render()
     {
         $count = count($this->_tags);
         $payload = '';
@@ -70,14 +70,14 @@ class XoopsXmlRpcResponse extends XoopsXmlRpcDocument
 class XoopsXmlRpcRequest extends XoopsXmlRpcDocument
 {
 
-	var $methodName;
+	public $methodName;
 
-	function __construct($methodName)
+	public function __construct($methodName)
 	{
 		$this->methodName = trim($methodName);
 	}
 
-	function render()
+	public function render()
     {
         $count = count($this->_tags);
         $payload = '';
@@ -91,29 +91,29 @@ class XoopsXmlRpcRequest extends XoopsXmlRpcDocument
 class XoopsXmlRpcTag
 {
 
-    var $_fault = false;
+    public $_fault = false;
 
-    function __construct()
+    public function __construct()
     {
 
     }
 
-    function &encode(&$text)
+    public function &encode(&$text)
     {
         $text = preg_replace(array("/\&([a-z\d\#]+)\;/i", "/\&/", "/\#\|\|([a-z\d\#]+)\|\|\#/i"), array("#||\\1||#", "&amp;", "&\\1;"), str_replace(array("<", ">"), array("&lt;", "&gt;"), $text));
 		return $text;
     }
 
-    function setFault($fault = true){
+    public function setFault($fault = true){
         $this->_fault = (intval($fault) > 0) ? true : false;
     }
 
-    function isFault()
+    public function isFault()
     {
         return $this->_fault;
     }
 
-    function render()
+    public function render()
     {
     }
 }
@@ -121,17 +121,17 @@ class XoopsXmlRpcTag
 class XoopsXmlRpcFault extends XoopsXmlRpcTag
 {
 
-    var $_code;
-    var $_extra;
+    public $_code;
+    public $_extra;
 
-    function __construct($code, $extra = null)
+    public function __construct($code, $extra = null)
     {
         $this->setFault(true);
         $this->_code = intval($code);
         $this->_extra = isset($extra) ? trim($extra) : '';
     }
 
-    function render()
+    public function render()
     {
         switch ($this->_code) {
         case 101:
@@ -179,14 +179,14 @@ class XoopsXmlRpcFault extends XoopsXmlRpcTag
 class XoopsXmlRpcInt extends XoopsXmlRpcTag
 {
 
-    var $_value;
+    public $_value;
 
-    function __construct($value)
+    public function __construct($value)
     {
         $this->_value = intval($value);
     }
 
-    function render()
+    public function render()
     {
         return '<value><int>'.$this->_value.'</int></value>';
     }
@@ -195,14 +195,14 @@ class XoopsXmlRpcInt extends XoopsXmlRpcTag
 class XoopsXmlRpcDouble extends XoopsXmlRpcTag
 {
 
-    var $_value;
+    public $_value;
 
-    function __construct($value)
+    public function __construct($value)
     {
         $this->_value = (float)$value;
     }
 
-    function render()
+    public function render()
     {
         return '<value><double>'.$this->_value.'</double></value>';
     }
@@ -211,14 +211,14 @@ class XoopsXmlRpcDouble extends XoopsXmlRpcTag
 class XoopsXmlRpcBoolean extends XoopsXmlRpcTag
 {
 
-    var $_value;
+    public $_value;
 
-    function __construct($value)
+    public function __construct($value)
     {
         $this->_value = (!empty($value) && $value != false) ? 1 : 0;
     }
 
-    function render()
+    public function render()
     {
         return '<value><boolean>'.$this->_value.'</boolean></value>';
     }
@@ -227,14 +227,14 @@ class XoopsXmlRpcBoolean extends XoopsXmlRpcTag
 class XoopsXmlRpcString extends XoopsXmlRpcTag
 {
 
-    var $_value;
+    public $_value;
 
-    function __construct($value)
+    public function __construct($value)
     {
         $this->_value = strval($value);
     }
 
-    function render()
+    public function render()
     {
         return '<value><string>'.$this->encode($this->_value).'</string></value>';
     }
@@ -243,9 +243,9 @@ class XoopsXmlRpcString extends XoopsXmlRpcTag
 class XoopsXmlRpcDatetime extends XoopsXmlRpcTag
 {
 
-    var $_value;
+    public $_value;
 
-    function __construct($value)
+    public function __construct($value)
     {
         if (!is_numeric($value)) {
             $this->_value = strtotime($value);
@@ -254,7 +254,7 @@ class XoopsXmlRpcDatetime extends XoopsXmlRpcTag
         }
     }
 
-    function render()
+    public function render()
     {
         return '<value><dateTime.iso8601>'.gmstrftime("%Y%m%dT%H:%M:%S", $this->_value).'</dateTime.iso8601></value>';
     }
@@ -263,14 +263,14 @@ class XoopsXmlRpcDatetime extends XoopsXmlRpcTag
 class XoopsXmlRpcBase64 extends XoopsXmlRpcTag
 {
 
-    var $_value;
+    public $_value;
 
-    function __construct($value)
+    public function __construct($value)
     {
         $this->_value = base64_encode($value);
     }
 
-    function render()
+    public function render()
     {
         return '<value><base64>'.$this->_value.'</base64></value>';
     }
@@ -279,18 +279,18 @@ class XoopsXmlRpcBase64 extends XoopsXmlRpcTag
 class XoopsXmlRpcArray extends XoopsXmlRpcTag
 {
 
-    var $_tags = array();
+    public $_tags = array();
 
-    function __construct()
+    public function __construct()
     {
     }
 
-    function add(&$tagobj)
+    public function add(&$tagobj)
     {
         $this->_tags[] = $tagobj;
     }
 
-    function render()
+    public function render()
     {
         $count = count($this->_tags);
         $ret = '<value><array><data>';
@@ -304,16 +304,16 @@ class XoopsXmlRpcArray extends XoopsXmlRpcTag
 
 class XoopsXmlRpcStruct extends XoopsXmlRpcTag{
 
-    var $_tags = array();
+    public $_tags = array();
 
-    function __construct(){
+    public function __construct(){
     }
 
-    function add($name, &$tagobj){
+    public function add($name, &$tagobj){
         $this->_tags[] = array('name' => $name, 'value' => $tagobj);
     }
 
-    function render(){
+    public function render(){
         $count = count($this->_tags);
         $ret = '<value><struct>';
         for ($i = 0; $i < $count; $i++) {

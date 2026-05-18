@@ -118,7 +118,7 @@ class XoopsMediaUploader
      * @param   int     $maxWidth
      * @param   int     $maxHeight
      **/
-    function __construct($uploadDir, $allowedMimeTypes, $maxFileSize, $maxWidth=null, $maxHeight=null)
+    public function __construct($uploadDir, $allowedMimeTypes, $maxFileSize, $maxWidth=null, $maxHeight=null)
     {
         if (is_array($allowedMimeTypes)) {
             $this->allowedMimeTypes = $allowedMimeTypes;
@@ -141,7 +141,7 @@ class XoopsMediaUploader
      * @global  $_FILES
      * @return  bool
      **/
-    function fetchMedia($media_name, $index = null)
+    public function fetchMedia($media_name, $index = null)
     {
         global $_FILES;
 	if (!isset($_FILES[$media_name])) {
@@ -193,7 +193,7 @@ class XoopsMediaUploader
      * 
      * @param   string  $value
      **/
-    function setTargetFileName($value){
+    public function setTargetFileName($value){
         $this->targetFileName = strval(trim($value));
     }
 
@@ -202,7 +202,7 @@ class XoopsMediaUploader
      * 
      * @param   string  $value
      **/
-    function setPrefix($value){
+    public function setPrefix($value){
         $this->prefix = strval(trim($value));
     }
 
@@ -211,7 +211,7 @@ class XoopsMediaUploader
      * 
      * @return  string 
      **/
-    function getMediaName()
+    public function getMediaName()
     {
         return $this->mediaName;
     }
@@ -221,7 +221,7 @@ class XoopsMediaUploader
      * 
      * @return  string 
      **/
-    function getMediaType()
+    public function getMediaType()
     {
         return $this->mediaType;
     }
@@ -231,7 +231,7 @@ class XoopsMediaUploader
      * 
      * @return  int 
      **/
-    function getMediaSize()
+    public function getMediaSize()
     {
         return $this->mediaSize;
     }
@@ -241,7 +241,7 @@ class XoopsMediaUploader
      * 
      * @return  string 
      **/
-    function getMediaTmpName()
+    public function getMediaTmpName()
     {
         return $this->mediaTmpName;
     }
@@ -253,7 +253,7 @@ class XoopsMediaUploader
      * 
      * @return  array    
      **/
-    function getMediaDimension()
+    public function getMediaDimension()
     {
         return $this->mediaDimension;
     }
@@ -263,7 +263,7 @@ class XoopsMediaUploader
      * 
      * @return  string 
      **/
-    function getSavedFileName(){
+    public function getSavedFileName(){
         return $this->savedFileName;
     }
 
@@ -272,7 +272,7 @@ class XoopsMediaUploader
      * 
      * @return  string
      **/
-    function getSavedDestination(){
+    public function getSavedDestination(){
         return $this->savedDestination;
     }
 
@@ -281,7 +281,7 @@ class XoopsMediaUploader
      * 
      * @return  bool
      **/
-    function upload()
+    public function upload()
     {
         if ($this->uploadDir == '') {
             $this->setErrors('Upload directory not set');
@@ -320,7 +320,7 @@ class XoopsMediaUploader
      * 
      * @return  bool 
      **/
-    function copyFile()
+    public function copyFile()
     {
         $matched = array();
         if (!preg_match("/\.([a-zA-Z0-9]+)$/", $this->mediaName, $matched)) {
@@ -346,7 +346,7 @@ class XoopsMediaUploader
      * 
      * @return  bool 
      **/
-    function checkMaxFileSize()
+    public function checkMaxFileSize()
     {
         if ($this->mediaSize > $this->maxFileSize) {
             return false;
@@ -359,7 +359,7 @@ class XoopsMediaUploader
      * 
      * @return  bool 
      **/
-    function checkMaxWidth()
+    public function checkMaxWidth()
     {
         if (!isset($this->maxWidth)) {
             return true;
@@ -375,7 +375,7 @@ class XoopsMediaUploader
      * 
      * @return  bool 
      **/
-    function checkMaxHeight()
+    public function checkMaxHeight()
     {
         if (!isset($this->maxHeight)) {
             return true;
@@ -393,7 +393,7 @@ class XoopsMediaUploader
      * 
      * @return  bool
      **/
-    function checkMimeType()
+    public function checkMimeType()
     {
         if (count($this->allowedMimeTypes) > 0 && !in_array($this->mediaType, $this->allowedMimeTypes)) {
             return false;
@@ -407,7 +407,7 @@ class XoopsMediaUploader
      * 
      * @param   string  $error
      **/
-    function setErrors($error)
+    public function setErrors($error)
     {
         $this->errors[] = trim($error);
     }
@@ -419,7 +419,7 @@ class XoopsMediaUploader
      * 
      * @return	array|string    Array of array messages OR HTML string
      */
-    function &getErrors($ashtml = true)
+    public function &getErrors($ashtml = true)
     {
         if (!$ashtml) {
             return $this->errors;

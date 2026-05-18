@@ -34,12 +34,12 @@ require_once XOOPS_ROOT_PATH.'/class/xml/rpc/xmlrpcapi.php';
 class XoopsApi extends XoopsXmlRpcApi
 {
 
-    function __construct(&$params, &$response, &$module)
+    public function __construct(&$params, &$response, &$module)
     {
         $this->XoopsXmlRpcApi($params, $response, $module);
     }
 
-    function newPost()
+    public function newPost()
     {
         global $_SERVER;
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
@@ -128,7 +128,7 @@ class XoopsApi extends XoopsXmlRpcApi
         }
     }
 
-    function editPost()
+    public function editPost()
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -191,7 +191,7 @@ class XoopsApi extends XoopsXmlRpcApi
         }
     }
 
-    function deletePost()
+    public function deletePost()
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -212,7 +212,7 @@ class XoopsApi extends XoopsXmlRpcApi
     }
 
     // currently returns the same struct as in metaWeblogApi
-    function &getPost($respond=true)
+    public function &getPost($respond=true)
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -257,7 +257,7 @@ class XoopsApi extends XoopsXmlRpcApi
         }
     }
 
-    function &getRecentPosts($respond=true)
+    public function &getRecentPosts($respond=true)
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             $this->response->add(new XoopsXmlRpcFault(104));
@@ -315,7 +315,7 @@ class XoopsApi extends XoopsXmlRpcApi
         }
     }
 
-    function &getCategories($respond=true)
+    public function &getCategories($respond=true)
     {
         if (!$this->_checkUser($this->params[1], $this->params[2])) {
             $this->response->add(new XoopsXmlRpcFault(104));
