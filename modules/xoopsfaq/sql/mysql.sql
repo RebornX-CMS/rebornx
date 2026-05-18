@@ -7,7 +7,7 @@ CREATE TABLE xoopsfaq_categories (
   category_title varchar(255) NOT NULL default '',
   category_order tinyint(3) unsigned NOT NULL default '0',
   PRIMARY KEY  (category_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -28,4 +28,4 @@ CREATE TABLE xoopsfaq_contents (
   PRIMARY KEY  (contents_id),
   KEY contents_title (contents_title(40)),
   KEY contents_visible_category_id (contents_visible,category_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

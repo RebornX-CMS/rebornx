@@ -16,7 +16,7 @@ CREATE TABLE xoopsheadline (
   headline_xml text NOT NULL default '',
   headline_updated int(10) NOT NULL default'0',
   PRIMARY KEY  (headline_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 

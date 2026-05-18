@@ -17,7 +17,7 @@ CREATE TABLE xoopspoll_option (
   option_color varchar(25) NOT NULL default '',
   PRIMARY KEY  (option_id),
   KEY poll_id (poll_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -40,7 +40,7 @@ CREATE TABLE xoopspoll_desc (
   PRIMARY KEY  (poll_id),
   KEY end_time (end_time),
   KEY display (display)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -57,7 +57,7 @@ CREATE TABLE xoopspoll_log (
   PRIMARY KEY  (log_id),
   KEY poll_id_user_id (poll_id, user_id),
   KEY poll_id_ip (poll_id, ip)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 

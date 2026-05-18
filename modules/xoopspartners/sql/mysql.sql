@@ -23,4 +23,4 @@ CREATE TABLE partners (
   status tinyint(1) NOT NULL default '1',
   PRIMARY KEY (id),
   KEY status(status)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

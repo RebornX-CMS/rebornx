@@ -14,7 +14,7 @@ CREATE TABLE bb_categories (
   cat_title varchar(100) NOT NULL default '',
   cat_order varchar(10) default NULL,
   PRIMARY KEY  (cat_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -26,7 +26,7 @@ CREATE TABLE bb_forum_access (
   user_id int(5) unsigned NOT NULL default '0',
   can_post tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (forum_id,user_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -37,7 +37,7 @@ CREATE TABLE bb_forum_mods (
   forum_id int(4) unsigned NOT NULL default '0',
   user_id int(5) unsigned NOT NULL default '0',
   KEY forum_user_id (forum_id,user_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -63,7 +63,7 @@ CREATE TABLE bb_forums (
   PRIMARY KEY  (forum_id),
   KEY forum_last_post_id (forum_last_post_id),
   KEY cat_id (cat_id)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -91,7 +91,7 @@ CREATE TABLE bb_posts (
   KEY topicid_uid (topic_id, uid),
   KEY topicid_postid_pid (topic_id, post_id, pid),
   FULLTEXT KEY search (subject)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -103,7 +103,7 @@ CREATE TABLE bb_posts_text (
   post_text text,
   PRIMARY KEY  (post_id),
   FULLTEXT KEY search (post_text)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -127,4 +127,4 @@ CREATE TABLE bb_topics (
   KEY topic_poster (topic_poster),
   KEY topic_forum (topic_id,forum_id),
   KEY topic_sticky (topic_sticky)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

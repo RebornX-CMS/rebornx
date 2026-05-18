@@ -30,7 +30,7 @@ CREATE TABLE stories (
   KEY title (title(40)),
   KEY created (created),
   FULLTEXT KEY search (title,hometext,bodytext)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -44,6 +44,6 @@ CREATE TABLE topics (
   topic_title varchar(50) NOT NULL default '',
   PRIMARY KEY  (topic_id),
   KEY pid (topic_pid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO topics VALUES (1,0,'xoops.gif','XOOPS');

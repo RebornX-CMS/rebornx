@@ -18,7 +18,7 @@ CREATE TABLE mydownloads_broken (
   KEY lid (lid),
   KEY sender (sender),
   KEY ip (ip)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -32,7 +32,7 @@ CREATE TABLE mydownloads_cat (
   imgurl varchar(150) NOT NULL default '',
   PRIMARY KEY  (cid),
   KEY pid (pid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -60,7 +60,7 @@ CREATE TABLE mydownloads_downloads (
   KEY cid (cid),
   KEY status (status),
   KEY title (title(40))
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -81,7 +81,7 @@ CREATE TABLE mydownloads_mod (
   description text NOT NULL,
   modifysubmitter int(11) NOT NULL default '0',
   PRIMARY KEY  (requestid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -92,7 +92,7 @@ CREATE TABLE mydownloads_text (
   lid int(11) unsigned NOT NULL default '0',
   description text NOT NULL,
   KEY lid (lid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 # --------------------------------------------------------
 
 #
@@ -110,4 +110,4 @@ CREATE TABLE mydownloads_votedata (
   KEY ratinguser (ratinguser),
   KEY ratinghostname (ratinghostname),
   KEY lid (lid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

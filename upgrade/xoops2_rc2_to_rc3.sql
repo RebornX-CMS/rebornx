@@ -31,7 +31,7 @@ CREATE TABLE group_permission (
   KEY groupid (gperm_groupid),
   KEY itemid (gperm_itemid),
   KEY gperm_modid (gperm_modid,gperm_name(10))
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE xoopsnotifications (
   not_id mediumint(8) unsigned NOT NULL auto_increment,
@@ -47,7 +47,7 @@ CREATE TABLE xoopsnotifications (
   KEY not_class (not_category),
   KEY not_uid (not_uid),
   KEY not_event (not_event)
-) TYPE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 ALTER TABLE modules ADD hasnotification tinyint(1) unsigned NOT NULL default '0';
 
